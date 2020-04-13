@@ -1,16 +1,6 @@
 <template>
-  <div class="dataMining">
-  </div>
+<div id="dataViz" style="height: 14450px">
+  <hw6></hw6>
+</div>
 </template>
 
-<script>
-
-</script>
-
-<style scoped>
-  p {
-    padding:.63em;
-    color:#656668
-  }
-
-</style>

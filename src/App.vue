@@ -13,12 +13,13 @@
   import dataMining from './components/dataMining.vue'
   import contact from './components/contact.vue'
   import tab from './components/tab.vue'
+  import dataViz from './components/dataViz.vue'
 
 
   export default {
     name: 'App',
     components: {
-      tab, topNav, mainContent, contact, dataMining
+      tab, topNav, mainContent, contact, dataMining, dataViz
     }
   }
 </script>

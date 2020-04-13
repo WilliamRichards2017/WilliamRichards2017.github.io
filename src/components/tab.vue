@@ -12,7 +12,8 @@
     v-bind:is="currentTabComponent"
     class="tab"
   ></component>
-  <contact/>
+<contact>
+</contact>
 </div>
 </div>
 

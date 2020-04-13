@@ -7,16 +7,22 @@ import about from './../components/about'
 import topNav from './../components/topNav'
 import contact from './../components/contact'
 import dataMining from './../components/dataMining'
+import dataViz from './../components/dataViz'
+
 import birthdayParadox from './../components/birthdayParadox'
 import tab from './../components/tab'
+import hw6 from "../components/hw6";
 
 
 Vue.component('birthdayParadox', birthdayParadox)
+Vue.component('hw6', hw6);
 Vue.component('about', about)
 Vue.component('mainContent', mainContent)
 Vue.component('topNav', topNav)
 Vue.component('contact', contact)
 Vue.component('dataMining', dataMining)
+Vue.component('dataViz', dataViz)
+
 Vue.component('tab', tab)
 
 Vue.config.productionTip = false
@@ -26,6 +32,9 @@ Vue.component('tab-home', {
 })
 Vue.component('tab-datamining', {
   template: '<div><dataMining></dataMining></div>'
+})
+Vue.component('tab-dataviz', {
+  template: '<div><dataViz></dataViz></div>'
 })
 
 Vue.use(Router)
