@@ -11,7 +11,7 @@ import dataViz from './../components/dataViz'
 
 import birthdayParadox from './../components/birthdayParadox'
 import tab from './../components/tab'
-import hw6 from "../components/hw6";
+import hw6 from "../components/dataVizComponents/hw6";
 
 
 Vue.component('birthdayParadox', birthdayParadox)

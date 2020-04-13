@@ -2,7 +2,7 @@
     <div id="table" style="overflow-y: auto; overflow-x: hidden">
 
 
-        <table>
+        <table width="200px3">
             <thead>
             <tr>
                 <td id="phraseHeader" @click="sortBy('T')">Phrase</td>
@@ -29,8 +29,8 @@
         data() {
             return {
 
-                freqWidth: 70,
-                percentWidth: 150,
+                freqWidth: 50,
+                percentWidth: 100,
                 svgHeight: 25,
                 freqScale: null,
                 percentScale: null,

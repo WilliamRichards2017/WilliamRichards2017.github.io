@@ -297,7 +297,7 @@
                     d3.select("#bg")
                         .style("opacity", 0.5);
 
-                   let fg =  d3.select("#app").append("div")
+                   let fg =  d3.select("#hw6").append("div")
                        .attr("id", "fg")
                        .style("top", 0)
                        .style("left", 0)

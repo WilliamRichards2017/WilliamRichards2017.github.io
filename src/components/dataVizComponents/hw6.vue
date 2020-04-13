@@ -1,12 +1,12 @@
 <template>
-<div class="dataViz" v-on:click="showExtremes = false">
+<div class="dataViz" v-on:click="showExtremes = false" style="height:14500px">
     <div id="bg">
         <div id="header-wrap">
             <header>
                 <h1>Word choice frequencies based on politcal leanings</h1>
 
                 <button v-on:click="toggleSeparate">Grouped by topic</button>
-                <!--<button v-on:click="toggleExtremes"> Show Extremes</button>-->
+                <button v-on:click="toggleExtremes"> Show Extremes</button>
 
 
             </header>
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import BubbleChart from './dataVizComponents/BubbleChart.vue'
-    import Table from './dataVizComponents/Table.vue'
-    import Words from './dataVizComponents/data/words'
+    import BubbleChart from './BubbleChart.vue'
+    import Table from './Table.vue'
+    import Words from './data/words'
 
 
     export default {
