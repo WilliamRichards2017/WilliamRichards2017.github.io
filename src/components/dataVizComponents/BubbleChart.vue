@@ -75,22 +75,14 @@
 
             buildBubbleChart() {
 
-                console.log("building bubble Chart")
-
-
                 d3.select("#bubbleSvg").remove();
-
-
 
                 let self = this;
                 let data = this.words;
 
                 let maxTotal = d3.max(data, function(d) { return +d.total;} );
                 let minTotal = d3.max(data, function(d) { return -d.total;} );
-
                 let ticks=["50", "40", "30", "20", "10", "0", "10", "20", "30", "40", "50"];
-
-
 
                 let percentScale = d3.scaleLinear()
                     .range([0, 750]);
@@ -98,8 +90,6 @@
                 let percentAxis = d3.axisTop(percentScale).ticks(11).tickFormat(function (d, i) {
                     return ticks[i];
                 });
-
-
 
                 let percentHeader = d3.select('#bubbleChart').append("svg")
                     .attr("id", "bubbleSvg")
@@ -179,11 +169,7 @@
             },
 
             separateBubbleChart() {
-
-                console.log("calling separate");
                 let self = this;
-                let data = self.words;
-
                 d3.select('#bubbleChart > svg')
                     .selectAll('circle')
                     .transition().duration(300)
@@ -192,6 +178,21 @@
                     })
                     .attr('cy', function (d) {
                         return d.moveY + 100;
+                    })
+                    .style("fill", d => self.categoryToColor(d.category));
+            },
+
+            unseparateBubbleChart(){
+                let self = this;
+
+                d3.select('#bubbleChart > svg')
+                    .selectAll('circle')
+                    .transition().duration(300)
+                    .attr('cx', function (d) {
+                        return d.sourceX;
+                    })
+                    .attr('cy', function (d) {
+                        return d.sourceY + 100;
                     })
                     .style("fill", d => self.categoryToColor(d.category));
             },
@@ -273,7 +274,7 @@
                 if (this.separate) {
                     this.separateBubbleChart();
                 } else {
-                    this.buildBubbleChart();
+                    this.unseparateBubbleChart();
                 }
             },
 
@@ -297,12 +298,12 @@
                     d3.select("#bg")
                         .style("opacity", 0.5);
 
-                   let fg =  d3.select("#hw6").append("div")
+                   let fg =  d3.select("#dataViz").append("div")
                        .attr("id", "fg")
                        .style("top", 0)
                        .style("left", 0)
-                       .style("width", "500px")
-                       .style("height", "500px")
+                       .style("width", "100%")
+                       .style("height", "100%")
                        .style("position", "absolute")
                        .style("opacity", 0);
 

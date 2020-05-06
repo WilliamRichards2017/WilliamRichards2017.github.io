@@ -5,7 +5,7 @@
           <about/>
       </div>
       <div class="column">
-        <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="75%" height="75%%"></div>
+        <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="75%" height="75%"></div>
         <div id="logo">
           Will Richards
         </div>

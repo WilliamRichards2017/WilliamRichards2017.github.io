@@ -33,7 +33,7 @@
 
   #wrapper {
     margin:0 auto;
-    width:900px;
+    width:100%;
 
   }
 

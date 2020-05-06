@@ -27,13 +27,13 @@ Vue.component('tab', tab)
 
 Vue.config.productionTip = false
 
-Vue.component('tab-home', {
+Vue.component('tab-Home', {
   template: '<div><mainContent></mainContent></div>'
 })
 Vue.component('tab-datamining', {
   template: '<div><dataMining></dataMining></div>'
 })
-Vue.component('tab-dataviz', {
+Vue.component('tab-Data Visualization', {
   template: '<div><dataViz></dataViz></div>'
 })
 

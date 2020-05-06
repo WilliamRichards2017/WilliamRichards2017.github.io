@@ -1,13 +1,11 @@
 <template>
-<div class="dataViz" v-on:click="showExtremes = false" style="height:14500px">
+<div id="dataViz" v-on:click="showExtremes = false">
     <div id="bg">
         <div id="header-wrap">
             <header>
                 <h1>Word choice frequencies based on politcal leanings</h1>
 
                 <button v-on:click="toggleSeparate">Grouped by topic</button>
-                <button v-on:click="toggleExtremes"> Show Extremes</button>
-
 
             </header>
 
@@ -61,19 +59,11 @@
             },
 
             toggleExtremes(){
-
-
                 setTimeout(this.te, 100);
-
-                console.log("toggling extremes in app", this.showExtremes);
             },
 
             toggleSeparate(){
-
-                console.log("toggling separate");
-
                 setTimeout(this.ts, 100);
-
             },
 
             initBrush(){
@@ -162,7 +152,13 @@
 
 <style>
 
-    .dataViz{
+    #dataViz{
+        width: 100%;
+        height: 100%;
+        /*style="height:14500px"*/
+    }
+
+    #bg{
         width: 100%;
         height: 100%;
     }

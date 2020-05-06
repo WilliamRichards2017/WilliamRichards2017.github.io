@@ -23,8 +23,8 @@
 export default {
 
   data (){ return {
-    currentTab: 'home',
-    tabs: ['home', 'datamining', 'dataviz']
+    currentTab: 'Home',
+    tabs: ['Home', 'Data Visualization']
     }
   },
   computed: {
