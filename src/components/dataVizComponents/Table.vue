@@ -36,12 +36,13 @@
                 percentScale: null,
 
                 colorDict: {
-                    "education": "green",
-                    "economy/fiscal issues": "red",
-                    "crime/justice": "blue",
-                    "mental health/substance abuse": "purple",
-                    "health care": "pink",
-                    "energy/environment": "magenta",
+                    "education": "#28a745",
+                    "economy/fiscal issues": "#d73a49",
+                    "crime/justice": "#ffd33d",
+                    "mental health/substance abuse": "#6f42c1",
+                    "health care": "#0366d6",
+                    "energy/environment": "#f66a0a"
+                    ,
                 },
 
             }

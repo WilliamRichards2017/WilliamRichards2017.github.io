@@ -133,7 +133,6 @@
                 }
 
                 if(this.brushedWords.length === 0){
-                    console.log("null select on start");
                     this.brushedWords = this.words;
                 }
 

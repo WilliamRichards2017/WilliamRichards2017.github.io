@@ -1,26 +1,18 @@
 <template>
     <div id="bubbleChart">
-
         <div id="tooltip"></div>
-
-       <pre class="h4">Democratic leaning &#9 &#9 &#9 &#9 &#9 &#9 &#9 &#9 Republican leaning</pre>
-
+        <pre class="h4">Democratic leaning &#9 &#9 &#9 &#9 &#9 &#9 &#9 &#9 Republican leaning</pre>
         <svg width="800" height="1000" id="bubbleSvg"></svg>
-
-
     </div>
 </template>
 
 <script>
-
-
     export default {
         name: 'BubbleChart',
         props: {
             words: null,
             brushedWords: null,
             separate: null,
-            showExtremes: null,
         },
 
         data() {
@@ -29,18 +21,17 @@
 
                 minTotal: null,
                 maxTotal: null,
-
-
                 radiusScale: null,
-
                 colorDict: {
-                    "education": "green",
-                    "economy/fiscal issues": "red",
-                    "crime/justice": "blue",
-                    "mental health/substance abuse": "purple",
-                    "health care": "orange",
-                    "energy/environment": "magenta",
+                    "education": "#28a745",
+                    "economy/fiscal issues": "#d73a49",
+                    "crime/justice": "#ffd33d",
+                    "mental health/substance abuse": "#6f42c1",
+                    "health care": "#0366d6",
+                    "energy/environment": "#f66a0a"
+                    ,
                 },
+                colorArray: ["economy/fiscal issues", "energy/environment", "crime/justice", "education", "health care", "mental health/substance abuse"],
             }
         },
 
@@ -51,10 +42,7 @@
                     return this.colorDict[category];
                 }
                 return "grey";
-
             },
-
-
 
             initScales() {
 
@@ -110,10 +98,6 @@
                     .attr("transform", "translate(25, 25)")
                     .call(percentAxis);
 
-
-
-
-
                 let radiusScale = d3.scaleLinear()
                     .domain([minTotal, maxTotal])
                     .range([1, 12]);
@@ -126,13 +110,23 @@
                     .style("width", "100px")
                     .style("height", "100px");
 
+                d3.select('#bubbleChart > svg')
+                    .selectAll('.headerText')
+                    .data(self.colorArray)
+                    .join('text')
+                    .attr("x", 20)
+                    .attr("y", (d,i) => 50+ i*133 )
+                    .text(d => d)
+                    .attr("font-family", "sans-serif")
+                    .attr("font-size", "20px")
+                    .attr("class", "headerText")
+                    .attr("fill", "black")
+                    .attr("opacity", 0);
 
                 d3.select('#bubbleChart > svg')
                     .selectAll('circle')
-
                     .data(data)
                     .join('circle')
-
                     .attr('r', d => radiusScale(d.total))
                     .style("fill", d => self.colorDict[d.category])
                     .style("stroke", "black")
@@ -140,32 +134,14 @@
                     .on("mouseover", d => console.log(d.percent_of_d_speeches, d.percent_of_r_speeches, d.phrase, radiusScale(d.total), d.moveX, d.moveY + 100))
                     .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
                     .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
-
-
                     .attr('cx', function (d) {
                         return d.sourceX;
                     })
                     .attr('cy', function (d) {
                         return d.sourceY + 100;
-                    })
+                    });
 
                 d3.select("#bubbleSvg").transition().duration(100).style("opacity", 1);
-
-
-
-
-
-
-
-
-            },
-
-            mouseStart(){
-
-                console.log("mousestart hover detected");
-
-                d3.select("#tooltip").text("uhh ohh")
-                    .style("visibility", "visible");
             },
 
             separateBubbleChart() {
@@ -180,6 +156,11 @@
                         return d.moveY + 100;
                     })
                     .style("fill", d => self.categoryToColor(d.category));
+
+                d3.select('#bubbleChart > svg')
+                    .selectAll(".headerText")
+                    .attr("opacity", "1");
+
             },
 
             unseparateBubbleChart(){
@@ -195,6 +176,11 @@
                         return d.sourceY + 100;
                     })
                     .style("fill", d => self.categoryToColor(d.category));
+
+                d3.select('#bubbleChart > svg')
+                    .selectAll(".headerText")
+                    .attr("opacity", "0");
+
             },
 
             highlightBrushedNodes(){
@@ -224,40 +210,6 @@
 
             },
 
-            wrap(text, width) {
-        text.each(function () {
-            var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = 1.1, // ems
-                x = text.attr("x"),
-                y = text.attr("y"),
-                dy = 0, //parseFloat(text.attr("dy")),
-                tspan = text.text(null)
-                    .append("tspan")
-                    .attr("x", x)
-                    .attr("y", y)
-                    .attr("dy", dy + "em");
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan")
-                        .attr("x", x)
-                        .attr("y", y)
-                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                        .text(word);
-                }
-            }
-        });
-    }
-
-
         },
 
         mounted() {
@@ -268,9 +220,6 @@
         watch: {
 
             separate: function () {
-
-                console.log("sperate inside watcher");
-
                 if (this.separate) {
                     this.separateBubbleChart();
                 } else {
@@ -281,129 +230,6 @@
             brushedWords: function(){
                 this.highlightBrushedNodes();
             },
-
-
-
-            showExtremes: function(){
-
-                let self = this;
-
-                this.separateBubbleChart();
-
-
-                console.log("toggling extremes in bubbleChart");
-
-
-                if(this.showExtremes){
-                    d3.select("#bg")
-                        .style("opacity", 0.5);
-
-                   let fg =  d3.select("#dataViz").append("div")
-                       .attr("id", "fg")
-                       .style("top", 0)
-                       .style("left", 0)
-                       .style("width", "100%")
-                       .style("height", "100%")
-                       .style("position", "absolute")
-                       .style("opacity", 0);
-
-
-                  let svg = fg.append("svg")
-                       .attr("width", "1000px")
-                       .attr("height", "1000px");
-
-
-
-
-                    let g = svg.append("g")
-                      .attr("width", 50)
-                      .attr("height", 50)
-                      .attr("x", 50)
-                      .attr("y", 300)
-
-                    let g2 = svg.append("g")
-                        .attr("width", 50)
-                        .attr("height", 50)
-                        .attr("x", 650)
-                        .attr("y", 300)
-
-                    g.append("rect")
-                        .attr("width", 200)
-                        .attr("height", 100)
-                        .attr("x", 50)
-                        .attr("y", 240)
-                        .style("fill", "gray")
-                        .style("opacity", 0.5)
-
-                    g2.append("rect")
-                        .attr("width", 200)
-                        .attr("height", 100)
-                        .attr("x", 571)
-                        .attr("y", 240)
-                        .style("fill", "gray")
-                        .style("opacity", 0.5)
-
-
-
-                     g.append("text")
-                         .attr("width", 50)
-                         .attr("height", 50)
-                         .attr("x", 59)
-                         .attr("y", 265)
-                        .text("Democrats used the phrase \' climate change \' in their speeches 7 times more often than republicans")
-                         .call(this.wrap, 175);
-
-                    g2.append("text")
-                        .attr("width", 50)
-                        .attr("height", 50)
-                        .attr("x", 580)
-                        .attr("y", 265)
-                        .text("Democrats used the phrase \' environment \' in their speeches 7 times more often than republicans")
-                        .call(this.wrap, 175);
-
-
-                    g2.append("text")
-                        .text("Republicans uesed the phrase \' environment \' in their speeches 3 times more often than republicans");
-
-                    svg.append("circle")
-                        .attr("cx", 35)
-                        .attr("cy", 347)
-                        .attr("r", 6)
-                        .style("fill", "magenta")
-                        .style("stroke", "black");
-
-                    svg.append("circle")
-                        .attr("cx", 734)
-                        .attr("cy", 347)
-                        .attr("r", 6)
-                        .style("fill", "magenta")
-                        .style("stroke", "black");
-
-
-                    d3.select("#fg").transition()
-                        .duration(1000)
-                        .style("opacity", 1);
-
-
-
-
-
-                }
-                else{
-
-                    console.log("removed");
-
-                    d3.select("#bg")
-                        .style("opacity", 1);
-
-                    d3.select("#fg")
-                        .remove();
-
-                    self.buildBubbleChart();
-
-
-                }
-            }
         }
 
 
