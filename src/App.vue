@@ -71,23 +71,16 @@
   /* unvisited link */
 
   a {
-    color:black;
+    color:#4fc9c5;
     text-decoration:none;
-  }
-  a:link {
-    color:black;
-    text-decoration:none;
+    font-size: 16px;
+    font-weight: bold;
   }
 
-  /* visited link */
-  a:visited {
-    color:black;
-    text-decoration:none;
-  }
 
   /* mouse over link */
   a:hover {
-    color:#6ed3cf;
+    color:#9068be;
     text-decoration:none;
 
   }
@@ -106,13 +99,7 @@
     border-bottom:1px solid #efece7;
   }
 
-  h2 {
-    color:#9068be;
-    margin:20px 0 10px;
-    padding-bottom:10px;
-    font:normal 17px Georgia, serif;
-    border-bottom:1px solid #efece7;
-  }
+
 
   h3 {
     margin:10px 0;
@@ -126,23 +113,6 @@
     margin:0 0 0 17px;
   }
 
-  #nav {
-    background:#6ed3cf;
-    text-align:right;
-    color:#f6dde3;
-    padding: 10px;
-  }
-
-
-  .row {
-    float: left;
-  }
-
-  #logo {
-    margin-bottom:20px;
-    font:normal 2em, Georgia, serif;
-    color:#9068be;
-  }
 
 
 </style>
