@@ -1,8 +1,6 @@
 <template>
-    <div id="table" style="overflow-y: auto; overflow-x: hidden">
-
-
-        <table width="200px3">
+    <div id="table">
+        <table width="200px">
             <thead>
             <tr>
                 <td id="phraseHeader" @click="sortBy('T')">Phrase</td>
@@ -251,6 +249,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+    #table{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 75vh;
+
+    }
 
     #freqHeader{
         background: beige;

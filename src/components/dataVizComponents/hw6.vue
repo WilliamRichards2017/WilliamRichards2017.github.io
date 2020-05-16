@@ -1,5 +1,5 @@
 <template>
-<div id="dataViz" v-on:click="showExtremes = false">
+<div id="hw6" v-on:click="showExtremes = false">
     <div id="bg">
         <div id="header-wrap">
             <header>
@@ -151,9 +151,9 @@
 
 <style>
 
-    #dataViz{
+    #hw6{
         width: 100%;
-        height: 100%;
+        height: 80vh;
         /*style="height:14500px"*/
     }
 

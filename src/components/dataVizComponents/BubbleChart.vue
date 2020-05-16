@@ -2,7 +2,7 @@
     <div id="bubbleChart">
         <div id="tooltip"></div>
         <pre class="h4">Democratic leaning &#9 &#9 &#9 &#9 &#9 &#9 &#9 &#9 Republican leaning</pre>
-        <svg width="800" height="1000" id="bubbleSvg"></svg>
+        <svg width="800" height="850" id="bubbleSvg"></svg>
     </div>
 </template>
 
@@ -82,7 +82,7 @@
                 let percentHeader = d3.select('#bubbleChart').append("svg")
                     .attr("id", "bubbleSvg")
                     .attr("width", 800)
-                    .attr("height", 1000)
+                    .attr("height", 800)
                 .append("svg")
                     .attr("width", 790)
 
@@ -250,7 +250,10 @@
     }
 
     #bubbleChart{
-        overflow: hidden;
+        overflow-y:scroll;
+        overflow-x: hidden;
+        height: 75vh;
+
     }
 
     #fg{
