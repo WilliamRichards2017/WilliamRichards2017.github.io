@@ -1,6 +1,15 @@
 <template>
 <div id="dataViz">
 
+    <div v-if="showHw6" style="height: 30px">
+      <ul>
+        <li v-on:click="showHw5 = true; showHw6 = false;"><a>Interactive table and tree</a></li>
+      </ul>
+  </div>
+
+  <div v-else-if="showHw5"></div>
+
+  <div v-else>
 
   <ul style="margin-top:10px;" v-if="!showHw6">
     <li v-on:click="showHw6 = true; showHw5 = false;"><a>Beeswarm vizualization</a></li>
@@ -10,9 +19,11 @@
 
 
   </ul>
+  </div>
+
 
   <hw6 v-if="showHw6"></hw6>
-  <hw5 v-if="showHw5"></hw5>
+    <hw5 v-if="showHw5"></hw5>
 
 </div>
 </template>

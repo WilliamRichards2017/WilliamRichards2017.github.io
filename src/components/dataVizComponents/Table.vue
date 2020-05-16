@@ -253,7 +253,7 @@
     #table{
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 75vh;
+        height: 70vh;
 
     }
 
