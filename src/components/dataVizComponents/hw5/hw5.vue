@@ -1,0 +1,246 @@
+<template>
+    <div id="hw5">
+            <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo" style="width: 100px"/>
+            <h1>Exploring Match Statistics for 2018 World Cup: CS-6630 Homework</h1>
+            <div>Name: Will Richards; E-Mail: richardsw2017@gmail.com; UID: u0401321</div>
+
+        <div style="display: inline-flex">
+
+            <div class="view">
+                <h2>Score Table</h2>
+
+                <table id="matchTable">
+                    <thead>
+                    <tr>
+                        <th>Team</th>
+                        <td style="text-align:center"> Goals <span class="glyphicon glyphicon-sort"></span><br/></td>
+                        <td>Round/Result</td>
+                        <td>Wins</td>
+                        <td>Losses</td>
+                        <td>Total Games</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td id="goalHeader"></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <tree></tree>
+
+    </div>
+    </div>
+
+</template>
+
+<script>
+
+    import Tree from './tree.vue'
+
+
+
+
+
+    export default {
+
+            components: {
+                Tree,
+            },
+
+        data() { return {
+
+        }
+        },
+        methods : {
+
+        },
+        mounted() {
+
+        },
+        watch : {
+
+        }
+    }
+</script>
+
+<style>
+
+
+    table {
+        border-collapse: collapse;
+        font: 14px sans-serif;
+    }
+
+    th {
+        font-weight: normal;
+        text-align: right;
+        padding-right: 6px;
+        min-width: 125px;
+    }
+
+    thead td , th{
+        cursor: s-resize;
+    }
+
+    tbody tr:first-child td {
+        padding-top: 5px;
+    }
+
+    tbody th{
+        cursor:pointer;
+        font-weight: bold;
+    }
+
+    .aggregate{
+        color: #af161e;
+        font-weight: bold;
+    }
+
+    .game{
+        color: #b1b1b1;
+    }
+
+    tbody td {
+        padding-right: 5px;
+        padding-left: 5px;
+        border-left: solid 1px #000;
+        color:black
+    }
+
+    tbody tr:hover {
+        background-color: #feebe2;
+    }
+
+    tbody tr .game {
+        background-color: #f0f0f0;
+    }
+
+    .label{
+        fill: #ffffff;
+        font: 14px sans-serif;
+
+    }
+
+    @font-face {
+        font-family: 'font1';
+        src: url('assets/font1.ttf');
+    }
+
+    @font-face {
+        font-family:'font2';
+        src: url('assets/font2.ttf');
+    }
+
+    h1 {
+        margin-top: 0;
+        font-family: 'font2';
+        color: #af161e;
+    }
+
+    h2 {
+        font-family: 'font2';
+        color: #af161e;
+        /* font-size: 50pt; */
+        /* font-weight:300; */
+
+    }
+
+    h3 {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        color: #354050;
+    }
+
+    * {
+        font-family: 'font1';
+    }
+
+    header {
+        padding: 0.5em;
+        text-align: center;
+        height: 100px;
+    }
+
+    #logo {
+        float: right;
+        height: 100px;
+    }
+
+    .goalBar{
+        opacity:0.6;
+    }
+
+    .goalCircle{
+        stroke-width: 3px;
+        r: 5px;
+    }
+
+
+    .node circle {
+        fill: #be2714;;
+    }
+
+    .node text {
+        font: 14px sans-serif;
+    }
+
+    .winner circle {
+        fill: #364e74;
+    }
+
+    .loser text {
+        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: rgb(36, 33, 33);
+        stroke-opacity: 0.5;
+        stroke-width: 3px;
+    }
+
+    .selected {
+        stroke: #e20e0e;
+        stroke-width: 6px;
+    }
+
+    .selectedLabel {
+        fill: #e20e0e;
+        font-weight: 300;
+    }
+
+    .view {
+        width: 650px;
+        padding: 0.5em;
+        float: left;
+    }
+
+    .barText{
+        fill: black;
+    }
+
+
+    .chart .barText {
+        text-anchor: start;
+        mix-blend-mode: difference;
+    }
+
+
+
+    #goalHeader{
+        width: 200px;
+        height: 50px;
+        margin: 10px;
+    }
+
+
+
+
+
+</style>
+

@@ -7,7 +7,11 @@
       </ul>
   </div>
 
-  <div v-else-if="showHw5"></div>
+  <div v-else-if="showHw5">
+    <ul>
+      <li v-on:click="showHw6 = true; showHw5 = false;"><a>Beeswarm vizualization</a></li>
+    </ul>
+  </div>
 
   <div v-else>
 
@@ -29,8 +33,8 @@
 </template>
 
 <script>
-import hw6 from './dataVizComponents/hw6'
-import hw5 from './dataVizComponents/hw5'
+import hw6 from './dataVizComponents/hw6/hw6.vue'
+import hw5 from './dataVizComponents/hw5/hw5.vue'
 
 
 

@@ -11,10 +11,8 @@ import dataViz from './../components/dataViz'
 
 import birthdayParadox from './../components/birthdayParadox'
 import tab from './../components/tab'
-import hw6 from "../components/dataVizComponents/hw6";
-import hw5 from "../components/dataVizComponents/hw5";
-
-
+import hw6 from "../components/dataVizComponents/hw6/hw6";
+import hw5 from "../components/dataVizComponents/hw5/hw5";
 
 Vue.component('birthdayParadox', birthdayParadox)
 Vue.component('hw6', hw6);
