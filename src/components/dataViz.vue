@@ -7,7 +7,7 @@
       </ul>
   </div>
 
-  <div v-else-if="showHw5">
+  <div v-if="showHw5">
     <ul>
       <li v-on:click="showHw6 = true; showHw5 = false;"><a>Beeswarm vizualization</a></li>
     </ul>

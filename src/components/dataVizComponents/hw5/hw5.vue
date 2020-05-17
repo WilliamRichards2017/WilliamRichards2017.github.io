@@ -1,9 +1,6 @@
 <template>
     <div id="hw5">
-            <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo" style="width: 100px"/>
-            <h1>Exploring Match Statistics for 2018 World Cup: CS-6630 Homework</h1>
-            <div>Name: Will Richards; E-Mail: richardsw2017@gmail.com; UID: u0401321</div>
-
+            <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo"/>
         <div style="display: inline-flex">
 
             <div class="view">

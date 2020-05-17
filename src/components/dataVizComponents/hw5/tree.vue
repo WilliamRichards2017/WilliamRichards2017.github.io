@@ -72,17 +72,14 @@
                     .attr('cx', function(d) {return wScale(d.y) + 15;})
                     .attr('cy', function(d) {return hScale(d.x);})
                     .attr('r', 4)
-                    .attr("fill", d => {if(d.data.Wins === "0") {
+                    .attr("fill", d => {if(d.data.Wins === 0) {
                         return "red"
                     }
                     else{
                         return "blue"
                     }
                     })
-
-
-
-                console.log("root", root);
+                
                 treeSvg.selectAll("text.node")
                     .data(root.descendants())
                     .enter()
@@ -159,6 +156,7 @@
         },
         mounted() {
             this.createTree();
+
         },
 
     }
