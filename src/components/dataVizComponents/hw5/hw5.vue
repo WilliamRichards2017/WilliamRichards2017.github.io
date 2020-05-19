@@ -62,7 +62,7 @@
                     self.updateTreeData = d
                 }, 100);
             },
-            
+
             onClearTree() {
                 this.clearTreeData++;
             }
@@ -71,7 +71,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     table {
         border-collapse: collapse;
         font: 14px sans-serif;

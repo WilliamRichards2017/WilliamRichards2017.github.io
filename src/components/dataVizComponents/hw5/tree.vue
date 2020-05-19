@@ -139,6 +139,3 @@
         }
     }
 </script>
-
-<style>
-</style>
