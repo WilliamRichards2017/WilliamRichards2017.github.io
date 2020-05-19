@@ -32,8 +32,6 @@
 
             //Update Scale Domains
 
-            console.log("this.teamData in createTable");
-
 
             let maxGoal = Math.max.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
 
@@ -622,7 +620,6 @@
             },
             emitClearTree(){
                 this.$emit("clear-tree");
-                console.log("emitClearTree")
             }
 
 

@@ -60,9 +60,13 @@
         },
         methods : {
                 onUpdateTree(d){
-                    this.updateTreeData = d;
+                    let self = this;
+                    this.updateTreeData = 0;
+                    setTimeout(function(){self.updateTreeData = d}, 100);
+                    console.log("updatingTree");
                 },
             onClearTree(){
+                    console.log("this.clearTreeData", this.clearTreeData);
                     this.clearTreeData++;
             }
 

@@ -129,7 +129,7 @@
 
                 d3.select("#tree").selectAll("text").filter((dt) => {
                     return dt.data.Team === d.key;
-                }).style("stroke", "red");
+                }).style("fill", "red");
 
 
             },
@@ -143,7 +143,7 @@
                     .style("stroke", "black");
 
                 d3.select("#tree").selectAll("text")
-                    .style("stroke", "black");
+                    .style("fill", "black");
 
 
             }
@@ -158,10 +158,8 @@
         watch: {
             updateTreeData: function(){
                 this.updateTree(this.updateTreeData);
-                console.log(this.clearTreeData);
             },
             clearTreeData: function(){
-                console.log("CchangeInClearTreeData")
                 this.clearTree();
             }
         }
