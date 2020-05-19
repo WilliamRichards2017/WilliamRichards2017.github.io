@@ -139,3 +139,16 @@
         }
     }
 </script>
+
+<style scoped>
+    h1 {
+        margin-top: 0;
+        font-family: 'font2';
+        color: #af161e;
+    }
+
+    h2 {
+        font-family: 'font2';
+        color: #af161e;
+    }
+</style>

@@ -583,7 +583,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     #table {
         height: 75vh;
     }

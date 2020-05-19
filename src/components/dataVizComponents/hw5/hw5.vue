@@ -71,7 +71,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     table {
         border-collapse: collapse;
         font: 14px sans-serif;
@@ -140,17 +140,6 @@
     @font-face {
         font-family: 'font2';
         src: url('assets/font2.ttf');
-    }
-
-    h1 {
-        margin-top: 0;
-        font-family: 'font2';
-        color: #af161e;
-    }
-
-    h2 {
-        font-family: 'font2';
-        color: #af161e;
     }
 
     * {
@@ -226,7 +215,6 @@
         text-anchor: start;
         mix-blend-mode: difference;
     }
-
 
     #goalHeader {
         width: 200px;

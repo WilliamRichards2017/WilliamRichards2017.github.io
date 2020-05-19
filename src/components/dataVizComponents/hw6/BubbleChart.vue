@@ -234,7 +234,7 @@
     }
 </script>
 
-<style scoped>
+<style>
 
     .nb {
 
