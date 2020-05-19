@@ -615,13 +615,25 @@
             this.tableElements = te;
             // ******* TODO: PART IV *******
 
-        }
+        },
+
+            emitTreeData(d){
+                this.$emit('update-tree', d);
+            },
+            emitClearTree(){
+                this.$emit("clear-tree");
+                console.log("emitClearTree")
+            }
 
 
     },
         mounted() {
             this.createTable();
             this.updateTable();
+
+            let rows = d3.select("#matchTable > tbody").selectAll("tr")
+                .on("mouseover", d => this.emitTreeData(d))
+                .on("mouseout", d => this.emitClearTree());
 
         },
 

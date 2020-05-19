@@ -28,8 +28,13 @@
 
             </div>
 
-            <tree></tree>
-            <soccer-table></soccer-table>
+            <tree
+            :updateTreeData="updateTreeData"
+            :clearTreeData="clearTreeData"
+            ></tree>
+            <soccer-table
+            @update-tree="onUpdateTree"
+            @clear-tree="onClearTree"></soccer-table>
 
     </div>
     </div>
@@ -49,10 +54,17 @@
             },
 
         data() { return {
-
+            updateTreeData: null,
+            clearTreeData: 0,
         }
         },
         methods : {
+                onUpdateTree(d){
+                    this.updateTreeData = d;
+                },
+            onClearTree(){
+                    this.clearTreeData++;
+            }
 
         },
         mounted() {

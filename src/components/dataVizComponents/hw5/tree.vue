@@ -19,6 +19,11 @@
 
     export default {
 
+        props: {
+            updateTreeData: null,
+            clearTreeData: null,
+    },
+
         data() { return {
 
             }
@@ -36,18 +41,12 @@
                     d.id = d.Team + d.Opponent + i;
                 });
 
-                console.log("treeData", treeData);
-
-
                         var treeLayout = d3.tree();
 
                 let root = d3.stratify()
                     .id((d, i) => {return  i })
                     .parentId(d => {return  d.ParentGame })
                     (treeData);
-
-
-                console.log("root", root);
 
 
                 let treeSvg = d3.select("#tree");
@@ -95,8 +94,6 @@
                         return d3.select(this).text() == "Croatia"
                     })
 
-                console.log("croatia", croatia)
-
                 treeSvg
                     .selectAll('line.link')
                     .data(root.links())
@@ -131,7 +128,6 @@
 
 
                 d3.select("#tree").selectAll("text").filter((dt) => {
-                    console.log("dt", dt);
                     return dt.data.Team === d.key;
                 }).style("stroke", "red");
 
@@ -158,6 +154,17 @@
             this.createTree();
 
         },
+
+        watch: {
+            updateTreeData: function(){
+                this.updateTree(this.updateTreeData);
+                console.log(this.clearTreeData);
+            },
+            clearTreeData: function(){
+                console.log("CchangeInClearTreeData")
+                this.clearTree();
+            }
+        }
 
     }
 </script>
