@@ -628,4 +628,8 @@
     }
 </script>
 
-<style></style>
+<style>
+    #table{
+        height: 75vh;
+    }
+</style>

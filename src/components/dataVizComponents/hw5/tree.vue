@@ -1,10 +1,10 @@
 
 <template>
-    <div class="view">
+    <div>
 
 
         <h2>Second Stage</h2>
-        <svg width="600" height="900">
+        <svg width="600" height="560">
             <g id="tree"></g>
         </svg>
     </div>
@@ -30,7 +30,7 @@
 // ******* TODO: PART VI *******
 
                 let width = 500;
-                let height = 900;
+                let height = 560;
 
                 treeData.forEach( (d, i) => {
                     d.id = d.Team + d.Opponent + i;
@@ -162,4 +162,5 @@
     }
 </script>
 
-<style></style>
+<style>
+</style>

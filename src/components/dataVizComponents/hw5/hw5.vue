@@ -214,6 +214,8 @@
         width: 650px;
         padding: 0.5em;
         float: left;
+        height: 75vh;
+        overflow-y: scroll
     }
 
     .barText{
@@ -233,10 +235,5 @@
         height: 50px;
         margin: 10px;
     }
-
-
-
-
-
 </style>
 
