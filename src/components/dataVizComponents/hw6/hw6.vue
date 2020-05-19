@@ -1,22 +1,20 @@
 <template>
-<div id="hw6" v-on:click="showExtremes = false">
-    <div id="bg">
-        <div id="header-wrap">
-            <header>
-                <h1>Word choice frequencies based on politcal leanings</h1>
-
-                <button v-on:click="toggleSeparate">Grouped by topic</button>
-
-            </header>
-
-            <div class="flexRow">
-                <BubbleChart :words="words" :brushedWords="brushedWords" :separate="separate" :showExtremes="showExtremes">
-                </BubbleChart>
-                <Table :words="brushedWords"></Table>
+    <div id="hw6" v-on:click="showExtremes = false">
+        <div id="bg">
+            <div id="header-wrap">
+                <header>
+                    <h1>Word choice frequencies based on politcal leanings</h1>
+                    <button v-on:click="toggleSeparate">Grouped by topic</button>
+                </header>
+                <div class="flexRow">
+                    <BubbleChart :words="words" :brushedWords="brushedWords" :separate="separate"
+                                 :showExtremes="showExtremes">
+                    </BubbleChart>
+                    <Table :words="brushedWords"></Table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </template>
 
@@ -25,85 +23,71 @@
     import Table from './Table.vue'
     import Words from './data/words'
 
-
     export default {
         components: {
             BubbleChart,
             Table
         },
 
-        data() { return {
-            words: Words,
-            brushedWords: Words,
-            separate: false,
-            showExtremes: false,
-            colorDict: {
-                "education": "green",
-                "economy/fiscal issues": "red",
-                "crime/justice": "blue",
-                "mental health/substance abuse": "purple",
-                "health care": "orange",
-                "energy/environment": "magenta",
+        data() {
+            return {
+                words: Words,
+                brushedWords: Words,
+                separate: false,
+                showExtremes: false,
+                colorDict: {
+                    "education": "green",
+                    "economy/fiscal issues": "red",
+                    "crime/justice": "blue",
+                    "mental health/substance abuse": "purple",
+                    "health care": "orange",
+                    "energy/environment": "magenta",
+                }
             }
-        }
         },
-        methods : {
+        methods: {
 
-            te(){
+            te() {
                 this.showExtremes = !this.showExtremes;
             },
 
-            ts(){
+            ts() {
                 this.separate = !this.separate;
 
             },
 
-            toggleExtremes(){
+            toggleExtremes() {
                 setTimeout(this.te, 100);
             },
 
-            toggleSeparate(){
+            toggleSeparate() {
                 setTimeout(this.ts, 100);
             },
 
-            initBrush(){
-
-                // console.log("this.words", this.words);
-                var brush = d3.brush()
+            initBrush() {
+                let brush = d3.brush()
                     .extent([[0, 0], [800, 1000]])
                     .on("end", this.brushEnded)
                     .on("brush", this.brush)
                     .on("start", this.brushStart);
 
-
-
-                let svg = d3.select("#bubbleSvg")
+                d3.select("#bubbleSvg")
                     .attr("class", "brush")
                     .call(brush);
-
-
-
             },
 
-            brushStart(){
-
+            brushStart() {
                 this.brushedWords = this.words;
-
             },
 
-            brush(){
+            brush() {
+                let self = this;
 
                 this.brushedWords = [];
 
-                let self = this;
-                // console.log("this.words", this.words);
-
                 const clonedWords = self.words.slice();
 
-
-
-
-                var s = d3.event.selection;
+                let s = d3.event.selection;
 
                 let x1 = s[0][0];
                 let y1 = s[0][1];
@@ -113,56 +97,44 @@
 
                 let yOffset = 100;
 
-                for(let i = 0; i < clonedWords.length; i++){
-
+                for (let i = 0; i < clonedWords.length; i++) {
                     let x = null;
                     let y = null;
 
-                    if(!self.separate){
+                    if (!self.separate) {
                         x = clonedWords[i].sourceX;
                         y = clonedWords[i].sourceY + yOffset;
-                    }
-                    else if(self.separate){
+                    } else if (self.separate) {
                         x = clonedWords[i].moveX;
                         y = clonedWords[i].moveY + yOffset;
                     }
-
-                    if(x > x1 && x < x2 && y > y1 && y < y2){
+                    if (x > x1 && x < x2 && y > y1 && y < y2) {
                         this.brushedWords.push(clonedWords[i]);
                     }
                 }
-
-                if(this.brushedWords.length === 0){
+                if (this.brushedWords.length === 0) {
                     this.brushedWords = this.words;
                 }
-
             },
-
         },
         mounted() {
             this.initBrush();
-
         },
-        watch : {
-
-        }
     }
 </script>
 
 <style>
-
-    #hw6{
+    #hw6 {
         width: 100%;
         height: 75vh;
-        /*style="height:14500px"*/
     }
 
-    #bg{
+    #bg {
         width: 100%;
         height: 100%;
     }
 
-    .flexRow{
+    .flexRow {
         display: flex;
     }
 

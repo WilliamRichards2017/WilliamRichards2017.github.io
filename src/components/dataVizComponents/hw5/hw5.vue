@@ -1,11 +1,9 @@
 <template>
     <div id="hw5">
-            <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo"/>
-        <div style="display: inline-flex">
-
+        <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo"/>
+        <div class="flex">
             <div class="view">
                 <h2>Score Table</h2>
-
                 <table id="matchTable">
                     <thead>
                     <tr>
@@ -22,21 +20,18 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
-
             </div>
-
             <tree
-            :updateTreeData="updateTreeData"
-            :clearTreeData="clearTreeData"
+                    :updateTreeData="updateTreeData"
+                    :clearTreeData="clearTreeData"
             ></tree>
             <soccer-table
-            @update-tree="onUpdateTree"
-            @clear-tree="onClearTree"></soccer-table>
-
-    </div>
+                    @update-tree="onUpdateTree"
+                    @clear-tree="onClearTree">
+            </soccer-table>
+        </div>
     </div>
 
 </template>
@@ -48,41 +43,35 @@
 
     export default {
 
-            components: {
-                Tree,
-                soccerTable,
-            },
-
-        data() { return {
-            updateTreeData: null,
-            clearTreeData: 0,
-        }
+        components: {
+            Tree,
+            soccerTable,
         },
-        methods : {
-                onUpdateTree(d){
-                    let self = this;
-                    this.updateTreeData = 0;
-                    setTimeout(function(){self.updateTreeData = d}, 100);
-                    console.log("updatingTree");
-                },
-            onClearTree(){
-                    console.log("this.clearTreeData", this.clearTreeData);
-                    this.clearTreeData++;
+
+        data() {
+            return {
+                updateTreeData: null,
+                clearTreeData: 0,
             }
-
         },
-        mounted() {
-
+        methods: {
+            onUpdateTree(d) {
+                let self = this;
+                this.updateTreeData = 0;
+                setTimeout(function () {
+                    self.updateTreeData = d
+                }, 100);
+            },
+            
+            onClearTree() {
+                this.clearTreeData++;
+            }
         },
-        watch : {
 
-        }
     }
 </script>
 
 <style>
-
-
     table {
         border-collapse: collapse;
         font: 14px sans-serif;
@@ -95,7 +84,7 @@
         min-width: 125px;
     }
 
-    thead td , th{
+    thead td, th {
         cursor: s-resize;
     }
 
@@ -103,25 +92,30 @@
         padding-top: 5px;
     }
 
-    tbody th{
-        cursor:pointer;
+    tbody th {
+        cursor: pointer;
         font-weight: bold;
     }
 
-    .aggregate{
+    .aggregate {
         color: #af161e;
         font-weight: bold;
     }
 
-    .game{
+    .game {
         color: #b1b1b1;
+    }
+
+
+    #flex{
+        display: inline-flex;
     }
 
     tbody td {
         padding-right: 5px;
         padding-left: 5px;
         border-left: solid 1px #000;
-        color:black
+        color: black
     }
 
     tbody tr:hover {
@@ -132,7 +126,7 @@
         background-color: #f0f0f0;
     }
 
-    .label{
+    .label {
         fill: #ffffff;
         font: 14px sans-serif;
 
@@ -144,7 +138,7 @@
     }
 
     @font-face {
-        font-family:'font2';
+        font-family: 'font2';
         src: url('assets/font2.ttf');
     }
 
@@ -157,19 +151,10 @@
     h2 {
         font-family: 'font2';
         color: #af161e;
-        /* font-size: 50pt; */
-        /* font-weight:300; */
-
-    }
-
-    h3 {
-        padding-bottom: 0px;
-        margin-bottom: 0px;
-        color: #354050;
     }
 
     * {
-        font-family: 'font1';
+        font-family: 'font1', serif;
     }
 
     header {
@@ -183,15 +168,14 @@
         height: 100px;
     }
 
-    .goalBar{
-        opacity:0.6;
+    .goalBar {
+        opacity: 0.6;
     }
 
-    .goalCircle{
+    .goalCircle {
         stroke-width: 3px;
         r: 5px;
     }
-
 
     .node circle {
         fill: #be2714;;
@@ -234,10 +218,9 @@
         overflow-y: scroll
     }
 
-    .barText{
+    .barText {
         fill: black;
     }
-
 
     .chart .barText {
         text-anchor: start;
@@ -245,8 +228,7 @@
     }
 
 
-
-    #goalHeader{
+    #goalHeader {
         width: 200px;
         height: 50px;
         margin: 10px;

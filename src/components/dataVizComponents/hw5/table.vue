@@ -1,4 +1,3 @@
-
 <template>
     <div id="table">
     </div>
@@ -12,633 +11,580 @@
 
     export default {
 
-        data() { return {
-            teamData: teamData
+        data() {
+            return {
+                teamData: teamData
 
-        }
+            }
         },
-        methods : {
+        methods: {
 
 
+            /**
+             * Creates a table skeleton including headers that when clicked allow you to sort the table by the chosen attribute.
+             * Also calculates aggregate values of goals, wins, losses and total games as a function of country.
+             *
+             */
+            createTable() {
 
-        /**
-         * Creates a table skeleton including headers that when clicked allow you to sort the table by the chosen attribute.
-         * Also calculates aggregate values of goals, wins, losses and total games as a function of country.
-         *
-         */
-        createTable() {
+                // ******* TODO: PART II *******
 
-            // ******* TODO: PART II *******
-
-            //Update Scale Domains
-
-
-            let maxGoal = Math.max.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
-
-            // let minGoal = Math.min.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
-
-            let gsWidth = 200;
-            let gsHeight = 50
-
-            let goalScale = d3.scaleLinear()
-                .domain([0, maxGoal])
-                .range([10, gsWidth-10]);
+                //Update Scale Domains
 
 
-            let axis = d3.axisTop(goalScale);
+                let maxGoal = Math.max.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
 
-            let goalHeader = d3.select("#goalHeader").append("svg")
-                .attr("width", gsWidth)
-                .attr("height", gsHeight)
-                .attr("margin", "10px");
+                // let minGoal = Math.min.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
 
+                let gsWidth = 200;
+                let gsHeight = 50;
 
-            goalHeader.append("g")
-                .attr("class", "axis axis--x")
-                .attr("transform", "translate(0, 25)")
-                .call(axis);
-
-            //add GoalAxis to header of col 1.
-
-            // ******* TODO: PART V *******
-
-            // Set sorting callback for clicking on headers
-
-            let team = d3.select("#matchTable > thead > tr").selectAll("th")
-                .on("click", (d,i) => this.sortByCol(5));
-
-            let headers = d3.select("#matchTable thead > tr").selectAll("td")
-                .on("click", (d,i) => this.sortByCol(i));
-
-            console.log("headers", headers);
-            console.log("team", team);
+                let goalScale = d3.scaleLinear()
+                    .domain([0, maxGoal])
+                    .range([10, gsWidth - 10]);
 
 
-            //Set sorting callback for clicking on Team header
-            //Clicking on headers should also trigger collapseList() and updateTable().
+                let axis = d3.axisTop(goalScale);
 
-            this.tableElements = this.teamData;
-
-
-        },
-
-
-        /**
-         * Updates the table contents with a row for each element in the global variable tableElements.
-         */
-        updateTable() {
-            // ******* TODO: PART III *******
-            //Create table rows
+                let goalHeader = d3.select("#goalHeader").append("svg")
+                    .attr("width", gsWidth)
+                    .attr("height", gsHeight)
+                    .attr("margin", "10px");
 
 
-            console.log("this.tableElements", this.tableElements);
+                goalHeader.append("g")
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0, 25)")
+                    .call(axis);
 
-            let svgs = d3.select("#matchTable  tbody").selectAll("td").selectAll("svg").remove();
+                //add GoalAxis to header of col 1.
+
+                // ******* TODO: PART V *******
+
+                // Set sorting callback for clicking on headers
+
+                let team = d3.select("#matchTable > thead > tr").selectAll("th")
+                    .on("click", (d, i) => this.sortByCol(5));
+
+                let headers = d3.select("#matchTable thead > tr").selectAll("td")
+                    .on("click", (d, i) => this.sortByCol(i));
+
+                console.log("headers", headers);
+                console.log("team", team);
 
 
+                //Set sorting callback for clicking on Team header
+                //Clicking on headers should also trigger collapseList() and updateTable().
 
-            let tr = d3.select("#matchTable  tbody").selectAll("tr")
-                .data(this.tableElements).join("tr");
-            // EXIT
-            // Remove old elements as needed.
+                this.tableElements = this.teamData;
 
-            console.log("this.tr", tr);
 
-            let th = tr.selectAll("th").data(d => {return [d]; })
-                .join("th")
-                // .text((d, i) =>  {if(d["value"] === "aggregate"){return d["key"] } else{
-                //     return "game"
-                // }})
-                .on("click", (d,i) => this.updateList(d["key"]));
+            },
 
-            th.text(d => {
-                if(d.value.type === "aggregate"){
-                    return  d["key"];
-                }
-                else{
-                    return "  vs. " +  d["key"];
-                }
-            })
-                .style("color", d => {
-                    if(d.value.type === "game"){
-                        return "gray";
+
+            /**
+             * Updates the table contents with a row for each element in the global variable tableElements.
+             */
+            updateTable() {
+                // ******* TODO: PART III *******
+                //Create table rows
+
+
+                console.log("this.tableElements", this.tableElements);
+
+                let svgs = d3.select("#matchTable  tbody").selectAll("td").selectAll("svg").remove();
+
+
+                let tr = d3.select("#matchTable  tbody").selectAll("tr")
+                    .data(this.tableElements).join("tr");
+                // EXIT
+                // Remove old elements as needed.
+
+                console.log("this.tr", tr);
+
+                let th = tr.selectAll("th").data(d => {
+                    return [d];
+                })
+                    .join("th")
+                    // .text((d, i) =>  {if(d["value"] === "aggregate"){return d["key"] } else{
+                    //     return "game"
+                    // }})
+                    .on("click", (d, i) => this.updateList(d["key"]));
+
+                th.text(d => {
+                    if (d.value.type === "aggregate") {
+                        return d["key"];
+                    } else {
+                        return "  vs. " + d["key"];
                     }
+                })
+                    .style("color", d => {
+                        if (d.value.type === "game") {
+                            return "gray";
+                        }
+                    });
+
+
+                console.log("th", th);
+
+
+                let td = tr.selectAll("td").data(d => this.cellArray(d)).join("td");
+
+
+                let goals = td.filter((d) => {
+                    return d.vis === "goals"
+                });
+
+                let bars = td.filter((d) => {
+                    return d.vis === "bar";
+                });
+
+                let rounds = td.filter((d) => {
+                    return d.vis === 'text'
                 });
 
 
-            console.log("th", th);
+                let games = td.filter(d => {
+                    return d.type === "game"
+                });
 
 
+                rounds.join("text")
+                    .text(d => d["val"]);
 
 
-            let td = tr.selectAll("td").data(d => this.cellArray(d)).join("td");
+                //Todo:scale using td cellwidth and height values
+                let barSvgs = bars.append("svg")
+                    .attr("class", "chart")
+                    .attr("width", 50)
+                    .attr("height", 25);
 
 
+                let barHeight = 20;
 
-            let goals = td.filter((d) => {
-                return d.vis === "goals"
-            });
-
-            let bars = td.filter((d) => {
-                return d.vis === "bar";
-            });
-
-            let rounds = td.filter((d) => {
-                return d.vis === 'text'
-            });
+                barSvgs
+                    .append("rect")
+                    .attr("width", d => d["val"] * 5)
+                    .attr("height", barHeight)
+                    .attr("fill", "red")
+                    .attr("opacity", d => d["val"] / 7);
 
 
-            let games = td.filter(d => {return d.type === "game"});
+                barSvgs
+                    .append("text")
+                    .style("fill", "black")
+                    .attr("x", 0)
+                    .attr("y", barHeight / 2 - 2)
+                    .attr("dy", "6px")
+                    .text(d => d["val"]);
 
 
-
-            rounds.join("text")
-                .text(d => d["val"]);
-
-
-            //Todo:scale using td cellwidth and height values
-            let barSvgs = bars.append("svg")
-                .attr("class", "chart")
-                .attr("width", 50)
-                .attr("height", 25)
+                let goalSvgs = goals.append("svg")
+                    .attr("width", 200)
+                    .attr("height", 25);
 
 
-            let barHeight = 20;
-
-            barSvgs
-                .append("rect")
-                .attr("width", d => d["val"] * 5)
-                .attr("height", barHeight)
-                .attr("fill", "red")
-                .attr("opacity", d => d["val"]/7);
-
-
-            barSvgs
-                .append("text")
-                .style("fill", "black")
-                .attr("x", 0)
-                .attr("y", barHeight / 2 - 2)
-                .attr("dy", "6px")
-                .text(d => d["val"]);
-
-
-
-
-
-            let goalSvgs = goals.append("svg")
-                .attr("width", 200)
-                .attr("height", 25);
-
-
-            goalSvgs.append("rect")
-                .attr("width", d => Math.abs(d["val"]["GoalsConceded"] -d["val"]["GoalsMade"]) * 12.5)
-                .attr("height", 10)
-                .attr("x",d =>  Math.min(d["val"]["GoalsConceded"], d["val"]["GoalsMade"]) * 12.5 )
-                .attr("y", 3)
-                .style("fill", d => {
-                    if(d.type === "aggregate") {
-                        if (d.val.GoalsMade - d.val.GoalsConceded > 0) {
-                            return "blue";
-                        } else if (d.val.GoalsMade - d.val.GoalsConceded < 0) {
-                            return "red";
+                goalSvgs.append("rect")
+                    .attr("width", d => Math.abs(d["val"]["GoalsConceded"] - d["val"]["GoalsMade"]) * 12.5)
+                    .attr("height", 10)
+                    .attr("x", d => Math.min(d["val"]["GoalsConceded"], d["val"]["GoalsMade"]) * 12.5)
+                    .attr("y", 3)
+                    .style("fill", d => {
+                        if (d.type === "aggregate") {
+                            if (d.val.GoalsMade - d.val.GoalsConceded > 0) {
+                                return "blue";
+                            } else if (d.val.GoalsMade - d.val.GoalsConceded < 0) {
+                                return "red";
+                            } else {
+                            }
                         } else {
+                            return "none";
                         }
-                    }
-                    else{
-                        return "none";
-                    }
-                })
-                .attr("opacity", 0.5);
+                    })
+                    .attr("opacity", 0.5);
 
 
-            //Todo, translate circles to goal scale exactly
-            goalSvgs.append("circle")
-                .attr("r", 5)
-                .attr("cy", barHeight / 2 - 2)
-                .attr("cx",d => d["val"]["GoalsMade"] * 12.5)
-                .style("fill", d => {
-                    if(d.val.GoalsConceded === d.val.GoalsMade){
-                        return "gray";
-                    }
-                    else if (d.type === "aggregate"){
-                        return "blue";
-                    }
-                    else{
-                        return "white";
-                    }
-
-                })
-                .style("stroke", d =>{
-
-                    if(d.type === "game"){
-                        if(d.val.GoalsConceded === d.val.GoalsMade){
+                //Todo, translate circles to goal scale exactly
+                goalSvgs.append("circle")
+                    .attr("r", 5)
+                    .attr("cy", barHeight / 2 - 2)
+                    .attr("cx", d => d["val"]["GoalsMade"] * 12.5)
+                    .style("fill", d => {
+                        if (d.val.GoalsConceded === d.val.GoalsMade) {
                             return "gray";
+                        } else if (d.type === "aggregate") {
+                            return "blue";
+                        } else {
+                            return "white";
                         }
-                        return "blue";
+
+                    })
+                    .style("stroke", d => {
+
+                        if (d.type === "game") {
+                            if (d.val.GoalsConceded === d.val.GoalsMade) {
+                                return "gray";
+                            }
+                            return "blue";
+                        }
+                    });
+
+
+                goalSvgs.append("circle")
+                    .attr("r", 5)
+                    .attr("cy", barHeight / 2 - 2)
+                    .attr("cx", d => d["val"]["GoalsConceded"] * 12.5)
+                    .style("fill", d => {
+                        if (d.type === "aggregate") {
+                            return "red"
+                        } else {
+                            return "white";
+                        }
+
+                    })
+                    .style("stroke", d => {
+                        if (d.type === "game") {
+                            if (d.val.GoalsConceded === d.val.GoalsMade) {
+                                return "gray";
+                            }
+                            return "red";
+                        }
+
+                    });
+            },
+
+
+            makeCell(type, vis, val) {
+
+                return {"type": type, "vis": vis, "val": val};
+
+            },
+            cellArray(d) {
+                // console.log("d inside cell array", d);
+
+                let value = d["value"];
+
+                let type = value["type"];
+
+                let gc = this.makeCell(type, "goals", {
+                    "GoalsMade": value["Goals Made"],
+                    "GoalsConceded": value["Goals Conceded"]
+                });
+
+                let rc = this.makeCell(type, "text", value["Result"]["label"]);
+
+                let wc = this.makeCell(type, "bar", value["Wins"]);
+
+                let lc = this.makeCell(type, "bar", value["Losses"]);
+
+                let tc = this.makeCell(type, "bar", value["TotalGames"]);
+
+
+                return [gc, rc, wc, lc, tc];
+            },
+
+
+            sortByCol(i) {
+
+                this.collapseList();
+
+                let tr = d3.select("#matchTable > tbody").selectAll("tr");
+
+
+                if (i === 0) {
+                    this.sortByGoalDiff();
+                } else if (i === 1) {
+                    this.sortByRound();
+                } else if (i === 2) {
+                    this.sortByWins();
+                } else if (i === 3) {
+                    this.sortByLosses();
+                } else if (i === 4) {
+                    this.sortByTotalGames()
+                } else if (i === 5) {
+                    this.sortByTeamName();
+                }
+
+                this.updateTable();
+
+            },
+
+            sortByGoalDiff() {
+                let preSort = this.tableElements.slice(0);
+
+                this.tableElements.sort(function (a, b) {
+                    if (a.value["Goals Made"] - a.value["Goals Conceded"] < b.value["Goals Made"] - b.value["Goals Conceded"]) {
+                        return -1;
                     }
+                    if (a.value["Goals Made"] - a.value["Goals Conceded"] > b.value["Goals Made"] - b.value["Goals Conceded"]) {
+                        return 1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                });
+
+                // console.log("presort, tableElements", preSort, this.tableElements);
+
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
+
+
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
+                }
+            },
+
+            sortByRound() {
+                let preSort = this.tableElements.slice(0);
+
+                this.tableElements.sort(function (a, b) {
+
+                    let aPoint = a.value.Result.ranking;
+                    let bPoint = b.value.Result.ranking;
+
+
+                    if (aPoint < bPoint) {
+                        return -1;
+                    }
+                    if (bPoint < aPoint) {
+                        return 1;
+                    }
+                    // a must be equal to b
+                    return 0;
                 });
 
 
-            goalSvgs.append("circle")
-                .attr("r", 5)
-                .attr("cy", barHeight / 2 - 2)
-                .attr("cx",d => d["val"]["GoalsConceded"] * 12.5)
-                .style("fill", d => {
-                    if (d.type === "aggregate"){
-                        return "red"
-                    }
-                    else{
-                        return "white";
-                    }
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
 
-                })
-                .style("stroke", d =>{
-                    if(d.type === "game"){
-                        if(d.val.GoalsConceded === d.val.GoalsMade){
-                            return "gray";
-                        }
-                        return "red";
-                    }
 
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
+                }
+            },
+
+            sortByWins() {
+                let preSort = this.tableElements.slice(0);
+
+                this.tableElements.sort(function (a, b) {
+
+                    let aPoint = a.value.Wins;
+                    let bPoint = b.value.Wins;
+
+
+                    if (aPoint < bPoint) {
+                        return -1;
+                    }
+                    if (bPoint < aPoint) {
+                        return 1;
+                    }
+                    // a must be equal to b
+                    return 0;
                 });
-        },
+
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
 
 
-
-        makeCell(type,vis, val){
-
-            return{"type": type, "vis": vis, "val": val};
-
-        },
-        cellArray(d){
-            // console.log("d inside cell array", d);
-
-            let value = d["value"]
-
-            let type = value["type"];
-
-            let gc = this.makeCell(type, "goals", {"GoalsMade" : value["Goals Made"], "GoalsConceded" : value["Goals Conceded"]});
-
-            let rc = this.makeCell(type, "text", value["Result"]["label"]);
-
-            let wc = this.makeCell(type, "bar", value["Wins"]);
-
-            let lc = this.makeCell(type, "bar", value["Losses"]);
-
-            let tc = this.makeCell(type, "bar", value["TotalGames"]);
-
-
-
-
-            return [gc, rc, wc, lc, tc];
-        },
-
-
-
-
-        sortByCol(i){
-
-            this.collapseList();
-
-            let tr = d3.select("#matchTable > tbody").selectAll("tr");
-
-
-            if(i === 0) {
-                this.sortByGoalDiff();
-            }
-            else if(i === 1){
-                this.sortByRound();
-            }
-            else if(i === 2){
-                this.sortByWins();
-            }
-            else if(i === 3){
-                this.sortByLosses();
-            }
-            else if (i === 4){
-                this.sortByTotalGames()
-            }
-
-            else if (i === 5){
-                this.sortByTeamName();
-            }
-
-            this.updateTable();
-
-        },
-
-        sortByGoalDiff(){
-            let preSort = this.tableElements.slice(0);
-
-            this.tableElements.sort(function (a, b) {
-                if (a.value["Goals Made"] - a.value["Goals Conceded"] < b.value["Goals Made"] - b.value["Goals Conceded"]) {
-                    return -1;
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
                 }
-                if (a.value["Goals Made"] - a.value["Goals Conceded"] > b.value["Goals Made"] - b.value["Goals Conceded"]) {
-                    return 1;
+            },
+
+            sortByLosses() {
+
+                let preSort = this.tableElements.slice(0);
+
+                this.tableElements.sort(function (a, b) {
+
+                    let aPoint = a.value.Losses;
+                    let bPoint = b.value.Losses;
+
+
+                    if (aPoint < bPoint) {
+                        return -1;
+                    }
+                    if (bPoint < aPoint) {
+                        return 1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                });
+
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
+
+
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
                 }
-                // a must be equal to b
-                return 0;
-            });
 
-            // console.log("presort, tableElements", preSort, this.tableElements);
+            },
 
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
+            sortByTotalGames() {
+                let preSort = this.tableElements.slice(0);
 
+                this.tableElements.sort(function (a, b) {
 
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
-        },
-
-        sortByRound(){
-            let preSort = this.tableElements.slice(0);
-
-            this.tableElements.sort(function (a, b) {
-
-                let aPoint = a.value.Result.ranking;
-                let bPoint = b.value.Result.ranking;
+                    let aPoint = a.value["Total Games"];
+                    let bPoint = b.value["Total Games"];
 
 
-                if (aPoint< bPoint) {
-                    return -1;
+                    if (aPoint < bPoint) {
+                        return -1;
+                    }
+                    if (bPoint < aPoint) {
+                        return 1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                });
+
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
+
+
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
                 }
-                if (bPoint < aPoint) {
-                    return 1;
+
+            },
+
+            sortByTeamName() {
+
+                let preSort = this.tableElements.slice(0);
+
+                this.tableElements.sort(function (a, b) {
+
+
+                    let aPoint = a.key;
+                    let bPoint = b.key;
+
+
+                    return aPoint.localeCompare(bPoint);
+                });
+
+
+                let arrEq = function arraysEqual(a1, a2) {
+                    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+                    return JSON.stringify(a1) == JSON.stringify(a2);
+                };
+
+
+                if (arrEq(preSort, this.tableElements)) {
+                    this.tableElements.reverse();
                 }
-                // a must be equal to b
-                return 0;
-            });
 
+            },
 
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
+            /**
+             * Updates the global tableElements variable, with a row for each row to be rendered in the table.
+             *
+             */
+            updateList(country) {
 
+                //todo: fix last element edge case
 
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
-        },
+                let i = this.getIndexFromList(country);
 
-        sortByWins(){
-            let preSort = this.tableElements.slice(0);
+                let type = this.tableElements[i].value.type;
 
-            this.tableElements.sort(function (a, b) {
-
-                let aPoint = a.value.Wins;
-                let bPoint = b.value.Wins;
-
-
-                if (aPoint< bPoint) {
-                    return -1;
+                if ("type" === "game") {
+                    return;
                 }
-                if (bPoint < aPoint) {
-                    return 1;
+
+                console.log("this.tableElements[i+1]", this.tableElements[i + 1]);
+
+                let games = this.tableElements[i]["value"]["games"];
+
+
+                if (typeof this.tableElements[i + 1] === "undefined") {
+                    console.log("undefined table element");
+                    for (let g = 0; g < games.length; g++) {
+                        this.tableElements.splice(i + g + 1, 0, games[g]);
+                        console.log("i, g, games[g]", i, g, games[g]);
+                    }
+                    this.updateTable();
+                    return;
                 }
-                // a must be equal to b
-                return 0;
-            });
 
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
+                let typeOfNext = this.tableElements[i + 1].value.type;
 
 
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
+                if (type === "aggregate" && typeOfNext === "aggregate") {
 
-        },
+                    for (let g = 0; g < games.length; g++) {
+                        this.tableElements.splice(i + g + 1, 0, games[g]);
+                        console.log("i, g, games[g]", i, g, games[g]);
+                    }
+                } else if (type === "aggregate" && typeOfNext === "game") {
 
-        sortByLosses(){
-
-            let preSort = this.tableElements.slice(0);
-
-            this.tableElements.sort(function (a, b) {
-
-                let aPoint = a.value.Losses;
-                let bPoint = b.value.Losses;
-
-
-                if (aPoint< bPoint) {
-                    return -1;
-                }
-                if (bPoint < aPoint) {
-                    return 1;
-                }
-                // a must be equal to b
-                return 0;
-            });
-
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
-
-
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
-
-        },
-
-        sortByTotalGames(){
-            let preSort = this.tableElements.slice(0);
-
-            this.tableElements.sort(function (a, b) {
-
-                let aPoint = a.value["Total Games"];
-                let bPoint = b.value["Total Games"];
-
-
-                if (aPoint< bPoint) {
-                    return -1;
-                }
-                if (bPoint < aPoint) {
-                    return 1;
-                }
-                // a must be equal to b
-                return 0;
-            });
-
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
-
-
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
-
-        },
-
-        sortByTeamName(){
-
-            let preSort = this.tableElements.slice(0);
-
-            this.tableElements.sort(function (a, b) {
-
-
-                let aPoint = a.key;
-                let bPoint = b.key;
-
-
-                return aPoint.localeCompare(bPoint);
-            });
-
-
-            let arrEq = function arraysEqual(a1, a2) {
-                /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-                return JSON.stringify(a1) == JSON.stringify(a2);
-            }
-
-
-            if (arrEq(preSort, this.tableElements)) {
-                this.tableElements.reverse();
-            }
-
-        },
-
-        /**
-         * Updates the global tableElements variable, with a row for each row to be rendered in the table.
-         *
-         */
-        updateList(country) {
-
-            //todo: fix last element edge case
-
-            let i = this.getIndexFromList(country);
-
-            let type = this.tableElements[i].value.type;
-
-            if("type" === "game"){
-                return;
-            }
-
-            console.log("this.tableElements[i+1]", this.tableElements[i+1]);
-
-            let games = this.tableElements[i]["value"]["games"];
-
-
-            if(typeof this.tableElements[i+1] === "undefined"){
-                console.log("undefined table element");
-                for (let g = 0; g < games.length; g++) {
-                    this.tableElements.splice(i + g + 1, 0, games[g]);
-                    console.log("i, g, games[g]", i, g, games[g]);
+                    this.tableElements = this.collapseTeam(i);
                 }
                 this.updateTable();
-                return;
-            }
+            },
 
-            let typeOfNext = this.tableElements[i+1].value.type;
+            getIndexFromList(country) {
+                return this.tableElements.findIndex(p => p.key === country);
+            },
 
+            collapseTeam(i) {
+                let te = this.tableElements[i + 1];
 
-            if(type === "aggregate" && typeOfNext === "aggregate") {
-
-                for (let g = 0; g < games.length; g++) {
-                    this.tableElements.splice(i + g + 1, 0, games[g]);
-                    console.log("i, g, games[g]", i, g, games[g]);
+                while (te.value.type === "game") {
+                    console.log("first te", te);
+                    this.tableElements.splice(i + 1, 1);
+                    console.log("this.tableELements after splice", this.tableElements);
+                    te = this.tableElements[i + 1];
+                    if (typeof te === "undefined") {
+                        return this.tableElements;
+                    }
                 }
-            }
+                return this.tableElements;
+            },
 
-            else if(type === "aggregate" && typeOfNext === "game"){
+            collapseList() {
+                let te = [];
 
-                this.tableElements = this.collapseTeam(i);
-
-                // console.log("this.tableElements after collapse", this.tableElements);
-            }
-
-
-            this.updateTable();
-
-            //Only update list for aggregate clicks, not game clicks
-
-        },
-
-        getIndexFromList(country){
-            console.log("getting index for country", country);
-            console.log(this.tableElements);
-
-            let index = this.tableElements.findIndex(p => p.key === country);
-
-            console.log("index", index);
-
-            return index;
-
-        },
-
-        collapseTeam(i){
-            console.log("collapsing team at index ", i);
-
-            // console.log("this.tableElements[i+1]", this.tableElements[i+1].value);
-
-            let te = this.tableElements[i+1];
-
-
-            while(te.value.type === "game"){
-                console.log("first te", te);
-                this.tableElements.splice(i+1, 1);
-                console.log("this.tableELements after splice", this.tableElements)
-                te = this.tableElements[i+1];
-                //end of list edge case
-                if(typeof te === "undefined"){
-                    return this.tableElements;
+                for (let i = 0; i < this.tableElements.length; i++) {
+                    if (this.tableElements[i].value.type === "aggregate") {
+                        te.push(this.tableElements[i]);
+                    }
                 }
-            }
-            return this.tableElements;
-        },
+                this.tableElements = te;
+            },
 
-
-        /**
-         * Collapses all expanded countries, leaving only rows for aggregate values per country.
-         *
-         */
-        collapseList() {
-
-            let te = [];
-
-            for(let i = 0; i < this.tableElements.length; i++){
-                if(this.tableElements[i].value.type === "aggregate"){
-                    te.push(this.tableElements[i]);
-                }
-            }
-
-            this.tableElements = te;
-            // ******* TODO: PART IV *******
-
-        },
-
-            emitTreeData(d){
+            emitTreeData(d) {
                 this.$emit('update-tree', d);
             },
-            emitClearTree(){
+            emitClearTree() {
                 this.$emit("clear-tree");
             }
-
-
-    },
+        },
         mounted() {
             this.createTable();
             this.updateTable();
 
-            let rows = d3.select("#matchTable > tbody").selectAll("tr")
+            d3.select("#matchTable > tbody").selectAll("tr")
                 .on("mouseover", d => this.emitTreeData(d))
                 .on("mouseout", d => this.emitClearTree());
-
         },
 
     }
 </script>
 
 <style>
-    #table{
+    #table {
         height: 75vh;
     }
 </style>

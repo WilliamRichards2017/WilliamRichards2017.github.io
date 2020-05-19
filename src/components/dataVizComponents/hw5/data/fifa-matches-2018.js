@@ -2623,6 +2623,6 @@ let teamData = [
       "type": "aggregate"
     }
   }
-]
+];
 
 export default teamData;

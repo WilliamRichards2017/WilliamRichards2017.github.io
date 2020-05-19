@@ -37,7 +37,6 @@
 
         methods: {
             categoryToColor(category) {
-
                 if (this.colorDict.hasOwnProperty(category)) {
                     return this.colorDict[category];
                 }
@@ -45,7 +44,6 @@
             },
 
             initScales() {
-
                 let self = this;
 
                 self.minTotal = d3.max(self.words, function (d) {
@@ -54,7 +52,6 @@
                 self.maxTotal = d3.max(self.words, function (d) {
                     return -d.total;
                 });
-
                 self.radiusScale = d3.scaleLinear()
                     .domain([self.minTotal, self.maxTotal])
                     .range([1, 12]);
@@ -62,15 +59,19 @@
 
 
             buildBubbleChart() {
+                let self = this;
 
                 d3.select("#bubbleSvg").remove();
 
-                let self = this;
                 let data = this.words;
 
-                let maxTotal = d3.max(data, function(d) { return +d.total;} );
-                let minTotal = d3.max(data, function(d) { return -d.total;} );
-                let ticks=["50", "40", "30", "20", "10", "0", "10", "20", "30", "40", "50"];
+                let maxTotal = d3.max(data, function (d) {
+                    return +d.total;
+                });
+                let minTotal = d3.max(data, function (d) {
+                    return -d.total;
+                });
+                let ticks = ["50", "40", "30", "20", "10", "0", "10", "20", "30", "40", "50"];
 
                 let percentScale = d3.scaleLinear()
                     .range([0, 750]);
@@ -83,14 +84,13 @@
                     .attr("id", "bubbleSvg")
                     .attr("width", 800)
                     .attr("height", 400)
-                .append("svg")
+                    .append("svg")
                     .attr("width", 790)
 
                     .attr("height", 50)
                     .attr("margin", "5px");
 
                 d3.select("#bubbleSvg").style("opacity", 0);
-
 
                 percentHeader.append("g")
                     .attr("x", 15)
@@ -115,7 +115,7 @@
                     .data(self.colorArray)
                     .join('text')
                     .attr("x", 20)
-                    .attr("y", (d,i) => 50+ i*133 )
+                    .attr("y", (d, i) => 50 + i * 133)
                     .text(d => d)
                     .attr("font-family", "sans-serif")
                     .attr("font-size", "20px")
@@ -132,24 +132,28 @@
                     .style("stroke", "black")
                     .style("z-axis", 0.01)
                     .on("mouseover", d => console.log(d.percent_of_d_speeches, d.percent_of_r_speeches, d.phrase, radiusScale(d.total), d.moveX, d.moveY + 100))
-                    .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-                    .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
+                    .on("mousemove", function () {
+                        return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+                    })
+                    .on("mouseout", function () {
+                        return tooltip.style("visibility", "hidden");
+                    })
                     .attr('cx', function (d) {
                         return d.sourceX;
                     })
                     .attr('cy', function (d) {
                         return d.sourceY + 100;
                     });
-
                 d3.select("#bubbleSvg").transition().duration(100).style("opacity", 1);
             },
 
             separateBubbleChart() {
                 let self = this;
-                d3.select("#bubbleSvg").attr("height", 761)
+
+                d3.select("#bubbleSvg").attr("height", 761);
 
                 d3.select('#bubbleSvg')
-                        .selectAll('circle')
+                    .selectAll('circle')
                     .transition().duration(300)
                     .attr('cx', function (d) {
                         return d.moveX;
@@ -165,11 +169,10 @@
                     .attr("opacity", 1);
             },
 
-            unseparateBubbleChart(){
+            unseparateBubbleChart() {
                 let self = this;
 
-                d3.select("#bubbleSvg").attr("height", 400)
-
+                d3.select("#bubbleSvg").attr("height", 400);
 
                 d3.select('#bubbleSvg')
                     .selectAll('circle')
@@ -186,34 +189,27 @@
                     .selectAll(".headerText")
                     .transition().duration(300)
                     .attr("opacity", 0);
-
             },
 
-            highlightBrushedNodes(){
+            highlightBrushedNodes() {
                 let self = this;
-                let nodes = d3.select("#bubbleChart").selectAll("circle");
 
+                let nodes = d3.select("#bubbleChart").selectAll("circle");
 
                 let brushedPhrases = [];
 
-                for(let i = 0; i < this.brushedWords.length; i++){
+                for (let i = 0; i < this.brushedWords.length; i++) {
                     brushedPhrases.push(this.brushedWords[i].phrase);
                 }
-
                 let nonBrushed = nodes.filter((d) => {
                     return !brushedPhrases.includes(d.phrase);
                 });
-
                 let brushed = nodes.filter((d) => {
                     return brushedPhrases.includes(d.phrase);
                 });
-
-
                 nonBrushed.style("fill", "grey");
 
                 brushed.style("fill", d => self.categoryToColor(d.category));
-
-
             },
 
         },
@@ -224,7 +220,6 @@
         },
 
         watch: {
-
             separate: function () {
                 if (this.separate) {
                     this.separateBubbleChart();
@@ -232,37 +227,32 @@
                     this.unseparateBubbleChart();
                 }
             },
-
-            brushedWords: function(){
+            brushedWords: function () {
                 this.highlightBrushedNodes();
             },
         }
-
-
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-    .nb{
+    .nb {
 
         fill: grey !important;
     }
 
-    #tooltip{
-        /*background: white;*/
+    #tooltip {
         opacity: 0.5;
     }
 
-    #bubbleChart{
-        overflow-y:scroll;
+    #bubbleChart {
+        overflow-y: scroll;
         overflow-x: hidden;
         height: 70vh;
 
     }
 
-    #fg{
+    #fg {
         top: 0;
         bottom: 0;
         width: 500px;
@@ -279,6 +269,5 @@
         margin-right: 0;
         font-weight: bold;
     }
-
 </style>
 

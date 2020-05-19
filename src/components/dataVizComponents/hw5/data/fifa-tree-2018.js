@@ -216,6 +216,6 @@ let treeData = [
         "Losses": 0,
         "ParentGame": ""
     }
-]
+];
 
 export default treeData;
