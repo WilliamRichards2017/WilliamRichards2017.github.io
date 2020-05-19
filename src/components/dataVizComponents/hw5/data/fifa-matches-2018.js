@@ -1,4 +1,4 @@
-[
+let teamData = [
   {
     "key": "Russia",
     "value": {
@@ -2624,3 +2624,5 @@
     }
   }
 ]
+
+export default teamData;

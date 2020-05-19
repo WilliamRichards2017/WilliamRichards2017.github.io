@@ -29,6 +29,7 @@
             </div>
 
             <tree></tree>
+            <soccer-table></soccer-table>
 
     </div>
     </div>
@@ -38,15 +39,13 @@
 <script>
 
     import Tree from './tree.vue'
-
-
-
-
+    import soccerTable from './table.vue'
 
     export default {
 
             components: {
                 Tree,
+                soccerTable,
             },
 
         data() { return {
