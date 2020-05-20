@@ -1,5 +1,5 @@
 <template>
-    <div id="map">
+    <div id="mapChart">
     </div>
 </template>
 
@@ -31,13 +31,13 @@
 
             populateData() {
                 this.projection = d3.geoWinkel3().scale(140).translate([365, 225]);
-                this.nameArray = data.population.map(d => d.geo.toUpperCase());
-                this.populationData = data.population;
             },
             drawMap(world) {
 
 
                 let geojson = topojson.feature(world, world.objects.countries);
+
+                console.log("geojson", geojson);
 
                 let countryData = geojson.features.map(country => {
 
@@ -57,7 +57,7 @@
                 let h = 350;
 
                 var svg = d3
-                    .select("#map-chart")
+                    .select("#mapChart")
                     .append("svg")
                     .attr("width", w)
                     .attr("height", h);
@@ -120,19 +120,18 @@
         },
 
         mounted() {
-            console.log("json", json)
-            console.log("this.mapData", this.mapData);
             this.populateData();
-            this.drawMap(this.mapData);
 
 
         },
 
         watch: {
             popData: function () {
-                this.populateData();
+                this.populationData = this.popData.population;
+                this.nameArray = this.popData.population.map(d => d.geo.toUpperCase());
+                console.log("this.nameAray", this.nameArray);
                 this.drawMap(this.mapData);
-                console.log("this.mapData", this.mapData)
+
             }
         }
 
