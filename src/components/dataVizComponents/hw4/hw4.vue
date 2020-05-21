@@ -1,17 +1,22 @@
 <template>
-    <div id="hw4">
+    <div id="hw4" style="display: inline-flex">
     <worldMap
     :popData="popData"></worldMap>
+    <gapPlot
+        :popData="popData">
+    </gapPlot>
     </div>
 </template>
 
 <script>
 
     import worldMap from './components/map.vue';
+    import gapPlot from './components/gapPlot.vue'
 
     export default {
 
         components: {
+            gapPlot,
             worldMap
 
         },
@@ -449,11 +454,26 @@
 
     .africa {
         fill: #FFCA28;
-        stroke: #FFCA28;
 
         /*  stroke-width: 1px;*/
     }
 
+    path.africa{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.europe{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.americas{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.asia{
+        stroke: white;
+        stroke-width: 1px;
+    }
     path.africa.selected-country,
     circle.africa.selected-country {
         fill: #cc9a04;
@@ -490,7 +510,6 @@
 
     .americas {
         fill: #D4E157;
-        stroke: #D4E157;
     }
 
 

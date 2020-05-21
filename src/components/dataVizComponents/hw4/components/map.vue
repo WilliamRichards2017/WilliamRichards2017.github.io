@@ -32,6 +32,7 @@
             populateData() {
                 this.projection = d3.geoWinkel3().scale(140).translate([365, 225]);
             },
+
             drawMap(world) {
 
 
@@ -83,7 +84,7 @@
                     .enter().append('path')
                     .attr('d', path)
                     .attr('vector-effect', 'non-scaling-stroke')
-                    .on("click", d => this.updateCountrymap(d["id"]));
+                    .on("click", d => { console.log("click"); this.updateCountryMap(d["id"])});
 
 
                 mapLayer.selectAll('path')
@@ -111,6 +112,11 @@
 
                 d3.select("#" + activeCountry.toLowerCase())
                     .classed("selected-country", true);
+            },
+
+            updateCountryMap(countryID) {
+                console.log("countryID", countryID);
+                this.updateHighlightClick(countryID);
             },
 
             clearHighlight() {
