@@ -34,9 +34,9 @@
             </ul>
         </div>
 
-        <hw6 v-if="showHw6"></hw6>
-        <hw5 v-if="showHw5"></hw5>
-        <hw4 v-if="showHw4"></hw4>
+        <hw6 v-show="showHw6"></hw6>
+        <hw5 v-show="showHw5"></hw5>
+        <hw4 v-show="showHw4"></hw4>
 
     </div>
 </template>
