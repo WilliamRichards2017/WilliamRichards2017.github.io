@@ -7,9 +7,16 @@
                 <table id="matchTable">
                     <thead>
                     <tr>
-                        <th>Team</th>
-                        <td style="text-align:center"> Goals <span class="glyphicon glyphicon-sort"></span><br/></td>
-                        <td>Round/Result</td>
+                        <th style="display: inline-flex">
+                            <svg width="32" height="32">
+                            <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                        </svg>
+                            <div style="padding-top: 8px"> Team </div></th>
+                        <td style="text-align:center;">
+                            Goals <span class="glyphicon glyphicon-sort"></span><br/>
+                        </td>
+
+                           <td> <div style="padding-bottom:16px"> Round/Result</div></td>
                         <td>Wins</td>
                         <td>Losses</td>
                         <td>Total Games</td>

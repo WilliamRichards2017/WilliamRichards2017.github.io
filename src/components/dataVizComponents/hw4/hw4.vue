@@ -1,9 +1,12 @@
 <template>
-    <div id="hw4" style="display: inline-flex">
+    <div id="hw4" style="display: inline-flex; padding-top: 20px">
     <worldMap
-    :popData="popData"></worldMap>
+    :popData="popData"
+    @update-active-country="onUpdateActiveCountry"></worldMap>
     <gapPlot
-        :popData="popData">
+        :popData="popData"
+        :active-country-prop="activeCountry"
+    >
     </gapPlot>
     </div>
 </template>
@@ -24,6 +27,7 @@
         data() {
             return {
                 popData: null,
+                activeCountry: null,
             }
         },
         methods: {
@@ -61,6 +65,10 @@
                     'life-expectancy': life,
                     'fertility-rate': tfr
                 };
+            },
+
+            onUpdateActiveCountry: function(activeCountry){
+                this.activeCountry = activeCountry;
             }
 
         },

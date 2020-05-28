@@ -63,6 +63,10 @@
 
                 // Set sorting callback for clicking on headers
 
+                d3.select("#matchTable > thead > tr").selectAll("td")
+                    .attr("content", "url(src/assets/sort.png")
+
+
                 let team = d3.select("#matchTable > thead > tr").selectAll("th")
                     .on("click", (d, i) => this.sortByCol(5));
 
@@ -587,4 +591,9 @@
     #table {
         height: 75vh;
     }
+
+    th:before {
+        content: url(https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg)
+    }
+
 </style>

@@ -76,7 +76,7 @@ class InfoBox {
 
         let infoArr = [];
 
-        let keys = Object.keys(self.data);
+        let keys = Object.keys(self.infoata);
 
         let values = Object.values(self.data);
 

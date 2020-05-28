@@ -1,6 +1,11 @@
 <template>
+    <div class="innerWrapper">
+
     <div id="mapChart">
     </div>
+               <div id="country-detail"></div>
+    </div>
+
 </template>
 
 <script>
@@ -19,7 +24,7 @@
                 projection: null,
                 nameArray: null,
                 populationData: null,
-                updateCountry: null,
+                activeCountry: null,
                 mapData: json,
 
             }
@@ -105,6 +110,7 @@
             },
 
             updateHighlightClick(activeCountry) {
+                this.activeCountry = activeCountry;
                 this.clearHighlight();
 
                 d3.select("#" + activeCountry.toUpperCase())
@@ -122,6 +128,9 @@
             clearHighlight() {
                 d3.selectAll("path")
                     .classed("selected-country", false);
+
+                d3.selectAll("circle")
+                    .classed("selected-country", false);
             }
         },
 
@@ -137,7 +146,11 @@
                 this.nameArray = this.popData.population.map(d => d.geo.toUpperCase());
                 console.log("this.nameAray", this.nameArray);
                 this.drawMap(this.mapData);
+            },
 
+            activeCountry: function(){
+                console.log("updateActiveCountry");
+                this.$emit("update-active-country", this.activeCountry);
             }
         }
 

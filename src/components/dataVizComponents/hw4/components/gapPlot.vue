@@ -1,28 +1,36 @@
 <template>
+    <div id="gapPlot">
     <div id="scatter-plot">
+        <info-box
 
+        :active-country="activeCountry"
+        :active-year="activeYear"
+        :info-data="popData"></info-box>
+    </div>
     </div>
 </template>
 
 <script>
 
     import PlotData from './../js/plotData.js'
+    import infoBox from './infoBox.vue'
 
     export default {
 
         components: {
+            infoBox
         },
 
         props: {
             popData: null,
-            updateCountry: null,
-            updateYear: null,
+            activeCountryProp: null,
         },
 
         data() {
             return {
                 margin: {top: 20, right: 20, bottom: 60, left: 80},
-                activeYear: '2000',
+                activeYear: '2020',
+                activeCountry: null,
 
 
             }
@@ -381,6 +389,44 @@
                 });
             },
 
+            updateYear(year) {
+
+        let self = this;
+
+        self.activeYear = year;
+
+
+        let dropDownWrapper = d3.select('.dropdown-wrapper');
+
+        let dropX = dropDownWrapper.select('#dropdown_x').select('.dropdown-content').select('select');
+        let dropY = dropDownWrapper.select('#dropdown_y').select('.dropdown-content').select('select');
+        let dropC = dropDownWrapper.select('#dropdown_c').select('.dropdown-content').select('select');
+
+        let yValue = dropY.node().value;
+        let xValue = dropX.node().value;
+        let cValue = dropC.node().value;
+
+        this.updatePlot(year, xValue, yValue, cValue);
+
+
+        let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 730]);
+        let sliderText = d3.select("#slider-txt");
+
+
+        sliderText.text(year.toString());
+        sliderText.attr('x', yearScale(year));
+        sliderText.attr('y', 25);
+
+    },
+
+          updateCountry(countryID) {
+
+        this.updateHighlightClick(countryID);
+        this.activeCountry = countryID;
+        // infoBox.updateTextDescription(countryID, self.activeYear);
+
+    },
+
             drawLegend(min, max) {
                 let scale = d3.scaleSqrt().range([3, 20]).domain([min, max]);
 
@@ -422,6 +468,9 @@
                 d3.selectAll("circle")
                     .classed("selected-country", false);
 
+                d3.selectAll("path")
+                    .classed("selected-country", false);
+
 
             },
             tooltipRender(data) {
@@ -440,6 +489,10 @@
         watch: {
             popData: function(){
                 this.drawPlot();
+            },
+            activeCountryProp: function(){
+                console.log("activeCountryProp", this.activeCountryProp)
+              this.activeCountry = this.activeCountryProp;
             }
         }
 
