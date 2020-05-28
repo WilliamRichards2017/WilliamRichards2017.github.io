@@ -37,7 +37,7 @@
                 // let minGoal = Math.min.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
 
                 let gsWidth = 200;
-                let gsHeight = 50;
+                let gsHeight = 35;
 
                 let goalScale = d3.scaleLinear()
                     .domain([0, maxGoal])
@@ -49,7 +49,6 @@
                 let goalHeader = d3.select("#goalHeader").append("svg")
                     .attr("width", gsWidth)
                     .attr("height", gsHeight)
-                    .attr("margin", "10px");
 
 
                 goalHeader.append("g")
@@ -63,8 +62,10 @@
 
                 // Set sorting callback for clicking on headers
 
-                d3.select("#matchTable > thead > tr").selectAll("td")
-                    .attr("content", "url(src/assets/sort.png")
+
+
+                d3.select("#goalHeader")
+                    .on("click", (d, i) => this.sortByCol(i));
 
 
                 let team = d3.select("#matchTable > thead > tr").selectAll("th")
@@ -73,12 +74,6 @@
                 let headers = d3.select("#matchTable thead > tr").selectAll("td")
                     .on("click", (d, i) => this.sortByCol(i));
 
-                console.log("headers", headers);
-                console.log("team", team);
-
-
-                //Set sorting callback for clicking on Team header
-                //Clicking on headers should also trigger collapseList() and updateTable().
 
                 this.tableElements = this.teamData;
 
@@ -93,9 +88,6 @@
                 // ******* TODO: PART III *******
                 //Create table rows
 
-
-                console.log("this.tableElements", this.tableElements);
-
                 let svgs = d3.select("#matchTable  tbody").selectAll("td").selectAll("svg").remove();
 
 
@@ -103,8 +95,6 @@
                     .data(this.tableElements).join("tr");
                 // EXIT
                 // Remove old elements as needed.
-
-                console.log("this.tr", tr);
 
                 let th = tr.selectAll("th").data(d => {
                     return [d];
@@ -127,9 +117,6 @@
                             return "gray";
                         }
                     });
-
-
-                console.log("th", th);
 
 
                 let td = tr.selectAll("td").data(d => this.cellArray(d)).join("td");
@@ -160,7 +147,7 @@
                 //Todo:scale using td cellwidth and height values
                 let barSvgs = bars.append("svg")
                     .attr("class", "chart")
-                    .attr("width", 50)
+                    .attr("width", 35)
                     .attr("height", 25);
 
 
@@ -318,10 +305,10 @@
 
                 this.tableElements.sort(function (a, b) {
                     if (a.value["Goals Made"] - a.value["Goals Conceded"] < b.value["Goals Made"] - b.value["Goals Conceded"]) {
-                        return -1;
+                        return 1;
                     }
                     if (a.value["Goals Made"] - a.value["Goals Conceded"] > b.value["Goals Made"] - b.value["Goals Conceded"]) {
-                        return 1;
+                        return -1;
                     }
                     // a must be equal to b
                     return 0;
@@ -350,10 +337,10 @@
 
 
                     if (aPoint < bPoint) {
-                        return -1;
+                        return 1;
                     }
                     if (bPoint < aPoint) {
-                        return 1;
+                        return -1;
                     }
                     // a must be equal to b
                     return 0;
@@ -381,10 +368,10 @@
 
 
                     if (aPoint < bPoint) {
-                        return -1;
+                        return 1;
                     }
                     if (bPoint < aPoint) {
-                        return 1;
+                        return -1;
                     }
                     // a must be equal to b
                     return 0;
@@ -412,10 +399,10 @@
 
 
                     if (aPoint < bPoint) {
-                        return -1;
+                        return 1;
                     }
                     if (bPoint < aPoint) {
-                        return 1;
+                        return -1;
                     }
                     // a must be equal to b
                     return 0;
@@ -443,10 +430,10 @@
 
 
                     if (aPoint < bPoint) {
-                        return -1;
+                        return 1;
                     }
                     if (bPoint < aPoint) {
-                        return 1;
+                        return -1;
                     }
                     // a must be equal to b
                     return 0;
@@ -507,16 +494,12 @@
                     return;
                 }
 
-                console.log("this.tableElements[i+1]", this.tableElements[i + 1]);
-
                 let games = this.tableElements[i]["value"]["games"];
 
 
                 if (typeof this.tableElements[i + 1] === "undefined") {
-                    console.log("undefined table element");
                     for (let g = 0; g < games.length; g++) {
                         this.tableElements.splice(i + g + 1, 0, games[g]);
-                        console.log("i, g, games[g]", i, g, games[g]);
                     }
                     this.updateTable();
                     return;
@@ -529,7 +512,6 @@
 
                     for (let g = 0; g < games.length; g++) {
                         this.tableElements.splice(i + g + 1, 0, games[g]);
-                        console.log("i, g, games[g]", i, g, games[g]);
                     }
                 } else if (type === "aggregate" && typeOfNext === "game") {
 
@@ -546,9 +528,7 @@
                 let te = this.tableElements[i + 1];
 
                 while (te.value.type === "game") {
-                    console.log("first te", te);
                     this.tableElements.splice(i + 1, 1);
-                    console.log("this.tableELements after splice", this.tableElements);
                     te = this.tableElements[i + 1];
                     if (typeof te === "undefined") {
                         return this.tableElements;
@@ -568,11 +548,24 @@
                 this.tableElements = te;
             },
 
-            emitTreeData(d) {
-                this.$emit('update-tree', d);
+            updateTree(d) {
+
+                d3.select("#tree").selectAll('line.link').filter((dl) => {
+                    return dl.target.data.Team === d.key;
+                }).style("stroke", "red");
+
+
+                d3.select("#tree").selectAll("text").filter((dt) => {
+                    return dt.data.Team === d.key;
+                }).style("fill", "red");
             },
-            emitClearTree() {
-                this.$emit("clear-tree");
+
+            clearTree() {
+                d3.select("#tree").selectAll('line.link')
+                    .style("stroke", "black");
+
+                d3.select("#tree").selectAll("text")
+                    .style("fill", "black");
             }
         },
         mounted() {
@@ -580,8 +573,8 @@
             this.updateTable();
 
             d3.select("#matchTable > tbody").selectAll("tr")
-                .on("mouseover", d => this.emitTreeData(d))
-                .on("mouseout", d => this.emitClearTree());
+                .on("mouseover", d => this.updateTree(d))
+                .on("mouseout", d => this.clearTree(d));
         },
 
     }

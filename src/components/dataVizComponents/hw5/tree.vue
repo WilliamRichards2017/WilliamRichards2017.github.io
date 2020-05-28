@@ -13,10 +13,7 @@
 
     export default {
 
-        props: {
-            updateTreeData: null,
-            clearTreeData: null,
-        },
+        props: {},
 
         data() {
             return {}
@@ -105,37 +102,14 @@
                     });
             },
 
-            updateTree(d) {
 
-                d3.select("#tree").selectAll('line.link').filter((dl) => {
-                    return dl.target.data.Team === d.key;
-                }).style("stroke", "red");
-
-
-                d3.select("#tree").selectAll("text").filter((dt) => {
-                    return dt.data.Team === d.key;
-                }).style("fill", "red");
-            },
-
-            clearTree() {
-                d3.select("#tree").selectAll('line.link')
-                    .style("stroke", "black");
-
-                d3.select("#tree").selectAll("text")
-                    .style("fill", "black");
-            }
         },
         mounted() {
             this.createTree();
         },
 
         watch: {
-            updateTreeData: function () {
-                this.updateTree(this.updateTreeData);
-            },
-            clearTreeData: function () {
-                this.clearTree();
-            }
+
         }
     }
 </script>

@@ -13,13 +13,40 @@
                         </svg>
                             <div style="padding-top: 8px"> Team </div></th>
                         <td style="text-align:center;">
-                            Goals <span class="glyphicon glyphicon-sort"></span><br/>
+                            <div style="display: inline-flex">
+                            <svg width="32" height="32">
+                                <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                            </svg>
+                            <div style="padding-top: 8px"> Goals </div>
+                            </div>
                         </td>
 
-                           <td> <div style="padding-bottom:16px"> Round/Result</div></td>
-                        <td>Wins</td>
-                        <td>Losses</td>
-                        <td>Total Games</td>
+                           <td>
+                               <div style="display: inline-flex">
+                               <svg width="32" height="32">
+                                   <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                               </svg>
+                               <div style="padding-top: 8px"> Round/Results </div>
+                           </div></td>
+                        <td>                   <div style="display: inline-flex">
+                            <svg width="32" height="32">
+                                <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                            </svg>
+                            <div style="padding-top: 8px"> Wins </div>
+                        </div></td>
+                        <td>                   <div style="display: inline-flex">
+                            <svg width="32" height="32">
+                                <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                            </svg>
+                            <div style="padding-top: 8px"> Losses </div>
+                        </div></td>
+                        <td>
+                            <div style="display: inline-flex; width: 200px">
+                            <svg width="32" height="32">
+                                <image xlink:href="https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg" width="32" height="32"/>
+                            </svg>
+                            <div style="padding-top: 8px"> Total Games </div>
+                        </div></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -31,12 +58,8 @@
                 </table>
             </div>
             <tree
-                    :updateTreeData="updateTreeData"
-                    :clearTreeData="clearTreeData"
             ></tree>
-            <soccer-table
-                    @update-tree="onUpdateTree"
-                    @clear-tree="onClearTree">
+            <soccer-table>
             </soccer-table>
         </div>
     </div>
@@ -57,22 +80,11 @@
 
         data() {
             return {
-                updateTreeData: null,
-                clearTreeData: 0,
+
             }
         },
         methods: {
-            onUpdateTree(d) {
-                let self = this;
-                this.updateTreeData = 0;
-                setTimeout(function () {
-                    self.updateTreeData = d
-                }, 100);
-            },
 
-            onClearTree() {
-                this.clearTreeData++;
-            }
         },
 
     }
@@ -207,7 +219,7 @@
     }
 
     .view {
-        width: 650px;
+        width: 750px;
         padding: 0.5em;
         float: left;
         height: 75vh;
