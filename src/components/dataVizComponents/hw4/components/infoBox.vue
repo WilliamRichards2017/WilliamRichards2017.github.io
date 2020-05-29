@@ -1,10 +1,4 @@
 <template>
-    <div id="infoBox">
-        <div id="country-detail">
-
-        </div>
-
-    </div>
 </template>
 
 <script>

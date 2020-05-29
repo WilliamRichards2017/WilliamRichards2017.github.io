@@ -161,7 +161,7 @@
     }
 
     #scatter-plot {
-        height: 730px;
+        height: 700px;
     }
 
     #map-chart svg {
@@ -190,16 +190,12 @@
     .circle-legend {
         width: 200px;
         height: 120px;
-        padding-right: 20px;
+        padding-right: 80px;
         margin: auto;
         display: inline-block;
         float: right;
     }
 
-    .circle-legend svg {
-        width: 100%;
-        height: 90%;
-    }
 
     .circle-legend text {
         font-size: 11px;
@@ -261,7 +257,7 @@
     }
 
     .innerWrapper {
-        width: 790px;
+        width: 690px;
         display: inline-block;
         float: left;
     }
@@ -388,7 +384,7 @@
 
     .slider {
         -webkit-appearance: none;
-        width: 725px;
+        width: 525px;
         height: 15px;
         border-radius: 5px;
         background: #d3d3d3;
@@ -433,7 +429,7 @@
     .slider-wrap {
         display: inline-block;
         float: left;
-        width: 750px;
+        width: 450px;
         margin-left: 50px;
     }
 

@@ -2,7 +2,6 @@
     <div id="gapPlot">
     <div id="scatter-plot">
         <info-box
-
         :active-country="activeCountry"
         :active-year="activeYear"
         :info-data="popData"></info-box>
@@ -38,10 +37,10 @@
 
         computed: {
             width: function () {
-                return 810 - this.margin.left - this.margin.right;
+                return 620 - this.margin.left - this.margin.right;
             },
             height: function () {
-                return 500 - this.margin.top - this.margin.bottom;
+                return 420 - this.margin.top - this.margin.bottom;
             }
 
         },
@@ -56,19 +55,17 @@
 
                 d3.select('#chart-view')
                     .append('div')
-                    .attr("class", "tooltip")
                     .style("opacity", 0);
 
                 let chartView = d3.select('#chart-view')
                     .append('svg').classed('plot-svg', true)
                     .attr('id', "plotSvg")
                     .attr("width", this.width + this.margin.left + this.margin.right)
-                    .attr("height", this.height + this.margin.top + this.margin.bottom);
+                    .attr("height", this.height);
 
                 chartView
                     .append('g')
                     .attr("id", "x-axis")
-                    .attr("transform", "translate(0, 420)");
 
                 chartView
                     .append('g')
@@ -114,6 +111,7 @@
                     .append('div')
                     .classed('circle-legend', true)
                     .append('svg')
+                    .attr("width", 225)
                     .append('g')
                     .attr('transform', 'translate(10, 0)');
 
@@ -231,7 +229,7 @@
                     .attr("transform", "translate(100, 50)");
 
                 let xAxis = d3.select("#x-axis")
-                    .attr("transform", "translate(70, 370)");
+                    .attr("transform", "translate(70, 290)");
 
                 xAxis.append("text")
                     .attr("class", "axis-label")
@@ -363,7 +361,7 @@
             drawYearBar() {
                 let self = this;
 
-                let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 730]);
+                let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 520]);
 
                 let yearSlider = d3.select('#activeYear-bar')
                     .append('div').classed('slider-wrap', true)
@@ -409,7 +407,7 @@
         this.updatePlot(year, xValue, yValue, cValue);
 
 
-        let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 730]);
+        let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 520]);
         let sliderText = d3.select("#slider-txt");
 
 
@@ -443,7 +441,7 @@
 
                 circleGroup = circleEnter.merge(circleGroup);
 
-                circleGroup.attr('transform', (d, i) => 'translate(' + ((i * (5 * scale(d))) + 20) + ', 25)');
+                circleGroup.attr('transform', (d, i) => 'translate(' + ((i * (5 * scale(d))) + 10) + ', 25)');
 
                 circleGroup.select('circle').attr('r', (d) => scale(d));
                 circleGroup.select('circle').attr('cx', '0');

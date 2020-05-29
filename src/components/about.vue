@@ -1,7 +1,7 @@
 <template>
 <div class="about">
     <h1>About Me</h1>
-    <p> I graduated from <a href="http://carleton.edu"> Carleton College </a> with a degree in Computer Science in July 2017. I am currently employed as a software developer for the <a href="http://marthlab.org"> Marth Lab</a>. I have 1.5 years of experience working on building software for computational genetic discovery, and have been working as a web developer for the past year on building diagnostic tools and visualizations for clinicians </p>
+    <p> I graduated from <a href="http://carleton.edu"> Carleton College </a> with a degree in Computer Science in July 2017. I have 3 years of experience being employed as a software developer for the <a href="http://marthlab.org"> Marth Lab</a>. I have 1.5 years of experience working on building software for computational genetic discovery, and have been working as a web developer with 1 year of experience. During this time, I have been focusing on building diagnostic tools and visualizations for clinicians </p>
     <div class="bigGap"></div>
 
     <h1>Some of my projects include </h1>
@@ -24,8 +24,8 @@
     <ul style="margin-top:10px;">
         <li><a href="https://github.com/WilliamRichards2017/RufAlu">Alu variant detection</a></li>
         <p>Denovo Alu variant detection plugin</p>
-        <li><a href="https://github.com/WilliamRichards2017/Twofus">Mobile element variant detection</a></li>
-        <p>Denovo mobile element variant detection plugin</p>
+        <li><a href="https://github.com/WilliamRichards2017/Twofus">Mobile element, large insertion, translocation, and inversion variant detection</a></li>
+        <p>Denovo structural variant detection plugin</p>
         <li><a href="https://github.com/WilliamRichards2017/pdxFilter">Patient derived tumor xenograft contamination filter</a></li>
         <p>Convolutional Neural Network approach to filter out murinal contamination from patient cancer tissue </p>
 
