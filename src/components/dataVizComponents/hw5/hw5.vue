@@ -1,6 +1,5 @@
 <template>
     <div id="hw5">
-        <img src="./assets/fifa_russia_logo.png" alt="WC Russia Logo" id="logo"/>
         <div class="flex">
             <div class="view">
                 <h2>Score Table</h2>
@@ -126,7 +125,7 @@
     }
 
 
-    #flex{
+    .flex{
         display: inline-flex;
     }
 
@@ -222,8 +221,8 @@
         width: 750px;
         padding: 0.5em;
         float: left;
-        height: 75vh;
-        overflow-y: scroll
+        height: 80vh;
+        overflow-y: scroll;
     }
 
     .barText {

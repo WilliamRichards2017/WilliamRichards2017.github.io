@@ -125,4 +125,112 @@
         font-family: 'font2';
         color: #af161e;
     }
+
+
+    .aggregate {
+        color: #af161e;
+        font-weight: bold;
+    }
+
+    .game {
+        color: #b1b1b1;
+    }
+
+
+    #flex{
+        display: inline-flex;
+    }
+
+
+
+    .label {
+        fill: #ffffff;
+        font: 14px sans-serif;
+
+    }
+
+    @font-face {
+        font-family: 'font1';
+        src: url('assets/font1.ttf');
+    }
+
+    @font-face {
+        font-family: 'font2';
+        src: url('assets/font2.ttf');
+    }
+
+    * {
+        font-family: 'font1', serif;
+    }
+
+    header {
+        padding: 0.5em;
+        text-align: center;
+        height: 100px;
+    }
+
+    #logo {
+        float: right;
+        height: 100px;
+    }
+
+    .goalBar {
+        opacity: 0.6;
+    }
+
+    .goalCircle {
+        stroke-width: 3px;
+        r: 5px;
+    }
+
+    .node circle {
+        fill: #be2714;;
+    }
+
+    .node text {
+        font: 14px sans-serif;
+    }
+
+    .winner circle {
+        fill: #364e74;
+    }
+
+    .loser text {
+        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: rgb(36, 33, 33);
+        stroke-opacity: 0.5;
+        stroke-width: 3px;
+    }
+
+    .selected {
+        stroke: #e20e0e;
+        stroke-width: 6px;
+    }
+
+    .selectedLabel {
+        fill: #e20e0e;
+        font-weight: 300;
+    }
+
+    .view {
+        width: 750px;
+        padding: 0.5em;
+        float: left;
+        height: 75vh;
+        overflow-y: scroll
+    }
+
+    .barText {
+        fill: black;
+    }
+
+    .chart .barText {
+        text-anchor: start;
+        mix-blend-mode: difference;
+    }
+
 </style>
