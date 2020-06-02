@@ -150,19 +150,25 @@
                     .append("rect")
                     .attr("width", d => self.freqScale(d.val[0] / 50))
                     .attr("height", barHeight)
-                    .style("fill", d => this.categoryToColor(d.val[1]));
+                    .style("fill", d => this.categoryToColor(d.val[1]))
+                    .style("stroke", "black")
+                    .style("stroke-width", "1px");
 
                 percentSvgs.append("rect")
                     .attr("width", d => self.percentScale(d.val[1]))
                     .attr("height", barHeight)
                     .attr("x", self.percentWidth / 2)
-                    .style("fill", "red");
+                    .style("fill", "#B2303C")
+                    .style("stroke", "black")
+                    .style("stroke-width", "1px");
 
                 percentSvgs.append("rect")
                     .attr("width", d => self.percentScale(d.val[0]))
                     .attr("height", barHeight)
                     .attr("x", d => (self.percentWidth / 2) - self.percentScale(d.val[0]))
-                    .style("fill", "blue");
+                    .style("fill", "#0353ab")
+                    .style("stroke", "black")
+                    .style("stroke-width", "1px");
             },
 
 
@@ -242,11 +248,11 @@
 </script>
 
 <style scoped>
+
     #table {
         overflow-y: scroll;
         overflow-x: hidden;
         height: 70vh;
-
     }
 
     #freqHeader {

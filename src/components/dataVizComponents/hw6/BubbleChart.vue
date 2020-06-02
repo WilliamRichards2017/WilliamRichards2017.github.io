@@ -167,6 +167,7 @@
                     .selectAll(".headerText")
                     .transition().duration(300)
                     .attr("opacity", 1);
+
             },
 
             unseparateBubbleChart() {
@@ -234,7 +235,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 
     .nb {
 
@@ -248,7 +249,7 @@
     #bubbleChart {
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 70vh;
+        height: 65vh;
 
     }
 

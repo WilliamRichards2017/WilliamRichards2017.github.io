@@ -1,11 +1,18 @@
 <template>
     <div id="hw6" v-on:click="showExtremes = false">
         <div id="bg">
-            <div id="header-wrap">
-                <header>
+            <div id="hw6Header">
                     <h1>Word choice frequencies based on politcal leanings</h1>
-                    <button v-on:click="toggleSeparate">Grouped by topic</button>
-                </header>
+                <toggle-button :value="false"
+                               v-model="separate"
+                               :color="toggleColors">
+
+                </toggle-button>
+                <span id="toggleLabel" style="color: black; fill: black;">
+                    {{separateText}}
+                </span>
+
+            </div>
                 <div class="flexRow">
                     <BubbleChart :words="words" :brushedWords="brushedWords" :separate="separate"
                                  :showExtremes="showExtremes">
@@ -14,8 +21,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
 </template>
 
 <script>
@@ -34,7 +39,7 @@
                 words: Words,
                 brushedWords: Words,
                 separate: false,
-                showExtremes: false,
+                separateText : 'Separate by category',
                 colorDict: {
                     "education": "green",
                     "economy/fiscal issues": "red",
@@ -42,27 +47,12 @@
                     "mental health/substance abuse": "purple",
                     "health care": "orange",
                     "energy/environment": "magenta",
-                }
+                },
+            toggleColors: {checked: '#9068be', unchecked: '#4fc9c5', disabled: 'gray'}
             }
         },
         methods: {
 
-            te() {
-                this.showExtremes = !this.showExtremes;
-            },
-
-            ts() {
-                this.separate = !this.separate;
-
-            },
-
-            toggleExtremes() {
-                setTimeout(this.te, 100);
-            },
-
-            toggleSeparate() {
-                setTimeout(this.ts, 100);
-            },
 
             initBrush() {
                 let brush = d3.brush()
@@ -117,13 +107,28 @@
                 }
             },
         },
+
+        watch: {
+            separate: function () {
+                if (this.separate){
+                    this.separateText= "Collapse categories"
+                }
+                else{
+                    this.separateText = "Expand by category"
+                }
+            }
+        },
         mounted() {
             this.initBrush();
         },
     }
 </script>
 
-<style>
+<style scoped>
+
+    h1{
+        text-align: center;
+    }
     #hw6 {
         width: 100%;
         height: 75vh;
@@ -137,6 +142,11 @@
     .flexRow {
         display: flex;
     }
+
+    #toggleLabel{
+        padding-left: 10px;
+    }
+
 
 </style>
 

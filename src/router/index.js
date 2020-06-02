@@ -38,6 +38,10 @@ Vue.component('tab-Data Visualization', {
   template: '<div><dataViz></dataViz></div>'
 });
 
+import ToggleButton from 'vue-js-toggle-button'
+
+Vue.use(ToggleButton);
+
 Vue.use(Router);
 
 export default new Router({

@@ -63,9 +63,8 @@
     }
 </script>
 
-<style>
+<style scoped>
     #hw6Container{
-        height: 30px;
     }
 
     .inline{

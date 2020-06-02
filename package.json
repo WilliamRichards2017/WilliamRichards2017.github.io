@@ -12,6 +12,7 @@
   "dependencies": {
     "d3": "^5.15.0",
     "vue": "^2.5.2",
+    "vue-js-toggle-button": "^1.3.3",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
