@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Second Stage</h2>
+        <h2 style="padding: 0; margin: 0">Second Stage</h2>
         <svg width="600" height="560">
             <g id="tree"></g>
         </svg>
@@ -220,7 +220,7 @@
         width: 750px;
         padding: 0.5em;
         float: left;
-        height: 75vh;
+        height: 75%;
         overflow-y: scroll
     }
 

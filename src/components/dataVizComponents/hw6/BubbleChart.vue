@@ -131,7 +131,6 @@
                     .style("fill", d => self.colorDict[d.category])
                     .style("stroke", "black")
                     .style("z-axis", 0.01)
-                    .on("mouseover", d => console.log(d.percent_of_d_speeches, d.percent_of_r_speeches, d.phrase, radiusScale(d.total), d.moveX, d.moveY + 100))
                     .on("mousemove", function () {
                         return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
                     })

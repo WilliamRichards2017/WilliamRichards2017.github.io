@@ -89,7 +89,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     table {
         border-collapse: collapse;
         font: 14px sans-serif;
@@ -221,8 +221,8 @@
         width: 750px;
         padding: 0.5em;
         float: left;
-        height: 80vh;
-        overflow-y: scroll;
+        height: 73vh;
+        overflow-y: scroll
     }
 
     .barText {

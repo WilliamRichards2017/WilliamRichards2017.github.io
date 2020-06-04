@@ -1,5 +1,5 @@
 <template>
-    <div id="hw4" style="display: inline-flex; padding-top: 20px">
+    <div id="hw4" style=" padding-top: 20px">
     <worldMap
     :popData="popData"
     @update-active-country="onUpdateActiveCountry"></worldMap>
@@ -88,7 +88,7 @@
 
     }
 </script>
-<style>
+<style scoped>
 
     * {
         font-family: 'Roboto', sans-serif;
@@ -134,7 +134,6 @@
     }
 
     #country-detail .stat {
-        font-style: bold;
         display: block;
         width: 500px;
     }
@@ -160,9 +159,6 @@
         height: 450px;
     }
 
-    #scatter-plot {
-        height: 700px;
-    }
 
     #map-chart svg {
         width: 100%;
@@ -189,8 +185,7 @@
 
     .circle-legend {
         width: 200px;
-        height: 120px;
-        padding-right: 80px;
+        height: 65px;
         margin: auto;
         display: inline-block;
         float: right;
@@ -231,6 +226,9 @@
         pointer-events: none;
     }
 
+    #hw4{
+        width: 100% !important;
+    }
 
     .graticule.outline {
         stroke-width: 2px;
@@ -287,7 +285,7 @@
         display: inline-block;
         margin-left: 75px;
         width: 320px;
-        height: 130px;
+        height: 65px;
         padding: 2px;
     }
 
@@ -298,7 +296,6 @@
     .y-label,
     .x-label,
     .c-label {
-        width: 1%7;
         display: inline-block;
         float: left;
         padding-right: 5px;
@@ -418,7 +415,6 @@
     }
 
     .slider-label svg {
-        width: 750px;
         height: 35px;
     }
 

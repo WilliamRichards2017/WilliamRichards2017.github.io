@@ -1,11 +1,12 @@
 <template>
     <div id="gapPlot">
-    <div id="scatter-plot">
-        <info-box
-        :active-country="activeCountry"
-        :active-year="activeYear"
-        :info-data="popData"></info-box>
-    </div>
+        <div id="scatter-plot">
+            <info-box
+                    :active-country="activeCountry"
+                    :active-year="activeYear"
+                    :info-data="popData"></info-box>
+        </div>
+        <div id="plotControls"></div>
     </div>
 </template>
 
@@ -37,7 +38,7 @@
 
         computed: {
             width: function () {
-                return 620 - this.margin.left - this.margin.right;
+                return 600 - this.margin.left - this.margin.right;
             },
             height: function () {
                 return 420 - this.margin.top - this.margin.bottom;
@@ -55,7 +56,7 @@
 
                 d3.select('#chart-view')
                     .append('div')
-                    .style("opacity", 0);
+                    .style("opacity", 0)
 
                 let chartView = d3.select('#chart-view')
                     .append('svg').classed('plot-svg', true)
@@ -78,7 +79,7 @@
                     .attr("x", "50px")
                     .attr("class", "activeYear-background");
 
-                let dropdownWrap = d3.select('#chart-view').append('div').classed('dropdown-wrapper', true);
+                let dropdownWrap = d3.select('#plotControls').append('div').classed('dropdown-wrapper', true);
 
                 let cWrap = dropdownWrap.append('div').classed('dropdown-panel', true);
 
@@ -107,7 +108,7 @@
                 yWrap.append('div').attr('id', 'dropdown_y').classed('dropdown', true).append('div').classed('dropdown-content', true)
                     .append('select');
 
-                d3.select('#chart-view')
+                d3.select('#plotControls')
                     .append('div')
                     .classed('circle-legend', true)
                     .append('svg')
@@ -389,41 +390,41 @@
 
             updateYear(year) {
 
-        let self = this;
+                let self = this;
 
-        self.activeYear = year;
-
-
-        let dropDownWrapper = d3.select('.dropdown-wrapper');
-
-        let dropX = dropDownWrapper.select('#dropdown_x').select('.dropdown-content').select('select');
-        let dropY = dropDownWrapper.select('#dropdown_y').select('.dropdown-content').select('select');
-        let dropC = dropDownWrapper.select('#dropdown_c').select('.dropdown-content').select('select');
-
-        let yValue = dropY.node().value;
-        let xValue = dropX.node().value;
-        let cValue = dropC.node().value;
-
-        this.updatePlot(year, xValue, yValue, cValue);
+                self.activeYear = year;
 
 
-        let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 520]);
-        let sliderText = d3.select("#slider-txt");
+                let dropDownWrapper = d3.select('.dropdown-wrapper');
+
+                let dropX = dropDownWrapper.select('#dropdown_x').select('.dropdown-content').select('select');
+                let dropY = dropDownWrapper.select('#dropdown_y').select('.dropdown-content').select('select');
+                let dropC = dropDownWrapper.select('#dropdown_c').select('.dropdown-content').select('select');
+
+                let yValue = dropY.node().value;
+                let xValue = dropX.node().value;
+                let cValue = dropC.node().value;
+
+                this.updatePlot(year, xValue, yValue, cValue);
 
 
-        sliderText.text(year.toString());
-        sliderText.attr('x', yearScale(year));
-        sliderText.attr('y', 25);
+                let yearScale = d3.scaleLinear().domain([1800, 2020]).range([30, 520]);
+                let sliderText = d3.select("#slider-txt");
 
-    },
 
-          updateCountry(countryID) {
+                sliderText.text(year.toString());
+                sliderText.attr('x', yearScale(year));
+                sliderText.attr('y', 25);
 
-        this.updateHighlightClick(countryID);
-        this.activeCountry = countryID;
-        // infoBox.updateTextDescription(countryID, self.activeYear);
+            },
 
-    },
+            updateCountry(countryID) {
+
+                this.updateHighlightClick(countryID);
+                this.activeCountry = countryID;
+                // infoBox.updateTextDescription(countryID, self.activeYear);
+
+            },
 
             drawLegend(min, max) {
                 let scale = d3.scaleSqrt().range([3, 20]).domain([min, max]);
@@ -485,16 +486,494 @@
         },
 
         watch: {
-            popData: function(){
+            popData: function () {
                 this.drawPlot();
             },
-            activeCountryProp: function(){
-                console.log("activeCountryProp", this.activeCountryProp)
-              this.activeCountry = this.activeCountryProp;
+            activeCountryProp: function () {
+                this.activeCountry = this.activeCountryProp;
             }
         }
 
     }
 </script>
+
+<style scoped>
+    * {
+        font-family: 'Roboto', sans-serif;
+    }
+
+
+    /*Element Styling*/
+
+    circle {
+        fill: #d9d9d9;
+        stroke: gray;
+        opacity: .8;
+    }
+
+    circle.selected-region {
+        stroke: #122f3d;
+    }
+
+    circle.selected-country {
+        stroke-width: 3px;
+        stroke: #000000;
+        opacity: 1;
+    }
+
+    circle.hidden {
+        opacity: .2;
+    }
+
+    path.hidden {
+        opacity: .4;
+    }
+
+
+    /*ID Styling*/
+
+    #country-detail {
+        display: inline-block;
+        width: 750px;
+        height: 100px;
+        margin: auto;
+        position: relative;
+        padding-left: 30px;
+    }
+
+    #country-detail .stat {
+        display: block;
+        width: 500px;
+    }
+
+    #country-detail .stats span {
+        font-weight: bold;
+    }
+
+    #country-detail div.label {
+        font-size: 26px;
+        display: block;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    #country-detail div.label span {
+        font-size: 22px;
+        padding-bottom: 15px;
+        font-weight: bold;
+    }
+
+    #map-chart {
+        height: 450px;
+    }
+
+
+    #map-chart svg {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+
+    #map-chart svg {
+        margin: auto;
+    }
+
+
+    /*class styling*/
+
+    .boundary {
+        fill: none;
+        stroke: #fff;
+        stroke-width: .8px;
+    }
+
+    .countries {
+        fill: #d9d9d9;
+    }
+
+    .circle-legend {
+        width: 200px;
+        height: 65px;
+        padding-right: 80px;
+        margin: auto;
+        display: inline-block;
+        float: right;
+    }
+
+
+    .circle-legend text {
+        font-size: 11px;
+    }
+
+    .circle-legend .label {
+        font-size: 12px;
+        font-weight: bold;
+        text-anchor: middle;
+    }
+
+    .circle-legend .subLabel {
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .stroke {
+        fill: none;
+        stroke: #000;
+        stroke-width: 2px;
+    }
+
+    .fill {
+        fill: #fff;
+        pointer-events: none;
+    }
+
+    .graticule {
+        fill: none;
+        stroke: #777;
+        stroke-width: .5px;
+        stroke-opacity: .2;
+        pointer-events: none;
+    }
+
+
+    .graticule.outline {
+        stroke-width: 2px;
+        stroke: #000;
+    }
+
+    .header {
+        width: 600px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .wrapper {
+        width: 1600px;
+        margin: auto;
+    }
+
+    .view {
+        width: 750px;
+        /*margin: auto;*/
+        padding: 5px;
+        float: left;
+    }
+
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .axis-label {
+        font-size: 14px;
+        stroke: black;
+        fill: black;
+        color: black;
+    }
+
+    div.toggle-panel {
+        display: block;
+        width: 100%;
+        height: 30px;
+        padding: 2px;
+    }
+
+    div.dropdown-wrapper {
+        display: inline-block;
+        margin-left: 75px;
+        width: 320px;
+        height: 65px;
+        padding: 2px;
+    }
+
+    .dropdown {
+        float: right;
+    }
+
+    .y-label,
+    .x-label,
+    .c-label {
+        display: inline-block;
+        float: left;
+        padding-right: 5px;
+    }
+
+
+    #x-axis{
+        margin: 20px;
+    }
+
+    #y-axis{
+
+        margin: 20px;
+
+    }
+
+    /*dropdown menu*/
+
+    .select-selected {
+        background-color: DodgerBlue;
+    }
+
+
+    /*style the arrow inside the select element:*/
+
+    .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: #fff transparent transparent transparent;
+    }
+
+
+    /*point the arrow upwards when the select box is open (active):*/
+
+    .select-selected.select-arrow-active:after {
+        border-color: transparent transparent #fff transparent;
+        top: 7px;
+    }
+
+
+    /*style the items (options), including the selected item:*/
+
+    .select-items div,
+    .select-selected {
+        color: #ffffff;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+    }
+
+
+    /*style items (options):*/
+
+    .select-items {
+        position: absolute;
+        background-color: DodgerBlue;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+    }
+
+
+    /*hide the items when the select box is closed:*/
+
+    .select-hide {
+        display: none;
+    }
+
+    .select-items div:hover,
+    .same-as-selected {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* slider styling */
+
+    .slider {
+        -webkit-appearance: none;
+        width: 525px;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        margin-left: 20px
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #D4E157;
+        cursor: pointer;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider-label svg {
+        height: 35px;
+    }
+
+    .slider-label svg text {
+        text-anchor: middle;
+    }
+
+    .slider-wrap {
+        display: inline-block;
+        float: left;
+        width: 450px;
+        margin-left: 50px;
+    }
+
+
+    /*tooltip */
+
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        min-width: 60px;
+        height: 28px;
+        padding: 2px;
+        background: white;
+        stroke: gray;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+
+    .tooltip h2 {
+        margin: auto;
+        font: 14px sans-serif;
+    }
+
+
+    /* Styling for Counties */
+
+    .africa {
+        fill: #FFCA28;
+
+        /*  stroke-width: 1px;*/
+    }
+
+    path.africa{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.europe{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.americas{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.asia{
+        stroke: white;
+        stroke-width: 1px;
+    }
+    path.africa.selected-country,
+    circle.africa.selected-country {
+        fill: #cc9a04;
+        /* stroke: #000000;*/
+    }
+
+    text.africa {
+        color: #FFCA28;
+    }
+
+    i.africa {
+        color: #FFCA28;
+    }
+
+    .asia {
+        fill: #85C1E9;
+        stroke: #85C1E9;
+    }
+
+    path.asia.selected-country,
+    circle.asia.selected-country {
+        fill: #2d7aad;
+        /*  stroke-width: 1px;*/
+        /* stroke: #000000;*/
+    }
+
+    i.asia {
+        color: #2d7aad;
+    }
+
+    text.asia {
+        color: #2d7aad;
+    }
+
+    .americas {
+        fill: #D4E157;
+    }
+
+
+    i.nf {
+        color: grey;
+    }
+
+    .nf {
+        fill: grey;
+
+    }
+
+    #activeYear {
+        stroke-width: 1px;
+        stroke: #000000;
+        padding: 25px;
+    }
+
+    path.americas.selected-country,
+    circle.americas.selected-country {
+        fill: #aaba18;
+        /*  stroke-width: 1px;*/
+        /* stroke: #000000;*/
+    }
+
+    i.americas {
+        color: #D4E157;
+    }
+
+
+    text.americas {
+        color: #D4E157;
+    }
+
+    .europe {
+        fill: #AD1457;
+        color: #AD1457;
+
+    }
+
+    path.europe.selected-country,
+    circle.europe.selected-country {
+        fill: #7c0238;
+        stroke-width: 1px;
+        stroke: #000000;
+    }
+
+    i.europe {
+        color: #AD1457;
+    }
+
+    text.europe {
+        color: #AD1457;
+    }
+
+    .activeYear-background {
+        font-size: 80px;
+        opacity: .4;
+    }
+
+
+    #plotControls{
+        display: inline-flex;
+    }
+</style>
 
 

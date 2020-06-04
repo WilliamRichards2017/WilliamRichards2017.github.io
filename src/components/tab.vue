@@ -46,8 +46,6 @@ export default {
 
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
-
 }
 .tab-button:hover {
   background: #e0e0e0;

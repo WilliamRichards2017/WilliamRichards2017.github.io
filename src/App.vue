@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <div id="wrapper">
+    <div id="content-wrap">
+      <div id="wrapper">
+    </div>
       <tab/>
     </div>
   </div>
@@ -31,39 +33,24 @@
     color:#656668
   }
 
+
   #wrapper {
     margin:0 auto;
+    position: relative;
     width:100%;
+    justify-content: center;
 
   }
 
-  #header {
-    margin:0 1px;
-  }
 
-  #bg {
-    height:36px;
-  }
 
-  .box {
-    padding-top: .5em;
-    padding:15px;
-    outline: 1px solid #f0e9eb;
 
-  }
 
-  .sidebar {
-    width:218px;
-    margin:0 auto;
-    padding:10px 25px;
+  #content-wrap {
+    padding-bottom: 100px;    /* Footer height */
   }
+   /* Footer height */
 
-  #footer {
-    background:#f7f7f7;
-    border-top:1px solid #f0e9eb;
-    padding:10px 15px;
-    clear:both;
-  }
 
   /* Global Styling */
 
@@ -80,8 +67,9 @@
 
   /* mouse over link */
   a:hover {
-    color:#9068be;
+    color:#9068be !important;
     text-decoration:none;
+    text-shadow: 0px 0px 0px transparent !important;
 
   }
 
@@ -116,4 +104,3 @@
 
 
 </style>
-color:#9068be;

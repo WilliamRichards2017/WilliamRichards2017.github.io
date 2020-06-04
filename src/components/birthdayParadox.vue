@@ -101,7 +101,6 @@ import * as d3 from "d3";
             }
             this.xCount += temp;
             this.coordPairs.push({x: parseFloat(i), y: parseFloat(this.xCount)});
-            console.log("X: " + i + ", Y: " + parseFloat(this.xCount/this.inputM));
 
           }
         },

@@ -1,8 +1,8 @@
 <template>
     <div class="contact">
-    <h1>Contact me</h1>
+    <h1 style="padding-left: 25px">Contact me</h1>
     <div/>
-      <div class="flex-container">
+      <div class="flex-container" style="padding-left: 25px">
         <div><a href="mailto:richardsw2017@gmail.com"><img class="icon" src="../assets/email.png" width=50px></a></div>
         <div><a href="https://github.com/williamrichards2017"><img class="icon" src="../assets/github.png" width=50px></a></div>
           <div><a download="William-Richards-resume"  target="_blank" href="../assets/resume.pdf">
@@ -42,5 +42,11 @@ a {
 p {
   padding-bottom: .05em;
 }
+
+    .contact{
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+    }
 
 </style>

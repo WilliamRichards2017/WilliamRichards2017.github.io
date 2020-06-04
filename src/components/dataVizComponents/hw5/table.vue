@@ -584,7 +584,7 @@
 
 <style scoped>
     #table {
-        height: 75vh;
+        height: 75%;
     }
 
     th:before {
@@ -681,13 +681,6 @@
         font-weight: 300;
     }
 
-    .view {
-        width: 750px;
-        padding: 0.5em;
-        float: left;
-        height: 75vh;
-        overflow-y: scroll
-    }
 
     .barText {
         fill: black;

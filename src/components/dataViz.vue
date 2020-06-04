@@ -1,30 +1,17 @@
 <template>
     <div id="dataViz">
 
-        <div id="hw6Container" v-if="showHw6" class="inline">
+        <div id="hwListContainer" v-show="showHw6 || showHw5 || showHw4" class="inline">
             <ul>
-                <li v-on:click="showHw5 = true; showHw6 = false; showHw4=false;"><a>World Cup Results</a></li>
-                <li v-on:click="showHw4 = true; showHw6 = false; showHw5 = false;"><a>Global Data Correlations</a></li>
+                <li id="hw6Active" v-on:click="showHw6 = true; showHw5 = false; showHw4=false;"><a>Political Word Choice</a></li>
+                <li id="hw5Active" v-on:click="showHw5 = true; showHw6 = false; showHw4=false;"><a>World Cup Results</a></li>
+                <li id="hw4Active" v-on:click="showHw4 = true; showHw6 = false; showHw5 = false;"><a>Global Data Correlations</a></li>
 
             </ul>
         </div>
 
-        <div v-else-if="showHw5" class="inline">
-            <ul>
-
-                <li v-on:click="showHw6 = true; showHw5 = false; showHw4=false;"><a>Political Word Choice</a></li>
-                <li v-on:click="showHw4 = true; showHw6 = false; showHw5 = false;"><a>Global Data Correlations</a></li>
-            </ul>
-        </div>
-
-        <div v-else-if="showHw4" class="inline">
-            <ul>
-                <li v-on:click="showHw6 = true; showHw5 = false; showHw4=false;"><a>Political Word Choice</a></li>
-                <li v-on:click="showHw5 = true; showHw6 = false; showHw4=false;"><a>World Cup Results</a></li>
-            </ul>
-            </div>
-        <div v-else>
-            <ul style="margin-top:10px;" v-if="!showHw6">
+        <div v-show="!showHw6 && !showHw5 && !showHw4">
+            <ul style="padding-top: 20px">
                 <li v-on:click="showHw6 = true; showHw5 = false; showHw4 = false"><a>Political Word Choice</a></li>
                 <p class="description"> Interactive beeswarm plot and bar chart to show the relative frequencies of various words used based on ones political leaning.  Words can be separated into various categories, and a brush selection on the beeswarm plot can be used to filter the barchart visualization.   </p>
                 <li v-on:click="showHw5 = true; showHw6 = false; showHw4 = false"><a>World Cup Results</a>
@@ -59,13 +46,46 @@
                 showHw5: false,
                 showHw4: false,
             }
+        },
+
+        watch: {
+            showHw6: function(){
+                if(this.showHw6){
+                    d3.select("#hw6Active")
+                        .classed("active", true);
+                }
+                else{
+                    d3.select("#hw6Active")
+                        .classed("active", false);
+                }
+            },
+            showHw5: function(){
+                if(this.showHw5){
+                    d3.select("#hw5Active")
+                        .classed("active", true);
+                }
+                else{
+                    d3.select("#hw5Active")
+                        .classed("active", false);
+                }
+            },
+            showHw4: function(){
+                if(this.showHw4){
+                    d3.select("#hw4Active")
+                        .classed("active", true);
+                }
+                else{
+                    d3.select("#hw4Active")
+                        .classed("active", false);
+                }
+            }
+
         }
     }
 </script>
 
 <style scoped>
-    #hw6Container{
-    }
+
 
     .inline{
         padding-bottom: 20px;
@@ -75,10 +95,23 @@
         width: 50%;
     }
 
+   #hwListContainer a {
+        font-size: 18px
+    }
+
     .inline ul li {
+        font-size: 20px;
         list-style-type:disc;
         float: left; text-indent:-4px;
         margin-right:50px; }
+
+    .active a{
+        color:#9068be;
+         text-shadow: 0.5px 0px 1px black;
+
+    }
+
+
 
 
 </style>
