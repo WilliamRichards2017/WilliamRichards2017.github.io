@@ -3,6 +3,13 @@
 
         <div id="hwListContainer" v-show="showHw6 || showHw5 || showHw4" class="inline">
             <ul>
+                <li id="dataViz" v-on:click="showHw6 = false; showHw5 = false; showHw4=false;"><a>Data Vizualizations</a></li>
+            </ul>
+
+            <span class="headerdivider"></span>
+
+
+            <ul>
                 <li id="hw6Active" v-on:click="showHw6 = true; showHw5 = false; showHw4=false;"><a>Political Word Choice</a></li>
                 <li id="hw5Active" v-on:click="showHw5 = true; showHw6 = false; showHw4=false;"><a>World Cup Results</a></li>
                 <li id="hw4Active" v-on:click="showHw4 = true; showHw6 = false; showHw5 = false;"><a>Global Data Correlations</a></li>
@@ -89,6 +96,7 @@
 
     .inline{
         padding-bottom: 20px;
+        padding-left: 10px
     }
 
     .description{
@@ -110,9 +118,6 @@
          text-shadow: 0.5px 0px 1px black;
 
     }
-
-
-
 
 </style>
 

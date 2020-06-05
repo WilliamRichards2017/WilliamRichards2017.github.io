@@ -2,7 +2,7 @@
     <div id="hw6" v-on:click="showExtremes = false">
         <div id="bg">
             <div id="hw6Header">
-                    <h1>Word choice frequencies based on politcal leanings</h1>
+                    <h1 style="text-align: center">Word choice frequencies based on politcal leanings</h1>
                 <toggle-button :value="false"
                                v-model="separate"
                                :color="toggleColors">

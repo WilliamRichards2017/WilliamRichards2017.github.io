@@ -1,11 +1,11 @@
 <template>
   <div class="mainContent">
     <div class="row">
-      <div class="column">
+      <div style="float: left; width:60%">
           <about/>
       </div>
-      <div class="column">
-        <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="75%" height="75%"></div>
+      <div style="float: left; width:40%">
+        <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="90%" height="90%"></div>
         <div id="logo">
           Will Richards
         </div>
@@ -35,6 +35,7 @@
 .column {
   float: left;
   width: 50%;
+  heigh: 50vh;
 }
 
 .row {

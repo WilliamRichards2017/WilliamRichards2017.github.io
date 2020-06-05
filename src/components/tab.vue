@@ -36,6 +36,11 @@ export default {
 </script>
 
 <style>
+
+  .box{
+    height: 75vh;
+  }
+
 .tab-button {
   padding: 6px 10px;
 
@@ -56,5 +61,6 @@ export default {
 .tab {
   border: 1px;
   padding: 1px;
+  height: 20vh;
 }
 </style>

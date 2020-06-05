@@ -39,7 +39,6 @@
     position: relative;
     width:100%;
     justify-content: center;
-
   }
 
 
@@ -47,7 +46,7 @@
 
 
   #content-wrap {
-    padding-bottom: 100px;    /* Footer height */
+    padding-bottom: 150px;    /* Footer height */
   }
    /* Footer height */
 

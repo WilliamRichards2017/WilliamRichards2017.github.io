@@ -5,7 +5,7 @@
       <div class="flex-container" style="padding-left: 25px">
         <div><a href="mailto:richardsw2017@gmail.com"><img class="icon" src="../assets/email.png" width=50px></a></div>
         <div><a href="https://github.com/williamrichards2017"><img class="icon" src="../assets/github.png" width=50px></a></div>
-          <div><a download="William-Richards-resume"  target="_blank" href="../assets/resume.pdf">
+          <div><a download="William-Richards-resume"  target="_blank" href="../../public/resume.pdf">
               <img alt="ResumeIcon" width="50" class="icon" src="../assets/circle-cropped.png">
           </a>
           </div>
@@ -47,6 +47,7 @@ p {
         position: fixed;
         bottom: 0;
         width: 100vw;
+        heigh: 5vh;
     }
 
 </style>

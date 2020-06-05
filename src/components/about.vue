@@ -1,19 +1,19 @@
 <template>
 <div class="about">
     <h1>About Me</h1>
-    <p> I graduated from <a href="http://carleton.edu"> Carleton College </a> with a degree in Computer Science in July 2017. I have 3 years of experience being employed as a software developer for the <a href="http://marthlab.org"> Marth Lab</a>. I have 1.5 years of experience working on building software for computational genetic discovery, and have been working as a web developer with 1 year of experience. During this time, I have been focusing on building diagnostic tools and visualizations for clinicians </p>
-    <div class="bigGap"></div>
+    <p> I graduated from <a href="http://carleton.edu" target="_blank"> Carleton College </a> with a degree in Computer Science in July 2017. I have 3 years of experience being employed as a software developer for the <a href="http://marthlab.org"> Marth Lab</a>. I have 1.5 years of experience working on building software for computational genetic discovery, and 1.5 years of experience
+        as a web developer. During my time as a web developer for the <a href="http://iobio.io/" target="_blank">iobio </a>team, I have been primarily building diagnostic tools and visualizations for clinicians.</p>
 
     <h1>Some of my projects include </h1>
 
     <h3>Web Applications</h3>
 
     <ul style="margin-top:10px;">
-        <li><a href="https://stage.pedigree.iobio.io">pedigree.iobio.io</a></li>
-        <p>Author of pedigree visualization with genotype/phenotype regression analysis </p>
-        <li><a href="https://gene.iobio.io">gene.iobio.io</a></li>
-        <p>Developer for web application for investigating potential disease-causing variants</p>
-        <li><a href="https://clin.iobio.io">clin.iobio.io</a></li>
+        <li><a href="https://stage.pedigree.iobio.io" target="_blank">pedigree.iobio.io</a></li>
+        <p>Author of pedigree visualization with interactive genotype/phenotype regression analysis </p>
+        <li><a href="https://gene.iobio.io" target="_blank">gene.iobio.io</a></li>
+        <p>Developer for web application used to investigate potential disease-causing variants</p>
+        <li><a href="https://clin.iobio.io" target="_blank">clin.iobio.io</a></li>
         <p>Developer for web application to guide clinicians with limited technical experience through a clinical diagnostic genomic analysis workflow  </p>
 
         <!--<li><a href="https://github.com/shenruyi1994/SelfDrivingCarTeamZero">Autonomous vehicle plugin</a></li>-->
@@ -22,12 +22,12 @@
 
     <h3> Backend software</h3>
     <ul style="margin-top:10px;">
-        <li><a href="https://github.com/WilliamRichards2017/RufAlu">Alu variant detection</a></li>
-        <p>Denovo Alu variant detection plugin</p>
-        <li><a href="https://github.com/WilliamRichards2017/Twofus">Mobile element, large insertion, translocation, and inversion variant detection</a></li>
-        <p>Denovo structural variant detection plugin</p>
-        <li><a href="https://github.com/WilliamRichards2017/pdxFilter">Patient derived tumor xenograft contamination filter</a></li>
-        <p>Convolutional Neural Network approach to filter out murinal contamination from patient cancer tissue </p>
+        <li><a href="https://github.com/WilliamRichards2017/RufAlu" target="_blank">Alu variant detection</a></li>
+        <p>Author of Alu mobile element detection plugin for denovo variant caller (c++11)</p>
+        <li><a href="https://github.com/WilliamRichards2017/Twofus" target="_blank">Structural variant detection</a></li>
+        <p>Author of structural variant detection plugin for denovo variant caller, including detection of inversions, translocations, large insertions, and general mobile elements (c++11)</p>
+        <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">Patient derived tumor xenograft contamination filter</a></li>
+        <p>Author of PDX contamination filter. Used a convolutional neural network pipeline to filter out murinal contamination from patient cancer tissue (python3) </p>
 
         <!--<li><a href="https://github.com/shenruyi1994/SelfDrivingCarTeamZero">Autonomous vehicle plugin</a></li>-->
         <!--<p>Gazebo physics engine C++ plugin files, and XML model and world files to control the operation of an autonomous vehicle in a simulated environment. </p>-->
@@ -37,12 +37,13 @@
 
 <style scoped>
 
-.bigGap {
-  padding-bottom: 1em;
-}
 p {
   margin: .2em;
   padding-bottom: .5em;
 }
+
+    .about{
+        padding-top: 10px;
+    }
 
 </style>
