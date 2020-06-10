@@ -34,7 +34,7 @@
             <div class="column">
         <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">Patient derived tumor xenograft contamination filter</a></li>
         <p>Author of PDX contamination filter. Used a convolutional neural network pipeline to filter out murinal contamination from patient cancer tissue (python3) </p>
-                <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">De novo variant caller</a></li>
+                <li><a href="https://github.com/jandrewrfarrell/RUFUS" target="_blank">De novo variant caller</a></li>
                 <p>Developer for k-mer based de novo variant caller (c++11) </p>
             </div>
         </div>

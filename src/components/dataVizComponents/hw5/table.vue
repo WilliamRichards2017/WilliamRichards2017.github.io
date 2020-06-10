@@ -598,6 +598,7 @@
             let self = this;
             this.createTable();
             this.updateTable();
+            this.clearTree();
 
             d3.select("#matchTable > tbody").selectAll("tr")
                 .on("mouseover", function(d,i){

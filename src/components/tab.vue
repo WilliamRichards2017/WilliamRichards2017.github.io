@@ -38,7 +38,7 @@ export default {
 <style>
 
   .box{
-    height: 75vh;
+    height: calc(100vh - 155px);
     overflow-y: scroll;
   }
 
@@ -62,6 +62,5 @@ export default {
 .tab {
   border: 1px;
   padding: 1px;
-  height: 20vh;
 }
 </style>

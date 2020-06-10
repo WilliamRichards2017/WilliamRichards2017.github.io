@@ -233,9 +233,5 @@
         mix-blend-mode: difference;
     }
 
-    #treeWrapper{
-        height: 80vh;
-        overflow-y: scroll;
-    }
 
 </style>

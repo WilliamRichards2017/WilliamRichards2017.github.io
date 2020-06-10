@@ -39,15 +39,11 @@ a {
   padding-bottom:1rem;
 }
 
-p {
-  padding-bottom: .05em;
-}
 
     .contact{
         position: fixed;
         bottom: 0;
         width: 100vw;
-        heigh: 5vh;
     }
 
 </style>
