@@ -1,8 +1,10 @@
 <template>
-    <div id="hw6" v-on:click="showExtremes = false">
+    <div id="hw6">
+        <div class="hw6Title">
+            <h1>Word choice frequencies based on politcal leanings</h1>
+        </div>
         <div id="bg">
             <div id="hw6Header">
-                    <h1 style="text-align: center">Word choice frequencies based on politcal leanings</h1>
                 <toggle-button :value="false"
                                v-model="separate"
                                :color="toggleColors">
@@ -15,7 +17,7 @@
             </div>
                 <div class="flexRow">
                     <BubbleChart :words="words" :brushedWords="brushedWords" :separate="separate"
-                                 :showExtremes="showExtremes">
+                                 >
                     </BubbleChart>
                     <Table :words="brushedWords"></Table>
                 </div>
@@ -39,7 +41,7 @@
                 words: Words,
                 brushedWords: Words,
                 separate: false,
-                separateText : 'Separate by category',
+                separateText : 'Expand by category',
                 colorDict: {
                     "education": "green",
                     "economy/fiscal issues": "red",
@@ -126,10 +128,22 @@
 
 <style scoped>
 
-    h1{
-        text-align: center;
+
+    .hw6Title{
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
+
+    h1{
+        vertical-align:middle;
+        position: absolute;
+
+    }
+
     #hw6 {
+        padding-top: 20px;
+        padding-bottom: 10px;
         width: 100%;
         height: 75vh;
     }

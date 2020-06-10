@@ -114,9 +114,7 @@
         margin-right:50px; }
 
     .active a{
-        color:#9068be;
-         text-shadow: 0.5px 0px 1px black;
-
+        color: #ac7ce3;
     }
 
 </style>

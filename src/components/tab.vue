@@ -39,6 +39,7 @@ export default {
 
   .box{
     height: 75vh;
+    overflow-y: scroll;
   }
 
 .tab-button {

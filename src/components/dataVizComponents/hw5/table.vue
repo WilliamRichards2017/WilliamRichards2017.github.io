@@ -39,12 +39,16 @@
                 let gsWidth = 200;
                 let gsHeight = 35;
 
+                console.log("maxGoal", maxGoal);
+
                 let goalScale = d3.scaleLinear()
                     .domain([0, maxGoal])
                     .range([10, gsWidth - 10]);
 
 
                 let axis = d3.axisTop(goalScale);
+
+                d3.selectAll("#goalHeader > svg").remove();
 
                 let goalHeader = d3.select("#goalHeader").append("svg")
                     .attr("width", gsWidth)
@@ -89,7 +93,7 @@
                 // ******* TODO: PART III *******
                 //Create table rows
 
-                let svgs = d3.select("#matchTable  tbody").selectAll("td").selectAll("svg").remove();
+    let svgs = d3.select("#matchTable  tbody").selectAll("td").selectAll("svg").remove();
 
 
                 let tr = d3.select("#matchTable  tbody").selectAll("tr")
@@ -118,6 +122,15 @@
                             return "gray";
                         }
                     });
+
+                let gsWidth = 200;
+                let maxGoal = 16;
+
+                console.log("maxGoal", maxGoal);
+
+                let goalScale = d3.scaleLinear()
+                    .domain([0, maxGoal])
+                    .range([0, gsWidth]);
 
 
                 let td = tr.selectAll("td").data(d => this.cellArray(d)).join("td");
@@ -158,29 +171,31 @@
                     .append("rect")
                     .attr("width", d => d["val"] * 5)
                     .attr("height", barHeight)
+                    .attr("y", 5)
                     .attr("fill", "red")
-                    .attr("opacity", d => d["val"] / 7);
+                    .attr("opacity", d => d["val"] / 7)
+                    .style("text-align", "center");
 
 
                 barSvgs
                     .append("text")
                     .style("fill", "black")
-                    .attr("x", 0)
-                    .attr("y", barHeight / 2 - 2)
+                    .attr("x", 3)
+                    .attr("y", barHeight / 2 +3)
                     .attr("dy", "6px")
                     .text(d => d["val"]);
 
 
                 let goalSvgs = goals.append("svg")
-                    .attr("width", 200)
-                    .attr("height", 25);
+                    .attr("width", 210)
+                    .attr("height", 25)
 
 
                 goalSvgs.append("rect")
-                    .attr("width", d => Math.abs(d["val"]["GoalsConceded"] - d["val"]["GoalsMade"]) * 12.5)
+                    .attr("width", d => Math.abs(goalScale(d["val"]["GoalsConceded"] - d["val"]["GoalsMade"])))
                     .attr("height", 10)
-                    .attr("x", d => Math.min(d["val"]["GoalsConceded"], d["val"]["GoalsMade"]) * 12.5)
-                    .attr("y", 3)
+                    .attr("x", d => Math.min(goalScale(d["val"]["GoalsConceded"]), goalScale(d["val"]["GoalsMade"]))+5)
+                    .attr("y", 8)
                     .style("fill", d => {
                         if (d.type === "aggregate") {
                             if (d.val.GoalsMade - d.val.GoalsConceded > 0) {
@@ -195,12 +210,11 @@
                     })
                     .attr("opacity", 0.5);
 
-
                 //Todo, translate circles to goal scale exactly
                 goalSvgs.append("circle")
                     .attr("r", 5)
-                    .attr("cy", barHeight / 2 - 2)
-                    .attr("cx", d => d["val"]["GoalsMade"] * 12.5)
+                    .attr("cy", barHeight / 2 +3)
+                    .attr("cx", d => goalScale(d["val"]["GoalsMade"])+5)
                     .style("fill", d => {
                         if (d.val.GoalsConceded === d.val.GoalsMade) {
                             return "gray";
@@ -219,13 +233,14 @@
                             }
                             return "blue";
                         }
-                    });
+                    })
+                    .style("opacity", 1);
 
 
                 goalSvgs.append("circle")
                     .attr("r", 5)
-                    .attr("cy", barHeight / 2 - 2)
-                    .attr("cx", d => d["val"]["GoalsConceded"] * 12.5)
+                    .attr("cy", barHeight / 2 + 3)
+                    .attr("cx", d => goalScale(d["val"]["GoalsConceded"])+5)
                     .style("fill", d => {
                         if (d.type === "aggregate") {
                             return "red"
@@ -242,7 +257,8 @@
                             return "red";
                         }
 
-                    });
+                    })
+                    .style("opacity", 1);
             },
 
 
@@ -552,6 +568,8 @@
 
             updateTree(d) {
 
+
+
                 d3.select("#tree").selectAll('line.link').filter((dl) => {
                     return dl.target.data.Team === d.key;
                 }).style("stroke", "red");
@@ -568,21 +586,54 @@
 
                 d3.select("#tree").selectAll("text")
                     .style("fill", "black");
-            }
+            },
+            isEven(value) {
+        if (value%2 == 0)
+            return true;
+        else
+            return false;
+    }
         },
         mounted() {
+            let self = this;
             this.createTable();
             this.updateTable();
 
             d3.select("#matchTable > tbody").selectAll("tr")
-                .on("mouseover", d => this.updateTree(d))
-                .on("mouseout", d => this.clearTree(d));
+                .on("mouseover", function(d,i){
+                    self.updateTree(d);
+                    d3.select(this).style("background-color", "#feebe2")})
+                .on("mouseout", function(d,i){
+                    self.clearTree(d);
+                    d3.select(this).style("background-color", function(){
+                        if(self.isEven(i)){
+                            return "white";
+                        }
+                        else{
+                            return "#d7d7d7";
+                        }
+                    })
+
+            })
+                .style("background-color", function(d, i){
+                    if(self.isEven(i)){
+                        return "white";
+                    }
+                    else{
+                        return "#d7d7d7";
+                    }
+                });
+
+
+
         },
 
     }
 </script>
 
 <style scoped>
+
+
     #table {
         height: 75%;
     }
@@ -591,6 +642,12 @@
         content: url(https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg)
     }
 
+    tbody tr:hover {
+        color: #feebe2;
+    }
+    tbody tr .game {
+        background-color: #f0f0f0;
+    }
 
     .aggregate {
         color: #af161e;

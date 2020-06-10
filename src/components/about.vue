@@ -22,12 +22,22 @@
 
     <h3> Backend software</h3>
     <ul style="margin-top:10px;">
+
+        <div class="row">
+            <div class="column">
         <li><a href="https://github.com/WilliamRichards2017/RufAlu" target="_blank">Alu variant detection</a></li>
         <p>Author of Alu mobile element detection plugin for denovo variant caller (c++11)</p>
         <li><a href="https://github.com/WilliamRichards2017/Twofus" target="_blank">Structural variant detection</a></li>
         <p>Author of structural variant detection plugin for denovo variant caller, including detection of inversions, translocations, large insertions, and general mobile elements (c++11)</p>
+            </div>
+
+            <div class="column">
         <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">Patient derived tumor xenograft contamination filter</a></li>
         <p>Author of PDX contamination filter. Used a convolutional neural network pipeline to filter out murinal contamination from patient cancer tissue (python3) </p>
+                <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">De novo variant caller</a></li>
+                <p>Developer for k-mer based de novo variant caller (c++11) </p>
+            </div>
+        </div>
 
         <!--<li><a href="https://github.com/shenruyi1994/SelfDrivingCarTeamZero">Autonomous vehicle plugin</a></li>-->
         <!--<p>Gazebo physics engine C++ plugin files, and XML model and world files to control the operation of an autonomous vehicle in a simulated environment. </p>-->
@@ -45,5 +55,15 @@ p {
     .about{
         padding-top: 10px;
     }
+
+.column {
+    float: left;
+    width: 50%;
+    heigh: 50vh;
+}
+
+.row {
+    float: left;
+}
 
 </style>

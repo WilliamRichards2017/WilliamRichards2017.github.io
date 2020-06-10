@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="treeWrapper">
         <h2 style="padding: 0; margin: 0">Second Stage</h2>
         <svg width="600" height="560">
             <g id="tree"></g>
@@ -99,7 +99,7 @@
                     })
                     .attr('y2', function (d) {
                         return hScale(d.target.x);
-                    });
+                    })
             },
 
 
@@ -231,6 +231,11 @@
     .chart .barText {
         text-anchor: start;
         mix-blend-mode: difference;
+    }
+
+    #treeWrapper{
+        height: 80vh;
+        overflow-y: scroll;
     }
 
 </style>
