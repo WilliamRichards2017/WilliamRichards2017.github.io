@@ -31,7 +31,7 @@
         <p>Author of structural variant detection plugin for denovo variant caller, including detection of inversions, translocations, large insertions, and general mobile elements (c++11)</p>
             </div>
 
-            <div class="column">
+            <div class="column" style="padding-left: 20px">
         <li><a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank">Patient derived tumor xenograft contamination filter</a></li>
         <p>Author of PDX contamination filter. Used a convolutional neural network pipeline to filter out murinal contamination from patient cancer tissue (python3) </p>
                 <li><a href="https://github.com/jandrewrfarrell/RUFUS" target="_blank">De novo variant caller</a></li>
@@ -47,6 +47,10 @@
 
 <style scoped>
 
+
+    ul{
+        padding-left: 10px;
+    }
 p {
   margin: .2em;
   padding-bottom: .5em;
@@ -58,8 +62,8 @@ p {
 
 .column {
     float: left;
-    width: 50%;
-    heigh: 50vh;
+    width: calc(50% - 10px);
+    height: 50vh;
 }
 
 .row {
