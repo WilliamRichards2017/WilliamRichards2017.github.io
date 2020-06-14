@@ -1,8 +1,12 @@
 <template>
     <div id="hw5">
-        <div class="flex">
+        <div style="display: inline-flex; justify-content: space-evenly; width: 100%">
+            <h2>World cup 2018 score table</h2>
+            <h2>Knockout round bracket</h2>
+
+        </div>
+        <div style="display: inline-flex">
             <div class="view">
-                <h2>Score Table</h2>
                 <table id="matchTable">
                     <thead>
                     <tr>
@@ -194,7 +198,7 @@
         width: 750px;
         padding: 0.5em;
         float: left;
-        height: 73vh;
+        height: 65vh;
         overflow-y: scroll
     }
     .barText {

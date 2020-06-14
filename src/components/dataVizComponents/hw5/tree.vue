@@ -1,7 +1,6 @@
 <template>
     <div id="treeWrapper">
-        <h2 style="padding: 0; margin: 0">Second Stage</h2>
-        <svg width="600" height="560">
+        <svg width="600" height="500">
             <g id="tree"></g>
         </svg>
     </div>
@@ -21,7 +20,7 @@
         methods: {
             createTree() {
                 let width = 500;
-                let height = 560;
+                let height = 500;
 
                 treeData.forEach((d, i) => {
                     d.id = d.Team + d.Opponent + i;
@@ -216,14 +215,6 @@
         font-weight: 300;
     }
 
-    .view {
-        width: 750px;
-        padding: 0.5em;
-        float: left;
-        height: 75%;
-        overflow-y: scroll
-    }
-
     .barText {
         fill: black;
     }
@@ -232,6 +223,7 @@
         text-anchor: start;
         mix-blend-mode: difference;
     }
+
 
 
 </style>

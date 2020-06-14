@@ -1,18 +1,23 @@
 <template>
+  <div>
 <div class="tab">
+
+  <div id="tab-header" style="position:absolute; top:0px; left:0px; height:35px; right:0px;overflow:hidden;">
   <button
     v-for="tab in tabs"
     v-bind:key="tab"
     v-bind:class="['tab-button', { active: currentTab === tab }]"
     v-on:click="currentTab = tab"
   >{{ tab }}</button>
+    </div>
 
-<div class="box">
+<div class="box" style="position:absolute; top:35px; bottom:100px; left:0px; right:0px; overflow:auto; padding-right: 20px; padding-left: 20px">
   <component
     v-bind:is="currentTabComponent"
     class="tab"
   ></component>
-<contact>
+</div>
+<contact style="position:absolute; bottom:0px; height:100px; left:0px; right:0px; overflow:hidden;">
 </contact>
 </div>
 </div>
@@ -37,10 +42,6 @@ export default {
 
 <style>
 
-  .box{
-    height: calc(100vh - 155px);
-    overflow-y: scroll;
-  }
 
 .tab-button {
   padding: 6px 10px;
@@ -63,4 +64,5 @@ export default {
   border: 1px;
   padding: 1px;
 }
+
 </style>

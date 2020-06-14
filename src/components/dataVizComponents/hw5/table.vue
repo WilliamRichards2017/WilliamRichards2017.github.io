@@ -1,6 +1,4 @@
 <template>
-    <div id="table">
-    </div>
 
 </template>
 
@@ -18,23 +16,8 @@
             }
         },
         methods: {
-
-
-            /**
-             * Creates a table skeleton including headers that when clicked allow you to sort the table by the chosen attribute.
-             * Also calculates aggregate values of goals, wins, losses and total games as a function of country.
-             *
-             */
             createTable() {
-
-                // ******* TODO: PART II *******
-
-                //Update Scale Domains
-
-
                 let maxGoal = Math.max.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
-
-                // let minGoal = Math.min.apply(Math, this.teamData.map(d => d["value"]["Goals Made"]));
 
                 let gsWidth = 200;
                 let gsHeight = 35;
@@ -60,14 +43,6 @@
                     .attr("transform", "translate(0, 25)")
                     .call(axis);
 
-                //add GoalAxis to header of col 1.
-
-                // ******* TODO: PART V *******
-
-                // Set sorting callback for clicking on headers
-
-
-
                 d3.select("#goalHeader")
                     .on("click", (d, i) => this.sortByCol(i));
 
@@ -78,17 +53,9 @@
                 let headers = d3.select("#matchTable thead > tr").selectAll("td")
                     .on("click", (d, i) => this.sortByCol(i));
 
-
-
                 this.tableElements = this.teamData;
-
-
             },
 
-
-            /**
-             * Updates the table contents with a row for each element in the global variable tableElements.
-             */
             updateTable() {
                 // ******* TODO: PART III *******
                 //Create table rows
@@ -633,11 +600,6 @@
 </script>
 
 <style scoped>
-
-
-    #table {
-        height: 75%;
-    }
 
     th:before {
         content: url(https://visualpharm.com/assets/165/Sort-595b40b85ba036ed117dbb04.svg)
