@@ -114,6 +114,12 @@
 </script>
 
 <style scoped>
+
+    #treeWrapper{
+        height: 60vh;
+        overflow-y: visible;
+    }
+
     h1 {
         margin-top: 0;
         font-family: 'font2';

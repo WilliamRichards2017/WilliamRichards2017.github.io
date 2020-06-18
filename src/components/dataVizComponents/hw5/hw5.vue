@@ -1,11 +1,11 @@
 <template>
     <div id="hw5">
-        <div style="display: inline-flex; justify-content: space-evenly; width: 100%">
-            <h2>World cup 2018 score table</h2>
-            <h2>Knockout round bracket</h2>
+        <div style="display: inline-flex; justify-content: space-evenly; width: 100%; padding-top: 20px" >
+            <h1>World cup 2018 score table</h1>
+            <h1>Knockout round bracket</h1>
 
         </div>
-        <div style="display: inline-flex">
+        <div style="display: inline-flex" >
             <div class="view">
                 <table id="matchTable">
                     <thead>
@@ -65,6 +65,7 @@
             <soccer-table>
             </soccer-table>
         </div>
+        <div class="right"><cite class="citation" style="float: right">Data sourced from: <a href="https://www.fifa.com/worldcup/archive/russia2018/matches/" target="_blank" style="font-size: 16px">fifa.com</a></cite></div>
     </div>
 
 </template>
@@ -198,7 +199,7 @@
         width: 750px;
         padding: 0.5em;
         float: left;
-        height: 65vh;
+        height: 63vh;
         overflow-y: scroll
     }
     .barText {
@@ -213,5 +214,15 @@
         height: 50px;
         margin: 10px;
     }
+
+    .citation{
+        position: fixed;
+        left: calc(100% - 200px);
+        bottom: 75px;
+        width: 100%;
+        font-size: 14px;
+        z-index: 1;
+    }
+
 </style>
 

@@ -3,7 +3,7 @@
 
         <div id="hwListContainer" v-show="showHw6 || showHw5 || showHw4" class="inline">
             <ul>
-                <li id="dataViz" v-on:click="showHw6 = false; showHw5 = false; showHw4=false;"><a>Data Vizualizations</a></li>
+                <li id="dataVizLink" v-on:click="showHw6 = false; showHw5 = false; showHw4=false;"><a>Data Vizualizations</a></li>
             </ul>
 
             <span class="headerdivider"></span>
@@ -95,17 +95,23 @@
 
 
     .inline{
-        padding-bottom: 20px;
-        padding-left: 10px
+        padding-bottom: 25px;
+        padding-left: 10px;
     }
 
     .description{
         width: 50%;
     }
 
-   #hwListContainer a {
-        font-size: 18px
+    #hwListContainer{
+        padding-top: 10px;
+        border-bottom: 1px solid #efece7;
+
     }
+
+   #hwListContainer a {
+        font-size: 18px;
+   }
 
     .inline ul li {
         font-size: 20px;

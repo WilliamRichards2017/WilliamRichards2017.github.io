@@ -34,6 +34,9 @@
   }
 
 
+    a{
+      cursor: pointer;
+    }
   #wrapper {
     margin:0 auto;
     position: relative;

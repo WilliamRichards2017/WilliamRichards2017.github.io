@@ -1,5 +1,10 @@
 <template>
     <div id="hw4" style=" padding-top: 20px">
+
+        <div class="hw5Title">
+            <h1>Gap Minder inspired world health data</h1>
+        </div>
+
     <worldMap
     :popData="popData"
     @update-active-country="onUpdateActiveCountry"></worldMap>
@@ -8,6 +13,8 @@
         :active-country-prop="activeCountry"
     >
     </gapPlot>
+        <cite class="citation">Data sourced from: <a href="https://www.gapminder.org/documentation/documentation/gapdoc2007-1.pdf" style="font-size: 16px;">gapminder.org</a></cite>
+
     </div>
 </template>
 
@@ -317,6 +324,12 @@
         background-color: DodgerBlue;
     }
 
+    .hw5Title{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
 
     /*style the arrow inside the select element:*/
 
@@ -567,6 +580,14 @@
     .activeYear-background {
         font-size: 80px;
         opacity: .4;
+    }
+
+    .citation{
+        position: fixed;
+        left: calc(100% - 275px);
+        bottom: 75px;
+        width: 100%;
+        font-size: 14px;
     }
 
 </style>

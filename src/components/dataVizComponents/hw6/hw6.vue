@@ -22,7 +22,9 @@
                     <Table :words="brushedWords"></Table>
                 </div>
             </div>
-        </div>
+        <cite class="citation">Data sourced from: <a href="https://github.com/fivethirtyeight/data/blob/master/state-of-the-state/words.csv" style="font-size: 16px">github.com/fivethirtyeight</a></cite>
+
+    </div>
 </template>
 
 <script>
@@ -145,7 +147,7 @@
         padding-top: 20px;
         padding-bottom: 10px;
         width: 100%;
-        height: 75vh;
+        height: 70vh;
     }
 
     #bg {
@@ -161,6 +163,14 @@
         padding-left: 10px;
     }
 
+    .citation{
+        position: fixed;
+        left: calc(100% - 350px);
+        bottom: 75px;
+        width: 100%;
+        font-size: 14px;
+        z-index: 1;
+    }
 
 </style>
 

@@ -63,7 +63,6 @@ p {
 .column {
     float: left;
     width: calc(50% - 10px);
-    height: 50vh;
 }
 
 .row {
