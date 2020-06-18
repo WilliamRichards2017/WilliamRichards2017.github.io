@@ -22,7 +22,7 @@
                     <Table :words="brushedWords"></Table>
                 </div>
             </div>
-        <cite class="citation">Data sourced from: <a href="https://github.com/fivethirtyeight/data/blob/master/state-of-the-state/words.csv" style="font-size: 16px">github.com/fivethirtyeight</a></cite>
+        <cite class="citation">Data sourced from: <a href="https://github.com/fivethirtyeight/data/blob/master/state-of-the-state/words.csv" target="_blank" style="font-size: 16px">github.com/fivethirtyeight</a></cite>
 
     </div>
 </template>

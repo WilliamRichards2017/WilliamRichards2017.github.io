@@ -113,6 +113,7 @@
                     .classed('circle-legend', true)
                     .append('svg')
                     .attr("width", 225)
+                    .attr("height", 50)
                     .append('g')
                     .attr('transform', 'translate(10, 0)');
 

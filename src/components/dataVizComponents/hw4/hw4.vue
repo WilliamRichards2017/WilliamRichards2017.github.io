@@ -1,5 +1,5 @@
 <template>
-    <div id="hw4" style=" padding-top: 20px">
+    <div id="hw4" style="padding-top: 20px;">
 
         <div class="hw5Title">
             <h1>Gap Minder inspired world health data</h1>
@@ -13,7 +13,8 @@
         :active-country-prop="activeCountry"
     >
     </gapPlot>
-        <cite class="citation">Data sourced from: <a href="https://www.gapminder.org/documentation/documentation/gapdoc2007-1.pdf" style="font-size: 16px;">gapminder.org</a></cite>
+
+        <div class="right"><cite class="citation" style="float: right">Data sourced from: <a href="https://www.gapminder.org/documentation/documentation/gapdoc2007-1.pdf" target="_blank" style="font-size: 16px">gapminder.org</a></cite></div>
 
     </div>
 </template>
@@ -580,6 +581,11 @@
     .activeYear-background {
         font-size: 80px;
         opacity: .4;
+    }
+
+    #hw4{
+        height: 63vh !important;
+
     }
 
     .citation{
