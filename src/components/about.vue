@@ -6,7 +6,7 @@
 
     <h1>Some of my projects include </h1>
 
-    <h3>Web Applications</h3>
+    <h3 style="padding-top: 5px">Web Applications</h3>
 
     <ul style="margin-top:10px;">
         <li><a href="https://stage.pedigree.iobio.io" target="_blank">pedigree.iobio.io</a></li>

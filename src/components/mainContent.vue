@@ -1,10 +1,10 @@
 <template>
   <div class="mainContent">
     <div class="row">
-      <div style="float: left; width:60%">
+      <div style="float: left; width:61%">
           <about/>
       </div>
-      <div style="float: left; width:40%">
+      <div style="float: left; width:39%">
         <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="90%" height="90%"></div>
         <div id="logo">
           Will Richards
@@ -44,7 +44,7 @@
 
 #logo {
 	margin-bottom:20px;
-	font:normal 18px Georgia, serif;
+	font:normal 17px Georgia, serif;
   text-align:center;
 }
 

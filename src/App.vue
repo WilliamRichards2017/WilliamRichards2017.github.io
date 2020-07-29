@@ -93,7 +93,7 @@
 
   h3 {
     margin:10px 0;
-    padding-bottom:10px;
+    padding-bottom:5px;
     font:bold 14px Arial, Helvetica, sans-serif;
     border-bottom:1px solid #efece7;
   }
