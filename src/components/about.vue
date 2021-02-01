@@ -67,6 +67,7 @@ p {
 
 .row {
     float: left;
+  padding-left: 20px;
 }
 
 </style>

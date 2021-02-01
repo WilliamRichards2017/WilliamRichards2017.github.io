@@ -1,21 +1,27 @@
 <template>
   <div>
-<div class="tab">
+<div>
 
-  <div id="tab-header" style="position:absolute; top:0px; left:0px; height:35px; right:0px;overflow:hidden;">
-  <button
+
+<!--  style="position:absolute; top:0px; left:0px; height:35px; right:0px;overflow:hidden;"-->
+  <div id="tab-header"class="nav nav-tabs" style="height:35px;overflow:hidden;">
+  <li
     v-for="tab in tabs"
     v-bind:key="tab"
-    v-bind:class="['tab-button', { active: currentTab === tab }]"
+    v-bind:class="['nav-link', { active: currentTab === tab }]"
     v-on:click="currentTab = tab"
-  >{{ tab }}</button>
+  >{{ tab }}</li>
     </div>
 
-<div class="box" style="position:absolute; top:35px; bottom:100px; left:0px; right:0px; overflow:auto; padding-right: 20px; padding-left: 20px">
-  <component
+
+  <div class="box" style="position:absolute; top:35px; bottom:100px; left:0px; right:0px; overflow:auto; padding-right: 20px; padding-left: 20px">
+    <keep-alive>
+
+    <component
     v-bind:is="currentTabComponent"
     class="tab"
   ></component>
+    </keep-alive>
 </div>
 <contact style="position:absolute; bottom:0px; height:100px; left:0px; right:0px; overflow:hidden;">
 </contact>
@@ -42,27 +48,12 @@ export default {
 
 <style>
 
-
-.tab-button {
-  padding: 6px 10px;
-
-  cursor: pointer;
-  background: #f0f0f0;
-  margin-bottom: 1px;
-  margin-right: 0px;
-
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+.nav-link:hover {
+  background: #e0e0e0 !important;
 }
-.tab-button:hover {
-  background: #e0e0e0;
-}
-.tab-button.active {
-  background: #6ed3cf;
-}
-.tab {
-  border: 1px;
-  padding: 1px;
+.nav-link.active {
+  background: #6ed3cf !important;
+  border-color: #277371 !important
 }
 
 </style>

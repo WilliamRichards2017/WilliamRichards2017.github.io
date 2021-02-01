@@ -5,7 +5,7 @@
           <about/>
       </div>
       <div style="float: left; width:39%">
-        <div id="main-image"><img class="rounded" src="../assets/Will_Richards.jpg" width="90%" height="90%"></div>
+        <div id="main-image"><img class="my-rounded" src="../assets/Will_Richards.jpg" width="90%" height="90%"></div>
         <div id="logo">
           Will Richards
         </div>
@@ -22,7 +22,7 @@
 
 }
 
-.rounded {
+.my-rounded {
   border-radius: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -40,6 +40,7 @@
 
 .row {
   float: left;
+  padding-left: 20px;
 }
 
 #logo {
