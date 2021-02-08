@@ -20,11 +20,25 @@
         <div v-show="!showHw6 && !showHw5 && !showHw4">
             <ul style="padding-top: 20px">
                 <li v-on:click="showHw6 = true; showHw5 = false; showHw4 = false"><a>Political Word Choice</a></li>
-                <p class="description"> Interactive beeswarm plot and bar chart to show the relative frequencies of various words used based on ones political leaning.  Words can be separated into various categories, and a brush selection on the beeswarm plot can be used to filter the barchart visualization.   </p>
-                <li v-on:click="showHw5 = true; showHw6 = false; showHw4 = false"><a>World Cup Results</a>
-                <p class="description"> Interactive stats table and bracket tournament tree show how each country performed in the 2018 world cup.  The data table can be sorted on by column.  Rows can be expanded to view the results of each game a team played. Hovering over a team or game will highlight the corresponding path in the tournament bracket.</p></li>
+                <div style="display: flex; padding-bottom: 25px">
+                    <p class="description"> Interactive beeswarm plot and bar chart to show the relative frequencies of various words used based on ones political leaning.  Words can be separated into various categories, and a brush selection on the beeswarm plot can be used to filter the barchart visualization.   </p>
+                    <img src="../assets/beeswarm.png"  style="padding-left: 50px" width="600x" height="125px">
+                </div>
+                <li v-on:click="showHw5 = true; showHw6 = false; showHw4 = false"><a>World Cup Results</a>  </li>
+                    <div style="display: flex; padding-bottom: 25px">
+                <p class="description"> Interactive stats table and bracket tournament tree show how each country performed in the 2018 world cup.  The data table can be sorted on by column.  Rows can be expanded to view the results of each game a team played. Hovering over a team or game will highlight the corresponding path in the tournament bracket.</p>
+                        <img src="../assets/worldcup.png" style="padding-left: 35px; padding-bottom: 25px" width="600px" height="175px">
+
+                    </div>
+
+
                 <li v-on:click="showHw4 = true; showHw6 = false; showHw5 = false;"><a>Global Data Correlations</a></li>
+                <div style="display: flex;">
                 <p class="description">Interactive world map and scatter-plot used to show correlations between data metrics collected for each country over time.  All metrics can be viewed for a specific country by selecting that country from the world map, or scatterplot. Data correlations can be visualized over time with the slider bar.  </p>
+                    <img src="../assets/globaldata.png" style="padding-left: 50px" width="600" height="150px">
+
+                </div>
+
             </ul>
         </div>
 

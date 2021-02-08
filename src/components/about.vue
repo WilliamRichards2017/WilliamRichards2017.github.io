@@ -9,7 +9,7 @@
     <h3 style="padding-top: 5px">Web Applications</h3>
 
     <ul style="margin-top:10px;">
-        <li><a href="https://stage.pedigree.iobio.io" target="_blank">pedigree.iobio.io</a></li>
+        <li><a href="https://pedigree.iobio.io" target="_blank">pedigree.iobio.io</a></li>
         <p>Author of pedigree visualization with interactive genotype/phenotype regression analysis </p>
         <li><a href="https://gene.iobio.io" target="_blank">gene.iobio.io</a></li>
         <p>Developer for web application used to investigate potential disease-causing variants</p>
