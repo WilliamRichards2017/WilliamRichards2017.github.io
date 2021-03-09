@@ -2,8 +2,8 @@
   <div id="game">
     <table class="board">
       <tr v-for="(row, rowKey) in mineGrid" :key="rowKey">
-        <td v-for="(col, colKey) in row" :key="colKey">
-          {{col}}
+        <td v-for="(col, colKey) in row" :key="colKey" >
+          {{col.text}}
         </td>
       </tr>
     </table>
@@ -56,6 +56,7 @@ td.no-neighbors {
 import hw4 from "../dataViz/hw4/hw4";
 import hw6 from "../dataViz/hw6/hw6";
 import hw5 from "../dataViz/hw5/hw5";
+import gridSquare from "./gridSquare";
 
 /**
  * Part 3:
@@ -342,6 +343,32 @@ export default {
   name: 'minesweeper',
 
   methods : {
+    //todo: refactor, still O(n^2) but looks ugly, can also render count on click, 
+    initNeighbors(){
+
+    let count = 0;
+
+    for(let x = 0; x < this.width; x++){
+      for(let y = 0; y < this.height; y++){
+        for(let i = x-1; i < x+2; i++){
+          for(let j = y-1; j < y+2; j++){
+            if(i > -1 && i < this.width && j > -1 && j < this.height){
+              if(this.mineGrid[i][j].text === 'X'){
+                this.mineGrid[x][y].count++;
+              }
+            }
+          }
+        }
+        console.log("count", this.mineGrid[x][y].count);
+        if(this.mineGrid[x][y].count > 0 && this.mineGrid[x][y].text !== 'X'){
+          this.mineGrid[x][y].text =  this.mineGrid[x][y].count.toString();
+        }
+      }
+    }
+
+
+    return count;
+    },
     initializeMineGrid(xC, yC) {
       //select 10 random 8,8
 
@@ -373,12 +400,11 @@ export default {
         let column = [];
         for (let y = 0; y < this.height; y++) {
           let comp = x + "," + y;
+          let square = new gridSquare("unrevealed", "")
           if (mineInit.includes(comp)) {
-            column.push(true);
-          } else {
-            column.push(false);
+            square.text = 'X';
           }
-
+          column.push(square);
         }
         this.mineGrid.push(column)
       }
@@ -388,6 +414,7 @@ export default {
 
   mounted: function(){
     this.initializeMineGrid(8,8);
+    this.initNeighbors();
   },
 
   data() {
