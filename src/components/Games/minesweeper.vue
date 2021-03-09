@@ -413,24 +413,69 @@ export default {
       console.log("this.mineGrid", this.mineGrid);
     },
 
-    revealSquare(x,y){
-      if(this.mineGrid[x][y].text === 'X'){
-        this.mineGrid[x][y].className = 'mine'
-        alert("Game over");
-      }
-      else{
-        if(this.mineGrid[x][y].className === 'unrevealed'){
-          this.squaresClicked +=1;
+  floodFill(x,y){
+    for(let i = x-1; i < x+2; i++){
+      for(let j = y-1; j < y+2; j++){
+        if(i > -1 && i < this.width && j > -1 && j < this.height) {
+          console.log("this.mineGrid[x][y]",i, j, this.mineGrid[i][j].className);
+
+          if(this.mineGrid[i][j].className === 'unrevealed'){
+            console.log("revealing", i, j, this.mineGrid[i][j].className)
+            this.squaresClicked +=1;
+            this.mineGrid[i][j].className = 'hint';
+            if(this.mineGrid[i][j].text === 0) {
+              this.floodFill(i, j);
+            }
+            // console.log("this.mineGrid[x][y]", this.mineGrid[i][j]);
+          }
         }
-        this.mineGrid[x][y].className = 'hint';
-        console.log("swaures clicked, win condition", this.squaresClicked, this.winCondition);
-        if(this.squaresClicked === this.winCondition){
-          //TODO: reveal squares, prompt restart
-          this.revealAll();
-          alert("You Won!");
-          // this.mineGrid = [];
-          // this.initializeMineGrid(4,4);
-          // this.initNeighbors();
+      }
+    }
+  },
+
+    revealSquare(x,y){
+      if(x < 0 || x > this.width-1 || y < 0 || y > this.height-1){
+        return;
+      }
+      if(this.mineGrid[x][y].className === 'unrevealed') {
+        if (this.mineGrid[x][y].text === 'X') {
+          this.mineGrid[x][y].className = 'mine'
+          alert("Game over");
+        } else {
+          this.squaresClicked++;
+
+          console.log("this.mineGrid[x][y]", this.mineGrid[x][y].text, this.mineGrid[x][y].className);
+          if(parseInt(this.mineGrid[x][y].text) > 0){
+            console.log("swag");
+            this.mineGrid[x][y].className = 'hint';
+          }
+          else if(parseInt(this.mineGrid[x][y].text) === 0){
+            this.mineGrid[x][y].className = 'hint';
+            console.log("floodFill neighbors", x, y)
+            this.revealSquare(x-1, y-1);
+            this.revealSquare(x-1, y);
+            this.revealSquare(x-1, y+1);
+            this.revealSquare(x, y-1);
+            this.revealSquare(x, y+1);
+            this.revealSquare(x+1, y-1);
+            this.revealSquare(x+1, y);
+            this.revealSquare(x+1, y+1);
+
+
+
+
+
+          }
+          else{
+            console.log("else catch");
+          }
+
+          if (this.squaresClicked === this.winCondition) {
+            //TODO: reveal squares, prompt restart
+            this.revealAll();
+            alert("You Won!");
+
+          }
         }
       }
     },
@@ -449,14 +494,14 @@ export default {
 
 
   mounted: function(){
-    this.initializeMineGrid(4,4);
+    this.initializeMineGrid(20,20);
     this.initNeighbors();
   },
 
   data() {
     return {
-      width: 4,
-      height : 4,
+      width: 20,
+      height : 20,
       numberOfMines: 1,
       mineGrid: [],
       board: [],
