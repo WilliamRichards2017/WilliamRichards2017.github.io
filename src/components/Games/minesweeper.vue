@@ -2,8 +2,11 @@
   <div id="game">
     <table class="board">
       <tr v-for="(row, rowKey) in mineGrid" :key="rowKey">
-        <td v-for="(col, colKey) in row" :key="colKey" >
-          {{col.text}}
+        <td v-for="(col, colKey) in row" :key="colKey"
+            @click="revealSquare(rowKey, colKey)"
+            :class="col.className"
+        >
+          <span v-if="col.className !== 'unrevealed'">{{col.text}} </span>
         </td>
       </tr>
     </table>
@@ -343,7 +346,7 @@ export default {
   name: 'minesweeper',
 
   methods : {
-    //todo: refactor, still O(n^2) but looks ugly, can also render count on click, 
+    //todo: refactor, still O(n^2) but looks ugly, can also render count on click,
     initNeighbors(){
 
     let count = 0;
@@ -359,8 +362,7 @@ export default {
             }
           }
         }
-        console.log("count", this.mineGrid[x][y].count);
-        if(this.mineGrid[x][y].count > 0 && this.mineGrid[x][y].text !== 'X'){
+        if(this.mineGrid[x][y].text !== 'X'){
           this.mineGrid[x][y].text =  this.mineGrid[x][y].count.toString();
         }
       }
@@ -410,22 +412,62 @@ export default {
       }
       console.log("this.mineGrid", this.mineGrid);
     },
+
+    revealSquare(x,y){
+      if(this.mineGrid[x][y].text === 'X'){
+        this.mineGrid[x][y].className = 'mine'
+        alert("Game over");
+      }
+      else{
+        if(this.mineGrid[x][y].className === 'unrevealed'){
+          this.squaresClicked +=1;
+        }
+        this.mineGrid[x][y].className = 'hint';
+        console.log("swaures clicked, win condition", this.squaresClicked, this.winCondition);
+        if(this.squaresClicked === this.winCondition){
+          //TODO: reveal squares, prompt restart
+          this.revealAll();
+          alert("You Won!");
+          // this.mineGrid = [];
+          // this.initializeMineGrid(4,4);
+          // this.initNeighbors();
+        }
+      }
+    },
+
+    revealAll(){
+
+      for (let x = 0; x < this.width; x++) {
+        for (let y = 0; y < this.height; y++) {
+          if(this.mineGrid[x][y].text === 'X'){
+            this.mineGrid[x][y].className = 'mine';
+          }
+        }
+      }
+    },
   },
 
+
   mounted: function(){
-    this.initializeMineGrid(8,8);
+    this.initializeMineGrid(4,4);
     this.initNeighbors();
   },
 
   data() {
     return {
-      width: 8,
-      height : 8,
-      numberOfMines: 10,
+      width: 4,
+      height : 4,
+      numberOfMines: 1,
       mineGrid: [],
       board: [],
-      firstClick: false
+      firstClick: false,
+      squaresClicked: 0,
     }
   },
+  computed: {
+    winCondition(){
+     return this.width * this.height - this.numberOfMines;
+    }
+  }
 }
 </script>
