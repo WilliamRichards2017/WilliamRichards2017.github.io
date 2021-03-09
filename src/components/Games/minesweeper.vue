@@ -3,10 +3,11 @@
     <table class="board">
       <tr v-for="(row, rowKey) in mineGrid" :key="rowKey">
         <td v-for="(col, colKey) in row" :key="colKey"
-            @click="revealSquare(rowKey, colKey)"
+            @click.left="revealSquare(rowKey, colKey)"
+            @click.right="flagSquare(rowKey, colKey)"
             :class="col.className"
         >
-          <span v-if="col.className !== 'unrevealed'">{{col.text}} </span>
+          <span v-if="col.className !== 'unrevealed' && col.className !== 'flagged'">{{col.text}} </span>
         </td>
       </tr>
     </table>
@@ -38,6 +39,9 @@ td.hint {
 
 td.unrevealed:hover {
   background-color: #ccc;
+}
+td.flagged{
+  background-color: blueviolet;
 }
 
 td.mine {
@@ -413,25 +417,10 @@ export default {
       console.log("this.mineGrid", this.mineGrid);
     },
 
-  floodFill(x,y){
-    for(let i = x-1; i < x+2; i++){
-      for(let j = y-1; j < y+2; j++){
-        if(i > -1 && i < this.width && j > -1 && j < this.height) {
-          console.log("this.mineGrid[x][y]",i, j, this.mineGrid[i][j].className);
+    flagSquare(x,y){
+      this.mineGrid[x][y].className = 'flagged';
+    },
 
-          if(this.mineGrid[i][j].className === 'unrevealed'){
-            console.log("revealing", i, j, this.mineGrid[i][j].className)
-            this.squaresClicked +=1;
-            this.mineGrid[i][j].className = 'hint';
-            if(this.mineGrid[i][j].text === 0) {
-              this.floodFill(i, j);
-            }
-            // console.log("this.mineGrid[x][y]", this.mineGrid[i][j]);
-          }
-        }
-      }
-    }
-  },
 
     revealSquare(x,y){
       if(x < 0 || x > this.width-1 || y < 0 || y > this.height-1){
@@ -443,15 +432,11 @@ export default {
           alert("Game over");
         } else {
           this.squaresClicked++;
-
-          console.log("this.mineGrid[x][y]", this.mineGrid[x][y].text, this.mineGrid[x][y].className);
           if(parseInt(this.mineGrid[x][y].text) > 0){
-            console.log("swag");
             this.mineGrid[x][y].className = 'hint';
           }
           else if(parseInt(this.mineGrid[x][y].text) === 0){
             this.mineGrid[x][y].className = 'hint';
-            console.log("floodFill neighbors", x, y)
             this.revealSquare(x-1, y-1);
             this.revealSquare(x-1, y);
             this.revealSquare(x-1, y+1);
@@ -460,14 +445,6 @@ export default {
             this.revealSquare(x+1, y-1);
             this.revealSquare(x+1, y);
             this.revealSquare(x+1, y+1);
-
-
-
-
-
-          }
-          else{
-            console.log("else catch");
           }
 
           if (this.squaresClicked === this.winCondition) {
@@ -500,12 +477,12 @@ export default {
 
   data() {
     return {
-      width: 20,
-      height : 20,
-      numberOfMines: 1,
+      width: 9,
+      height : 9,
+      numberOfMines: 7,
       mineGrid: [],
       board: [],
-      firstClick: false,
+      firstClick: true,
       squaresClicked: 0,
     }
   },
