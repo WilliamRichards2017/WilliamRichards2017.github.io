@@ -35,7 +35,7 @@ export default {
 
   data (){ return {
     currentTab: 'Home',
-    tabs: ['Home', 'Data Visualization']
+    tabs: ['Home', 'Data Visualization', 'Games']
     }
   },
   computed: {

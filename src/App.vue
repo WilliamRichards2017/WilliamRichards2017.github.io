@@ -11,17 +11,16 @@
 <script>
 
   import topNav from './components/topNav.vue'
-  import mainContent from './components/mainContent.vue'
-  import dataMining from './components/dataMining.vue'
+  import mainContent from './components/Home/mainContent.vue'
   import contact from './components/contact.vue'
   import tab from './components/tab.vue'
-  import dataViz from './components/dataViz.vue'
+  import dataViz from './components/dataViz/dataViz.vue'
 
 
   export default {
     name: 'App',
     components: {
-      tab, topNav, mainContent, contact, dataMining, dataViz
+      tab, topNav, mainContent, contact, dataViz
     }
   }
 </script>
