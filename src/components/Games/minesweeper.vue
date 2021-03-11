@@ -418,7 +418,12 @@ export default {
     },
 
     flagSquare(x,y){
-      this.mineGrid[x][y].className = 'flagged';
+      if(this.mineGrid[x][y].className === "unrevealed"){
+        this.mineGrid[x][y].className = 'flagged';
+      }
+      else if(this.mineGrid[x][y].className === "flagged"){
+        this.mineGrid[x][y].className = 'unrevealed';
+      }
     },
 
 
@@ -457,6 +462,10 @@ export default {
       }
     },
 
+    resetBoard(){
+
+    },
+
     revealAll(){
 
       for (let x = 0; x < this.width; x++) {
@@ -473,6 +482,16 @@ export default {
   mounted: function(){
     this.initializeMineGrid(20,20);
     this.initNeighbors();
+
+      var blockContextMenu, myElement;
+
+      blockContextMenu = function (evt) {
+        evt.preventDefault();
+      };
+
+      myElement = document.querySelector('#game');
+      myElement.addEventListener('contextmenu', blockContextMenu);
+
   },
 
   data() {
