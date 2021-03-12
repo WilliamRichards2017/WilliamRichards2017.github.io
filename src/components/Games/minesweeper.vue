@@ -1,7 +1,27 @@
 <template>
   <div id="game">
-    <button @click="resetBoard">reset</button>
-    <table class="board">
+     <div>
+     <label for="difficulty">Select a difficulty:</label>
+
+     <select id="difficulty" v-model="boardSize" hint="Select difficulty">
+       <option value="easy">easy</option>
+       <option value="medium">medium</option>
+       <option value="hard">hard</option>
+     </select>
+       <button style="margin-left: 25px" @click="initBoard">reset</button>
+     </div>
+
+
+
+    <div>
+      <div>Flags remaining:
+        <span style="color: blueviolet">{{flagsRemaining}}</span>
+      </div>
+    </div>
+
+
+
+     <table id="board" class="small">
       <tr v-for="(row, rowKey) in board" :key="rowKey">
         <td v-for="(col, colKey) in row" :key="colKey"
             @click.left="revealSquare(rowKey, colKey)"
@@ -12,6 +32,7 @@
         </td>
       </tr>
     </table>
+    </div>
   </div>
 </template>
 
@@ -21,13 +42,27 @@
   border-collapse: collapse;
 }
 
-.board>tr>td {
+#board>tr>td {
   border: 1px solid white;
   padding: 0;
-  height: 40px;
-  width: 40px;
   text-align: center;
 }
+
+#board.small>tr>td {
+  height: 40px;
+  width: 40px;
+}
+
+#board.medium>tr>td {
+  height: 30px;
+  width: 30px;
+}
+
+#board.hard>tr>td {
+  height: 30px;
+  width: 30px;
+}
+
 
 td.unrevealed {
   background-color: #bbb;
@@ -120,15 +155,18 @@ export default {
           }
         }
       }
+      console.log("this.minesRemaining after init", this.numberOfMines, mineInit.length, mineInit);
       console.log("this.board", this.board);
     },
 
     flagSquare(x,y){
       if(this.board[x][y].className === "unrevealed"){
         this.board[x][y].className = 'flagged';
+        this.flagsRemaining--;
       }
       else if(this.board[x][y].className === "flagged"){
         this.board[x][y].className = 'unrevealed';
+        this.flagsRemaining++;
       }
     },
 
@@ -145,6 +183,7 @@ export default {
       if(this.board[x][y].className === 'unrevealed') {
         if (this.board[x][y].text === 'X') {
           this.board[x][y].className = 'mine'
+          this.revealAll();
           alert("Game over");
         } else {
           this.squaresClicked++;
@@ -175,6 +214,12 @@ export default {
 
     initBoard(){
 
+      this.board = [];
+      this.flagsRemaining = this.numberOfMines;
+      this.firstClick = true;
+      this.squaresClicked = 0;
+
+      this.flagsRemaining = this.numberOfMines;
 
       for (let x = 0; x < this.width; x++) {
         let column = [];
@@ -183,16 +228,6 @@ export default {
           column.push(square);
         }
         this.board.push(column)
-      }
-      console.log("this.board", this.board);
-    },
-
-    resetBoard() {
-
-      for (let x = 0; x < this.width; x++) {
-        for (let y = 0; y < this.height; y++) {
-          this.board[x][y] = new gridSquare("unrevealed", "")
-        }
       }
     },
 
@@ -212,14 +247,14 @@ export default {
   mounted: function(){
     this.initBoard();
 
-    let blockContextMenu, myElement;
-
-    blockContextMenu = function (evt) {
-      evt.preventDefault();
-    };
-
-    myElement = document.querySelector('#game');
-    myElement.addEventListener('contextmenu', blockContextMenu);
+    // let blockContextMenu, myElement;
+    //
+    // blockContextMenu = function (evt) {
+    //   evt.preventDefault();
+    // };
+    //
+    // myElement = document.querySelector('#game');
+    // myElement.addEventListener('contextmenu', blockContextMenu);
 
   },
 
@@ -227,10 +262,40 @@ export default {
     return {
       width: 9,
       height : 9,
-      numberOfMines: 7,
+      numberOfMines: 10,
+      flagsRemaining : 0,
       board: [],
       firstClick: true,
       squaresClicked: 0,
+      boardSize : 'easy'
+    }
+  },
+
+  watch : {
+    boardSize: function(){
+      if(this.boardSize === 'easy'){
+        this.width = 9;
+        this.height = 9;
+        this.numberOfMines = 10;
+        d3.select("#board")
+          .attr("class", "small");
+      }
+      else if(this.boardSize === 'medium'){
+        this.width = 16;
+        this.height = 16;
+        this.numberOfMines = 40;
+        d3.select("#board")
+            .attr("class", "medium");
+      }
+      else if(this.boardSize === 'hard'){
+        this.width = 16;
+        this.height = 30;
+        this.numberOfMines = 99;
+
+        d3.select("#board")
+            .attr("class", "hard");
+      }
+      this.initBoard();
     }
   },
   computed: {

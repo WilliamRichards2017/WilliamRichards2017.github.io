@@ -1,6 +1,6 @@
 <template>
   <div id="games">
-    Minesweeper
+    <h2>Minesweeper</h2>
     <minesweeper>
 
     </minesweeper>
