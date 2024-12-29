@@ -23,22 +23,6 @@
     <!-- Main Games List -->
     <div v-show="!showMinesweeper && !showTetris">
       <ul style="padding-top: 20px">
-        <!-- Minesweeper Section -->
-        <li v-on:click="showMinesweeper = true; showTetris = false;">
-          <a>Minesweeper</a>
-        </li>
-        <div style="display: flex; padding-bottom: 25px">
-          <p class="description">
-            A classic Minesweeper game built using Vue.js. Includes varying levels of difficulty and intuitive controls.
-          </p>
-          <img
-            v-on:click="showMinesweeper = true; showTetris = false;"
-            src="../../assets/minesweeper.png"
-            style="padding-left: 50px"
-            class="scaled-image"
-            alt="Screenshot of the Minesweeper game"
-          />
-        </div>
 
         <!-- Tetris Section -->
         <li v-on:click="showTetris = true; showMinesweeper = false;">
@@ -60,6 +44,23 @@
         </div>
       </ul>
     </div>
+
+            <!-- Minesweeper Section -->
+        <li v-on:click="showMinesweeper = true; showTetris = false;">
+          <a>Minesweeper</a>
+        </li>
+        <div style="display: flex; padding-bottom: 25px">
+          <p class="description">
+            A classic Minesweeper game built using Vue.js. Includes varying levels of difficulty and intuitive controls.
+          </p>
+          <img
+            v-on:click="showMinesweeper = true; showTetris = false;"
+            src="../../assets/minesweeper.png"
+            style="padding-left: 50px"
+            class="scaled-image"
+            alt="Screenshot of the Minesweeper game"
+          />
+        </div>
 
     <!-- Minesweeper Component -->
     <minesweeper v-show="showMinesweeper"></minesweeper>
