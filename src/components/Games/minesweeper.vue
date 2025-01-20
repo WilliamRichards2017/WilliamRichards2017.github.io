@@ -12,6 +12,9 @@
      </div>
 
 
+    <strong>
+      Click to reveal, right click to flag
+    </strong>
 
     <div>
       <div>Flags remaining:
@@ -23,7 +26,7 @@
 
      <table id="board" class="small">
       <tr v-for="(row, rowKey) in board" :key="rowKey">
-        <td v-for="(col, colKey) in row" :key="colKey"
+        <td v-for="(col, colKey) in row" :key="colKey" oncontextmenu="return false;"
             @click.left="revealSquare(rowKey, colKey)"
             @click.right="flagSquare(rowKey, colKey)"
             :class="col.className"
