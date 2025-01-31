@@ -9,7 +9,6 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "deploy": "gh-pages -d dist"
-
   },
   "dependencies": {
     "d3": "^5.15.0",
