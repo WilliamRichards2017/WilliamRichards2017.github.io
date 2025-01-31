@@ -5,7 +5,7 @@
       <div class="flex-container" style="padding-left: 25px">
         <div><a href="mailto:richardsw2017@gmail.com"><img class="icon" src="../assets/email.png" width=50px></a></div>
         <div><a href="https://github.com/williamrichards2017"><img class="icon" src="../assets/github.png" width=50px></a></div>
-          <div><a download="William-Richards-resume"  target="_blank" href="https://github.com/WilliamRichards2017/WilliamRichards2017.github.io/raw/dev/master/resume.pdf">
+          <div><a download="William-Richards-resume"  target="_blank" href="https://github.com/WilliamRichards2017/WilliamRichards2017.github.io/raw/master/resume.pdf">
               <img alt="ResumeIcon" width="50" class="icon" src="../assets/circle-cropped.png">
           </a>
           </div>
