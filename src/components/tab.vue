@@ -48,6 +48,10 @@ export default {
 
 <style>
 
+.nav-link {
+  cursor: pointer;
+}
+
 .nav-link:hover {
   background: #e0e0e0 !important;
 }
