@@ -4,7 +4,7 @@
 
 
 <!--  style="position:absolute; top:0px; left:0px; height:35px; right:0px;overflow:hidden;"-->
-  <div id="tab-header" class="nav nav-tabs" style="height:35px;overflow:hidden;">
+  <div id="tab-header" class="nav nav-tabs">
   <li
     v-for="tab in tabs"
     v-bind:key="tab"
@@ -14,7 +14,7 @@
     </div>
 
 
-  <div class="box" style="position:absolute; top:35px; bottom:100px; left:0px; right:0px; overflow:auto; padding-right: 20px; padding-left: 20px">
+  <div class="box" >
     <keep-alive>
 
     <component
@@ -48,9 +48,16 @@ export default {
 
 <style>
 
+.box {
+  position:absolute; top:35px; bottom:100px; left:0px; right:0px; overflow:auto; padding-right: 20px; padding-left: 20px;
+  z-index: -1;
+}
+
 .nav-link {
   cursor: pointer;
 }
+
+
 
 .nav-item {
   padding: 0.75rem 1.5rem;
@@ -59,7 +66,6 @@ export default {
   color: #444;
   transition: all 0.2s ease;
   border-radius: 6px 6px 0 0;
-  position: relative;
   top: 2px;
 }
 

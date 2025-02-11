@@ -10,7 +10,7 @@
             <p class="section-text">
               I specialize in crafting accessible, high-performance web applications that solve real business challenges. 
               With a passion for clean code and user-centric design, I bridge technical execution with strategic vision 
-              to deliver products that scale and inspire.
+              to deliver products that scale and empower.
             </p>
           </div>
         </section>
