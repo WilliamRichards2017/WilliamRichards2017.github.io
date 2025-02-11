@@ -27,9 +27,8 @@
 
 <style>
 
-
   p {
-    color:#656668
+    /* color:#656668 */
   }
 
 
@@ -84,7 +83,7 @@
     margin:0 0 10px;
     padding-top:.1em;
     padding-bottom:.2em;
-    font:normal 17px Georgia, serif;
+    font:normal 24px Georgia, serif;
     border-bottom:1px solid #efece7;
   }
 

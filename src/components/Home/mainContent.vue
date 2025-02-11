@@ -7,7 +7,6 @@
 <style scoped>
 .main-content {
   margin-bottom: 20px;
-  padding: 0 20px;
 }
 
 

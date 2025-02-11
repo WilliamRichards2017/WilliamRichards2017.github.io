@@ -4,11 +4,11 @@
 
 
 <!--  style="position:absolute; top:0px; left:0px; height:35px; right:0px;overflow:hidden;"-->
-  <div id="tab-header"class="nav nav-tabs" style="height:35px;overflow:hidden;">
+  <div id="tab-header" class="nav nav-tabs" style="height:35px;overflow:hidden;">
   <li
     v-for="tab in tabs"
     v-bind:key="tab"
-    v-bind:class="['nav-link', { active: currentTab === tab }]"
+    v-bind:class="['nav-item', { active: currentTab === tab }]"
     v-on:click="currentTab = tab"
   >{{ tab }}</li>
     </div>
@@ -52,12 +52,25 @@ export default {
   cursor: pointer;
 }
 
-.nav-link:hover {
-  background: #e0e0e0 !important;
+.nav-item {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: #444;
+  transition: all 0.2s ease;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  top: 2px;
 }
-.nav-link.active {
-  background: #6ed3cf !important;
-  border-color: #277371 !important
+
+.nav-item:hover {
+  color: #4a90e2;
+  background: #f8f9fa;
+}
+
+.nav-item.active {
+  color: #4a90e2;
+  border-bottom: 3px solid #4a90e2;
 }
 
 </style>
