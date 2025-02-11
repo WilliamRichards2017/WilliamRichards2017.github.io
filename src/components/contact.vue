@@ -25,7 +25,7 @@
 }
 
 h1 {
-    color:#9068be;
+    color: #4a90e2;
 	margin:0 0 10px;
   padding-top:.3em;
 	padding-bottom:.2em;

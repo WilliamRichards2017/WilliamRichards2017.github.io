@@ -79,4 +79,8 @@ export default {
   border-bottom: 3px solid #4a90e2;
 }
 
+#tab-header {
+  background-color: white;
+}
+
 </style>
