@@ -154,19 +154,7 @@
 
     }
 
-    @font-face {
-        font-family: 'font1';
-        src: url('assets/font1.ttf');
-    }
 
-    @font-face {
-        font-family: 'font2';
-        src: url('assets/font2.ttf');
-    }
-
-    * {
-        font-family: 'font1', serif;
-    }
 
     header {
         padding: 0.5em;

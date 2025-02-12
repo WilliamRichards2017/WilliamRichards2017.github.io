@@ -27,11 +27,6 @@
 
 <style>
 
-  p {
-    /* color:#656668 */
-  }
-
-
     a{
       cursor: pointer;
     }
@@ -43,27 +38,9 @@
   }
 
 
-
-
-
-  #content-wrap {
-    padding-bottom: 150px;    /* Footer height */
-  }
-   /* Footer height */
-
-
-  /* Global Styling */
-
-
-  /* unvisited link */
-
-  a {
-    color:#4fc9c5;
-    text-decoration:none;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
+p {
+  font-size: 1.2em;
+}
 
   /* mouse over link */
   a:hover {

@@ -40,7 +40,7 @@
     </div>
 
                 <section class="work-highlights">
-              <h4 >Key Contributions</h4>
+              <h2  >Key Contributions</h2>
               <ul class="highlight-list">
                 <li>Own and lead development of core application workflows including model lifecycle management, compliance reporting, and AI Use Case pages</li>
                 <li>Collaborate directly with Fortune 100 executive teams to solve complex integration challenges and unique business needs</li>
@@ -158,17 +158,21 @@
   left: 0;
   width: 50px;
   height: 3px;
-  background: #4a90e2;
+  background: #2a70c2;
 }
 
 /* Tagline */
 .tagline {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #4a90e2;
+  color: #2a70c2;
   margin-bottom: 1.5rem;
   padding-left: 1rem;
-  border-left: 3px solid #4a90e2;
+  border-left: 3px solid #2a70c2;
+}
+
+li > a, ul > li {
+  font-size: 1.2em
 }
 
 /* Text Elements */
@@ -241,7 +245,7 @@
 
 /* Links */
 .link {
-  color: #4a90e2;
+  color: #2a70c2;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
