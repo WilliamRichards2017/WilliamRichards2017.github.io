@@ -6,22 +6,26 @@
                 <td id="phraseHeader" @click="sortBy('T')">Phrase</td>
                 <td id="freqHeader" @click="sortBy('F')">
                     <table>
+                        <thead>
                         <tr>
                             <td>Frequency</td>
                         </tr>
                         <tr>
                             <td id="freqAxis"></td>
                         </tr>
+                        </thead>
                     </table>
                 </td>
                 <td id="percentHeader" @click="sortBy('P')">
                     <table>
+                        <thead>
                         <tr>
                             <td>Percentages</td>
                         </tr>
                         <tr>
                             <td id="percentAxis"></td>
                         </tr>
+                        </thead>
                     </table>
                 </td>
                 <td id="totalHeader" @click="sortBy('F')">Total</td>
@@ -34,6 +38,9 @@
 </template>
 
 <script>
+
+    import * as d3 from 'd3';
+
     export default {
         name: 'Table',
         props: {

@@ -32,6 +32,8 @@
     import Table from './Table.vue'
     import Words from './data/words'
 
+    import * as d3 from 'd3';
+
     export default {
         components: {
             BubbleChart,

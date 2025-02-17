@@ -1,58 +1,48 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import App from './../App.vue'
+import { createRouter, createWebHistory } from 'vue-router';
 
-import mainContent from '../components/Home/mainContent.vue'
-import about from '../components/Home/about'
-import topNav from '../components/topNav'
-import contact from '../components/contact'
-import dataViz from '../components/dataViz/dataViz'
-import games from '../components/Games/games'
+// Import your components
+import About from '../components/Home/about.vue';
+import Contact from '../components/contact.vue';
+import ProjectDetail from '../components/SideProjects/projectDetail.vue';
+import Home from '../components/Home/home.vue';
+// Define your routes
+const routes = [
 
-import tab from './../components/tab'
-import hw6 from "../components/dataViz/hw6/hw6";
-import hw5 from "../components/dataViz/hw5/hw5";
-import minesweeper from '../components/Games/minesweeper';
 
-Vue.component('minesweeper', minesweeper);
-Vue.component('hw6', hw6);
-Vue.component('hw6', hw5);
-Vue.component('about', about);
-Vue.component('mainContent', mainContent);
-Vue.component('topNav', topNav);
-Vue.component('contact', contact);
-Vue.component('dataViz', dataViz);
-Vue.component('Games', games);
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },
 
-Vue.component('tab', tab);
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
+  },
+  {
+    path: '/project/:id', // Dynamic route parameter
+    name: 'ProjectDetail',
+    component: ProjectDetail,
+    props: true // Automatically pass route params as props
+  },
 
-Vue.config.productionTip = false;
+  // Add a catch-all route for 404 pages
+  {
+    path: '/:pathMatch(.*)*', // Vue Router 4 syntax for catch-all
+    redirect: '/', // Redirect to home or a 404 component
+  },
+];
 
-Vue.component('tab-Home', {
-  template: '<div><mainContent></mainContent></div>'
+// Create the router instance
+const router = createRouter({
+  history: createWebHistory(), // Use HTML5 history mode
+  routes, // Short for `routes: routes`
 });
 
-Vue.component('tab-Data Visualization', {
-  template: '<div><dataViz></dataViz></div>'
-});
-Vue.component('tab-Games', {
-  template: '<div><games></games></div>'
-});
-
-
-
-import ToggleButton from 'vue-js-toggle-button'
-
-Vue.use(ToggleButton);
-
-Vue.use(Router);
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'App',
-      component: App
-    }
-  ]
-})
+export default router;

@@ -34,7 +34,7 @@
       <div class="image-section">
         <img class="profile-image" src="../../assets/Will_Richards.jpg" alt="Will Richards portrait">
         <div class="signature-container">
-          <div class="signature typed-out">William Richards</div>
+            <div :class="{'signature': true, 'typed-out': !disableAnimations, 'animated-element': true}">William Richards</div>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
       <div class="project-category">
         <h2 class="subheading">Web Applications</h2>
         <ul class="project-list">
-          <li>
+          <li> 
             <a href="https://pedigree.iobio.io" target="_blank" class="link">pedigree.iobio.io</a>
             <p class="project-description">Author of pedigree visualization with interactive genotype/phenotype regression analysis.</p>
           </li>
@@ -112,6 +112,15 @@
       </div>
     </section>
 
+    <section class="section">
+
+
+
+    <side-projects/>
+    
+
+    </section>
+
     <!-- Education -->
     <section class="section">
       <h1 class="section-title">Education</h1>
@@ -121,10 +130,32 @@
         with a degree in Computer Science in July 2017. 
       </p>
     </section>
+
+    
   </div>
 </template>
 
-<style scoped>
+
+<script>
+
+import SideProjects from './../SideProjects/SideProjects.vue';
+import Cookies from 'js-cookie'
+
+export default {
+  
+    components: {
+        SideProjects
+    },
+
+        data() {
+    return {
+      disableAnimations: Cookies.get('disableAnimations') === 'true'
+    }
+  },
+};
+</script>
+
+<style>
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -333,9 +364,9 @@ li > a, ul > li {
   border-right: 0.15em solid black;
   white-space: nowrap;
   font-size: 1.6rem;
-  width: 0;
+  width: 0.15em;
   animation: 
-    typing 2.5s steps(32, end) forwards,
+    typing 2s steps(32, end) forwards,
     blink-cursor 0.7s step-end infinite,
     hide-cursor 5s forwards;
 }
@@ -356,6 +387,7 @@ li > a, ul > li {
 
 .signature-container {
   display: inline-block;
+  width: fit-content;
 }
 
 .signature {
@@ -363,11 +395,10 @@ li > a, ul > li {
   color: #2a2a2a;
   letter-spacing: 2px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
+  /* position: relative; */
   display: inline-block;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   opacity: 0.9;
-  margin-left:  0.15em;
   font-size: 2.2rem;
 }
 
