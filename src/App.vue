@@ -135,17 +135,12 @@
         <AccessibilityStatement @close="showAccessibilityStatement = false" />
       </v-dialog>
     </v-main>
-
-    <Footer />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-
-
-
-import { ref, watch, onMounted, defineComponent } from 'vue';
-import Cookies from 'js-cookie';
+import { ref, watch, onMounted, defineComponent, provide, computed } from 'vue';
+import { useTheme } from 'vuetify/lib/framework.mjs';
 
 import {
   mdiHuman,
@@ -175,55 +170,71 @@ const Icon = defineComponent({
   }
 });
 
-// Motion Control
+const theme = useTheme();
+const isDark = ref(localStorage.getItem("theme") === "dark");
+const highContrast = ref(localStorage.getItem("highContrast") === "true");
+
+// Unified Theme Update
+const updateTheme = () => {
+  const themeName = highContrast.value 
+    ? `highContrast`
+    : isDark.value ? 'dark' : 'light';
+  
+  theme.global.name.value = themeName;
+  localStorage.setItem("theme", isDark.value ? "dark" : "light");
+  localStorage.setItem("highContrast", highContrast.value.toString());
+};
+
+// Theme Toggle Function
+const toggleTheme = () => {
+  isDark.value = !isDark.value;
+  updateTheme();
+};
+
+const iconColor = computed(() => {
+  return highContrast.value || isDark.value ? 'white' : 'black';
+});
+
+provide('isDark', isDark);
+provide('toggleTheme', toggleTheme);
+provide('iconColor', iconColor);
+
+// Other Accessibility Settings
 const systemPrefersReducedMotion = ref(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-const disableAnimations = ref(Cookies.get("disableAnimations") === "true" || systemPrefersReducedMotion.value);
+const disableAnimations = ref(localStorage.getItem("disableAnimations") === "true" || systemPrefersReducedMotion.value);
+const textScale = ref(parseFloat(localStorage.getItem("textScale") || "1"));
 
-// Text Scaling
-const textScale = ref(parseFloat(Cookies.get("textScale") || '1'));
-const updateTextScale = (value: number) => {
-  document.documentElement.style.setProperty('--text-scale', `${value}`);
-  Cookies.set("textScale", value.toString(), { expires: 365 });
-};
-
-// Contrast Control
-const highContrast = ref(Cookies.get("highContrast") === "true");
-const updateContrast = (value: boolean) => {
-  document.body.classList.toggle('high-contrast', value);
-  Cookies.set("highContrast", value.toString(), { expires: 365 });
-};
-
-// Dialogs
-const showAccessibilityStatement = ref(false);
-const showKeyboardHelp = ref(false);
-
-//
-watch([disableAnimations, textScale, highContrast], ([motion, scale, contrast]) => {
-  document.body.classList.toggle("no-animations", motion);
-  updateTextScale(scale);
-  updateContrast(contrast);
+// Watchers
+watch([disableAnimations, textScale, highContrast, isDark], () => {
+  document.body.classList.toggle("no-animations", disableAnimations.value);
+  document.documentElement.style.setProperty('--text-scale', `${textScale.value}`);
+  localStorage.setItem("disableAnimations", disableAnimations.value.toString());
+  localStorage.setItem("textScale", textScale.value.toString());
+  updateTheme();
 });
 
 // Initial Setup
 onMounted(() => {
   document.body.classList.toggle("no-animations", disableAnimations.value);
-
-  updateTextScale(textScale.value);
-  updateContrast(highContrast.value);
-
-  // System preference listeners
-  window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener('change', e => {
-    systemPrefersReducedMotion.value = e.matches;
-    if (!Cookies.get("disableAnimations")) disableAnimations.value = e.matches;
-  });
+  document.documentElement.style.setProperty('--text-scale', `${textScale.value}`);
+  updateTheme();
 });
 
 const drawer = ref(false);
+const showAccessibilityStatement = ref(false);
+const showKeyboardHelp = ref(false);
 </script>
 
 <style>
 :root {
   --text-scale: 1;
+}
+
+body.no-animations .animated-element {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+
 }
 
 .v-list-item-subtitle {
@@ -273,14 +284,7 @@ html {
   }
 }
 
-/* High Contrast Mode */
-.high-contrast {
-  /* --v-theme-background: #000 !important;
-  --v-theme-surface: #111 !important;
-  --v-theme-primary: #FFD700 !important;
-  --v-theme-on-primary: #000 !important;
-  filter: contrast(1.4); */
-}
+
 
 .icon-link {
   color: rgba(var(--v-theme-text-secondary), var(--v-medium-emphasis-opacity));

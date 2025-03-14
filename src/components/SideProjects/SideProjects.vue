@@ -70,6 +70,7 @@ export default {
   opacity: 0.9;
 }
 
+
 .card-overlay {
   position: absolute;
   top: 0;

@@ -2,7 +2,6 @@
 
 <div class="footer-group">
 
-  <div class="footer-group container">
     <v-btn
       href="mailto:richardsw2017@gmail.com"
       class="icon-link"
@@ -34,7 +33,6 @@
     >
       <Icon :path="mdiFileAccount" :color="iconColor" size="24" />
     </v-btn>
-  </div>
 
   </div>
 
@@ -48,20 +46,13 @@ import {
 
 } from "@mdi/js";
 
-import { ref, onMounted } from 'vue';
+import { inject, Ref } from 'vue';
 import Icon from './Icon.vue';
-import { useTheme } from 'vuetify/lib/framework.mjs';
-
-const theme = useTheme();
-const isDark = ref(false);
 
 
+const iconColor = inject<Ref<string>>('iconColor');
 
-onMounted(() => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  isDark.value = savedTheme === "dark";
-  theme.global.name.value = savedTheme;
-});
+
 </script>
 
 <style>
@@ -71,7 +62,7 @@ onMounted(() => {
   align-items: center;
   gap: 1em;
   width: 100%;
-  padding: 0.25em 1em;
+  padding: 0.5em 1em;
   background-color: rgb(var(--v-theme-surface));
   justify-content: center;
 }

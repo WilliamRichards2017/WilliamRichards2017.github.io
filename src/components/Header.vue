@@ -48,27 +48,17 @@ import {
   mdiMoonWaningCrescent,
   mdiWhiteBalanceSunny
 } from '@mdi/js';
+import { inject, Ref } from 'vue';
 
-import { ref, computed, onMounted } from 'vue';
-import Icon from './Icon.vue';
-import { useTheme } from 'vuetify/lib/framework.mjs';
+const isDark = inject<Ref<boolean>>('isDark');
+const iconColor = inject<Ref<string>>('iconColor');
 
-const theme = useTheme();
-const isDark = ref(false);
+const toggleTheme = inject<() => void>('toggleTheme');
 
-const toggleTheme = () => {
-  isDark.value = !isDark.value;
-  theme.global.name.value = isDark.value ? "dark" : "light";
-  localStorage.setItem("theme", theme.global.name.value);
-};
 
-const iconColor = computed(() => (isDark.value ? 'white' : 'black'));
 
-onMounted(() => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  isDark.value = savedTheme === "dark";
-  theme.global.name.value = savedTheme;
-});
+
+
 </script>
 
 <style scoped>
@@ -124,10 +114,6 @@ onMounted(() => {
   margin-left: 2em;
 }
 
-body.no-animations .animated-element {
-  animation: none !important;
-  transition: none !important;
-}
 
 
 .theme-switch {

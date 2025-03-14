@@ -59,6 +59,29 @@ const lightTheme = {
   }
 };
 
+const highContrastTheme = {
+  "dark": false,
+  "colors": {
+    "background": "#000000",
+    "text-primary": "#FFFFFF",
+    "text-secondary": "#FFFF00",
+    "surface": "#000000",
+    "primary": "#FFFFFF",
+    "secondary": "#FFFF00",
+    "error": "#FF0000",
+    "info": "#00FFFF",
+    "success": "#00FF00",
+    "warning": "#FFFF00",
+    "overlay-start": "#000000", // rgba(0, 0, 0, 1) in hex
+    "overlay-end": "#000000", // rgba(0, 0, 0, 1) in hex
+    "card-border": "#FFFFFF", // rgba(255, 255, 255, 1) in hex
+    "highlight-bg": "#FFFFFF",  // rgba(255, 255, 255, 1) in hex
+    "highlight-border": "#FFFFFF",
+    "text-shadow": "#000000", 
+    "accent": "#FFD452" 
+  }
+};
+
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
@@ -66,8 +89,8 @@ export default createVuetify({
       defaultTheme: lightTheme,
 
       light: lightTheme,
-      dark: darkTheme
+      dark: darkTheme,
+      highContrast: highContrastTheme
     },
-
   }
 })

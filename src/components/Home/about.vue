@@ -1,197 +1,214 @@
 <template>
-  <div class="container">
-    <div class="top-row">
-      <div class="content-section">
-        <!-- About Section -->
-        <section class="section">
-          <h1 class="section-title">About Me</h1>
-          <div class="about-section">
-            <p class="tagline">Senior Front-End Engineer building better web experiences</p>
+  <div>
+    <div class="container">
+      <div class="top-row">
+        <div class="content-section">
+          <!-- About Section -->
+          <section class="section">
+            <h1 class="section-title">About Me</h1>
+            <div class="about-section">
+              <p class="tagline">Senior Front-End Engineer building better web experiences</p>
+              <p class="section-text">
+                I specialize in crafting accessible, high-performance web applications that solve real business challenges.
+                With a passion for clean code and user-centric design, I bridge technical execution with strategic vision
+                to deliver products that scale and empower.
+              </p>
+            </div>
+          </section>
+
+          <!-- Current Work -->
+          <section class="current-work">
+            <h1 class="section-title">Current Work</h1>
             <p class="section-text">
-              I specialize in crafting accessible, high-performance web applications that solve real business challenges.
-              With a passion for clean code and user-centric design, I bridge technical execution with strategic vision
-              to deliver products that scale and empower.
+              I currently work as a Senior Front-End Engineer at <a href="https://www.modelop.com" target="_blank" class="link">ModelOp</a>,
+              an enterprise AI governance platform trusted by Fortune 100 companies and regulatory bodies.
+              My work focuses on creating robust solutions that enable large organizations to effectively manage
+              and operationalize their AI initiatives at scale.
             </p>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <!-- Current Work -->
-        <section class="current-work">
-          <h1 class="section-title">Current Work</h1>
-          <p class="section-text">
-            I currently work as a Senior Front-End Engineer at <a href="https://www.modelop.com" target="_blank" class="link">ModelOp</a>,
-            an enterprise AI governance platform trusted by Fortune 100 companies and regulatory bodies.
-            My work focuses on creating robust solutions that enable large organizations to effectively manage
-            and operationalize their AI initiatives at scale.
-          </p>
-        </section>
-      </div>
-
-      <!-- Profile Image -->
-      <div class="image-section">
-        <v-img class="profile-image" src="../../assets/Will_Richards.webp" alt="Will Richards portrait"/>
-        <span id="typeit-signature"></span>
-      </div>
-    </div>
-
-    <!-- Key Contributions -->
-    <v-card class="work-highlights px-5 py-5">
-      <h2 class="subheading">Key Contributions</h2>
-      <ul class="highlight-list">
-        <li>
-          Own and lead development of core application workflows including model lifecycle management, compliance reporting, and AI Use Case pages
-        </li>
-        <li>
-          Collaborate directly with Fortune 100 executive teams to solve complex integration challenges and unique business needs
-        </li>
-        <li>
-          Championed WCAG 2.2 AA compliance across entire platform
-        </li>
-      </ul>
-    </v-card>
-
-    <!-- Previous Experience -->
-    <section class="section">
-      <h1 class="section-title">Previous Work Experience</h1>
-      <p class="section-text">
-        Before ModelOp, I spent 3 years as a software developer for the
-        <a href="http://marthlab.org" target="_blank" class="link">Marth Lab</a> and 1.5 years developing software for computational genetic discovery.
-        I also gained 1.5 years of experience as a web developer on the
-        <a href="http://iobio.io/" target="_blank" class="link">iobio</a> team, building diagnostic tools and visualizations for clinicians.
-      </p>
-    </section>
-
-    <!-- Projects -->
-    <section>
-      <h1 class="section-title">Projects</h1>
-
-      <div class="project-category">
-        <h2 class="subheading">Web Applications</h2>
-        <ul class="project-list">
-          <li>
-            <a href="https://pedigree.iobio.io" target="_blank" class="link">pedigree.iobio.io</a>
-            <p class="project-description">Author of pedigree visualization with interactive genotype / phenotype regression analysis.</p>
-          </li>
-          <li>
-            <a href="https://gene.iobio.io" target="_blank" class="link">gene.iobio.io</a>
-            <p class="project-description">Developer for web application used to investigate potential disease-causing variants.</p>
-          </li>
-          <li>
-            <a href="https://clin.iobio.io" target="_blank" class="link">clin.iobio.io</a>
-            <p class="project-description">Developer for a web application guiding clinicians through a diagnostic genomic analysis workflow.</p>
-          </li>
-        </ul>
-      </div>
-
-      <div class="project-category">
-        <h2 class="subheading">Backend Software</h2>
-        <div class="columns">
-          <div class="column">
-            <ul class="project-list">
-              <li>
-                <a href="https://github.com/WilliamRichards2017/RufAlu" target="_blank" class="link">Alu variant detection</a>
-                <p class="project-description">Author of Alu mobile element detection plugin for de novo variant caller (C++11).</p>
-              </li>
-              <li>
-                <a href="https://github.com/WilliamRichards2017/Twofus" target="_blank" class="link">Structural variant detection</a>
-                <p class="project-description">Author of structural variant detection plugin for de novo variant caller (C++11).</p>
-              </li>
-            </ul>
-          </div>
-          <div class="column">
-            <ul class="project-list">
-              <li>
-                <a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank" class="link">PDX contamination filter</a>
-                <p class="project-description">Author of filter leveraging CNN pipeline to filter murine contamination (Python 3).</p>
-              </li>
-              <li>
-                <a href="https://github.com/jandrewrfarrell/RUFUS" target="_blank" class="link">De novo variant caller</a>
-                <p class="project-description">Developer for k-mer based de novo variant caller (C++11).</p>
-              </li>
-            </ul>
-          </div>
+        <!-- Profile Image -->
+        <div class="image-section">
+          <v-img class="profile-image" src="../../assets/Will_Richards.webp" alt="Will Richards portrait"/>
+          <span id="typeit-signature">
+            <template v-if="disableAnimations">
+              William Richards
+            </template>
+            <template v-else>
+              <!-- TypeIt animation will be here -->
+            </template>
+          </span>
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <side-projects/>
-    </section>
+      <!-- Key Contributions -->
+      <v-card class="work-highlights px-5 py-5">
+        <h2 class="subheading">Key Contributions</h2>
+        <ul class="highlight-list">
+          <li>
+            Own and lead development of core application workflows including model lifecycle management, compliance reporting, and AI Use Case pages
+          </li>
+          <li>
+            Collaborate directly with Fortune 100 executive teams to solve complex integration challenges and unique business needs
+          </li>
+          <li>
+            Championed WCAG 2.2 AA compliance across entire platform
+          </li>
+        </ul>
+      </v-card>
 
-    <!-- Education -->
-    <section class="section">
-      <h1 class="section-title">Education</h1>
-      <p class="section-text">
-        I graduated from
-        <a href="http://carleton.edu" target="_blank" class="link">Carleton College</a>
-        with a degree in Computer Science in July 2017.
-      </p>
-    </section>
+      <!-- Previous Experience -->
+      <section class="section">
+        <h1 class="section-title">Previous Work Experience</h1>
+        <p class="section-text">
+          Before ModelOp, I spent 3 years as a software developer for the
+          <a href="http://marthlab.org" target="_blank" class="link">Marth Lab</a> and 1.5 years developing software for computational genetic discovery.
+          I also gained 1.5 years of experience as a web developer on the
+          <a href="http://iobio.io/" target="_blank" class="link">iobio</a> team, building diagnostic tools and visualizations for clinicians.
+        </p>
+      </section>
+
+      <!-- Projects -->
+      <section>
+        <h1 class="section-title">Projects</h1>
+
+        <div class="project-category">
+          <h2 class="subheading">Web Applications</h2>
+          <ul class="project-list">
+            <li>
+              <a href="https://pedigree.iobio.io" target="_blank" class="link">pedigree.iobio.io</a>
+              <p class="project-description">Author of pedigree visualization with interactive genotype / phenotype regression analysis.</p>
+            </li>
+            <li>
+              <a href="https://gene.iobio.io" target="_blank" class="link">gene.iobio.io</a>
+              <p class="project-description">Developer for web application used to investigate potential disease-causing variants.</p>
+            </li>
+            <li>
+              <a href="https://clin.iobio.io" target="_blank" class="link">clin.iobio.io</a>
+              <p class="project-description">Developer for a web application guiding clinicians through a diagnostic genomic analysis workflow.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-category">
+          <h2 class="subheading">Backend Software</h2>
+          <div class="columns">
+            <div class="column">
+              <ul class="project-list">
+                <li>
+                  <a href="https://github.com/WilliamRichards2017/RufAlu" target="_blank" class="link">Alu variant detection</a>
+                  <p class="project-description">Author of Alu mobile element detection plugin for de novo variant caller (C++11).</p>
+                </li>
+                <li>
+                  <a href="https://github.com/WilliamRichards2017/Twofus" target="_blank" class="link">Structural variant detection</a>
+                  <p class="project-description">Author of structural variant detection plugin for de novo variant caller (C++11).</p>
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <ul class="project-list">
+                <li>
+                  <a href="https://github.com/WilliamRichards2017/pdxFilter" target="_blank" class="link">PDX contamination filter</a>
+                  <p class="project-description">Author of filter leveraging CNN pipeline to filter murine contamination (Python 3).</p>
+                </li>
+                <li>
+                  <a href="https://github.com/jandrewrfarrell/RUFUS" target="_blank" class="link">De novo variant caller</a>
+                  <p class="project-description">Developer for k-mer based de novo variant caller (C++11).</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <side-projects/>
+      </section>
+
+      <!-- Education -->
+      <section class="section">
+        <h1 class="section-title">Education</h1>
+        <p class="section-text">
+          I graduated from
+          <a href="http://carleton.edu" target="_blank" class="link">Carleton College</a>
+          with a degree in Computer Science in July 2017.
+        </p>
+      </section>
+
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import SideProjects from './../SideProjects/SideProjects.vue';
-import Cookies from 'js-cookie';
+import { ref, onMounted } from 'vue';
 import TypeIt from 'typeit';
 
 export default {
   components: {
     SideProjects
   },
-  mounted() {
-    new TypeIt('#typeit-signature', {
-      lifeLike: false,
-      speed: 0,
-      afterComplete: function (instance) {
-        instance.destroy();
+  setup() {
+    const systemPrefersReducedMotion = ref(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const disableAnimations = ref(localStorage.getItem("disableAnimations") === "true" || systemPrefersReducedMotion.value);
+
+    onMounted(() => {
+      if (!disableAnimations.value) {
+        new TypeIt('#typeit-signature', {
+          lifeLike: false,
+          speed: 0,
+          afterComplete: function (instance) {
+            instance.destroy();
+          }
+        })
+        .delete(12, { instant: true })
+        .type("W")
+        .pause(100)
+        .pause(269)
+        .type("i")
+        .pause(95)
+        .type("l")
+        .pause(256)
+        .type("l")
+        .pause(165)
+        .type("i")
+        .pause(194)
+        .type("a")
+        .pause(118)
+        .type("m")
+        .pause(594)
+        .delete(1)
+        .pause(140)
+        .delete(1)
+        .pause(143)
+        .delete(1)
+        .pause(417)
+        .type(" ")
+        .pause(230)
+        .type("R")
+        .pause(127)
+        .type("i")
+        .pause(131)
+        .type("c")
+        .pause(111)
+        .type("h")
+        .pause(79)
+        .type("a")
+        .pause(80)
+        .type("r")
+        .pause(187)
+        .type("d")
+        .pause(67)
+        .type("s")
+        .go();
       }
-    })
-    .delete(12, { instant: true })
-    .type("W")
-    .pause(100)
-    .pause(269)
-    .type("i")
-    .pause(95)
-    .type("l")
-    .pause(256)
-    .type("l")
-    .pause(165)
-    .type("i")
-    .pause(194)
-    .type("a")
-    .pause(118)
-    .type("m")
-    .pause(594)
-    .delete(1)
-    .pause(140)
-    .delete(1)
-    .pause(143)
-    .delete(1)
-    .pause(417)
-    .type(" ")
-    .pause(230)
-    .type("R")
-    .pause(127)
-    .type("i")
-    .pause(131)
-    .type("c")
-    .pause(111)
-    .type("h")
-    .pause(79)
-    .type("a")
-    .pause(80)
-    .type("r")
-    .pause(187)
-    .type("d")
-    .pause(67)
-    .type("s")
-    .go();
-  },
-  data() {
+    });
+
     return {
-      disableAnimations: Cookies.get('disableAnimations') === 'true'
-    }
+      disableAnimations
+    };
   }
 };
 </script>
