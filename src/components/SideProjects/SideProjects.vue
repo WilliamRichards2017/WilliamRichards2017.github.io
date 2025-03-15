@@ -1,7 +1,6 @@
 <template>
   <div class="side-projects">
     <h2 class="subheading">Featured Side Project</h2>
-    <div class="project-grid">
       <router-link
         v-for="project in projects"
         :key="project.id"
@@ -9,11 +8,17 @@
           name: 'ProjectDetail',
           params: { id: project.id }
         }"
-        :class="['project-card', 'animated-element', { 'featured-project': project.featured }]"
+        :class="['project-card', 'animated-element']"
         :style="{ backgroundImage: 'url(' + project.preview + ')', backgroundSize: 'cover', backgroundPosition: 'center' }"
       >
-        <div class="card-overlay"></div>
+
         <div class="card-content">
+<div class="border-wrapper">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
           <h1>{{ project.title }}</h1>
           <p>{{ project.description }}</p>
           <div v-if="project.featured" class="featured-highlights">
@@ -21,7 +26,6 @@
           </div>
         </div>
       </router-link>
-    </div>
   </div>
 </template>
 
@@ -45,56 +49,47 @@ export default {
   margin-top: 2rem;
 }
 
+
 .project-card {
   position: relative;
   display: block;
   text-decoration: none;
   color: rgb(var(--v-theme-text-primary));
-  border-radius: 8px;
   overflow: hidden;
-  min-height: 300px;
+  min-height: 400px;
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(var(--v-theme-card-border));
+  /* border: 2px solid rgb(var(--v-theme-primary)); */
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  color: rgb(var(--v-theme-text-primary)) !important;
-  mask: linear-gradient(-60deg, rgb(var(--v-theme-text-primary)) 30%,
-          rgba(var(--v-theme-text-primary), 0.2),
-          rgb(var(--v-theme-text-primary)) 70%) right/350% 100%;
-  animation: shimmer 2.5s infinite;
-  opacity: 0.9;
+  transform: scale(1.02);
+  /* box-shadow: 0 4px 8px rgba(var(--v-theme-primary), 0.6); */
 }
 
-
-.card-overlay {
+.project-card::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(var(--v-theme-overlay-start), 0.9),
-    rgba(var(--v-theme-overlay-end), 0.7)
-  ) !important;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  background: rgba(var(--v-theme-background), 0.7);
+  z-index: 1;
+  transition: background 0.3s ease;
 }
 
-.project-card:hover .card-overlay:hover {
-  opacity: 0.7;
+.project-card:hover::before {
+  background: rgba(var(--v-theme-background), 0.8);
 }
 
 .card-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 1.5rem;
-  height: 100%;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -104,7 +99,6 @@ export default {
 .card-content h1 {
   margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  text-shadow: 1px 1px 3px rgba(var(--v-theme-text-shadow), 0.5);
 }
 
 .card-content p {
@@ -112,8 +106,7 @@ export default {
   font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.4;
-  opacity: 0.9;
-  text-shadow: 2px 2px 4px rgba(var(--v-theme-text-shadow), 0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .highlight-item {
@@ -125,20 +118,17 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .project-card {
+  .project-card, .card-content {
     min-height: 250px;
   }
-}
-
-.featured-project {
-  grid-column: 1 / -1 !important;
-  min-height: 400px;
-  animation: subtle-pulse 6s infinite;
-  border: 2px solid rgb(var(--v-theme-primary)) !important;
+    .featured-highlights {
+    gap: 0.5rem;
+  }
+  .highlight-item {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+  }
 }
 
 .featured-highlights {
@@ -148,27 +138,117 @@ export default {
   flex-wrap: wrap;
 }
 
-@keyframes subtle-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.005); }
+
+.border-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:  rgb(var(--v-theme-primary));
+  padding: 30px 60px;
+  font-size: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
-@media (min-width: 1024px) {
-  .featured-project {
-    grid-column: span 2;
+.border-wrapper:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.border-wrapper span {
+  position: absolute;
+  background: linear-gradient(to right, rgb(var(--v-theme-primary)),  rgb(var(--v-theme-primary)));
+}
+
+.border-wrapper span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.border-wrapper span:nth-child(2) {
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  animation-delay: 1s;
+}
+
+.border-wrapper span:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.border-wrapper span:nth-child(4) {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  animation-delay: 1s;
+}
+
+.border-wrapper:hover span:nth-child(1) {
+  animation: animate1 2s linear infinite;
+}
+
+.border-wrapper:hover span:nth-child(2) {
+  animation: animate2 2s linear infinite;
+}
+
+.border-wrapper:hover span:nth-child(3) {
+  animation: animate3 2s linear infinite;
+}
+
+.border-wrapper:hover span:nth-child(4) {
+  animation: animate4 2s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
-@media (max-width: 768px) {
-  .featured-project {
-    min-height: 300px;
+@keyframes animate2 {
+  0% {
+    transform: translateY(-100%);
   }
-  .featured-highlights {
-    gap: 0.5rem;
+  100% {
+    transform: translateY(100%);
   }
-  .highlight-item {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
+}
+
+@keyframes animate3 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes animate4 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
   }
 }
 </style>
