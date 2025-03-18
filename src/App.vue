@@ -128,7 +128,7 @@
             </p>
           </div>
           </template>
-\      </v-navigation-drawer>
+      </v-navigation-drawer>
 
       <!-- Dialogs -->
       <v-dialog v-model="showAccessibilityStatement" max-width="600">

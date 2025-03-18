@@ -56,11 +56,6 @@
       <v-divider class="my-6"></v-divider>
 
       <div class="text-caption text-medium-emphasis">
-        <p>
-          <strong>Technical Specifications:</strong><br>
-          HTML5, ARIA, CSS3, Vue.js 3, Vuetify 3.6<br>
-          Tested across modern browsers and screen reader (VoiceOver)
-        </p>
         <p class="mt-2">
           Last updated: Friday, Feb 28, 2025
         </p>
@@ -70,9 +65,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import emailjs from '@emailjs/browser';
 
-const emit = defineEmits(['close']);
+
+const publicKey = 'hBqw0-itkHDcvbEiv'; 
+
+onMounted(() => {
+  emailjs.init(publicKey);
+});
+
 
 const implementedFeatures = ref([
   {
@@ -105,10 +107,30 @@ const implementedFeatures = ref([
 const feedback = ref('');
 const email = ref('');
 
-const submitFeedback = () => {
-  // Implement your feedback submission logic
-  console.log('Feedback submitted:', { feedback: feedback.value, email: email.value });
-  emit('close');
+const submitFeedback = async (event) => {
+  event.preventDefault(); // Prevent form from reloading the page
+
+
+  const serviceId = 'service_rik1l0n';
+  const templateId = 'template_ky6mb0k';
+
+  console.log('feedback:', feedback.value);
+  console.log('email:', email.value);
+  
+
+  try {
+    await emailjs.send(
+      serviceId, 
+      templateId,
+      { email: email.value, feedback: feedback.value }
+    );
+    
+    alert('Feedback sent successfully!');
+    // emit('close'); 
+  } catch (error) {
+    alert('Failed to send feedback: ' + error );
+    console.error('EmailJS Error:', error);
+  }
 };
 </script>
 
