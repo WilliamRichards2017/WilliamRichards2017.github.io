@@ -290,7 +290,6 @@ li > a, ul > li {
   line-height: 1.6;
   color: rgba(var(--v-theme-text-secondary));
   margin-bottom: 1.5rem;
-  max-width: 75ch;
 }
 
 /* Work Highlights */
