@@ -78,7 +78,8 @@ const highContrastTheme = {
     "highlight-bg": "#FFFFFF",  // rgba(255, 255, 255, 1) in hex
     "highlight-border": "#FFFFFF",
     "text-shadow": "#000000", 
-    "accent": "#FFD452" 
+    "accent": "#FFD452" ,
+    "border": "#FFFFFF"
   }
 };
 

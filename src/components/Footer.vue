@@ -65,6 +65,7 @@ const iconColor = inject<Ref<string>>('iconColor');
   padding: 0.5em 1em;
   background-color: rgb(var(--v-theme-surface));
   justify-content: center;
+  border-top: 1px solid rgb(var(--v-theme-border));
 }
 
 .toggle-container {

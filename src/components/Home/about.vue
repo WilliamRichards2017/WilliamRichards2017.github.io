@@ -216,6 +216,7 @@ export default {
 <style>
 #typeit-signature {
   display: inline-block;
+  font-size: 1.5rem;
 }
 
 .container {

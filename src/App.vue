@@ -7,7 +7,7 @@
 
     <Header />
 
-    <v-main>
+    <v-main class="main">
       <router-view />
 
       <!-- Dynamic FAB -->
@@ -263,6 +263,7 @@ html {
   transition: transform 0.3s ease;
   padding: 8px;
   backdrop-filter: blur(4px);
+  border: 1px solid rgb(var(--v-theme-border));
 }
 
 .fab-button:hover {
@@ -405,6 +406,12 @@ input:focus-visible {
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
+}
+
+.main {
+  border-top: 1px solid rgb(var(--v-theme-border));
+    border-bottom: 1px solid rgb(var(--v-theme-border))
+
 }
 
 
