@@ -13,10 +13,12 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/WilliamRichards2017.github.io/' : '/', // Conditionally set the base URL
+  base: '/',
+
   plugins: [
     VueRouter({
       dts: 'src/typed-router.d.ts',
+      
     }),
     Layouts(),
     AutoImport({
@@ -47,7 +49,7 @@ export default defineConfig({
     }),
     Fonts({
       google: {
-        families: [{
+        families: [ {
           name: 'Roboto',
           styles: 'wght@100;300;400;500;700;900',
         }],

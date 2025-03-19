@@ -5,7 +5,7 @@
  */
 
 // Composables
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router/auto'
 
 import ProjectDetail from '../components/SideProjects/projectDetail.vue';
 import Home from '../components/Home/home.vue';
@@ -37,8 +37,8 @@ const routes = [
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory(), // Use HTML5 history mode
-  routes, // Short for `routes: routes`
+  history: createWebHashHistory(),
+    routes, // Short for `routes: routes`
 });
 // Workaround for https://github.com/vitejs/vite/issues/11804
 router.onError((err, to) => {
