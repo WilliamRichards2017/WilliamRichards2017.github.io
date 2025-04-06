@@ -24,7 +24,7 @@
       title="resume"
       download="William-Richards-resume.pdf"
       target="_blank"
-      href="https://github.com/WilliamRichards2017/WilliamRichards2017.github.io/raw/master/public/resume.pdf"
+      href="https://github.com/WilliamRichards2017/resume/raw/main/William_Richards_Resume.pdf"
       class="icon-link"
       aria-label="Download William Richards' Resume"
             variant="text"
