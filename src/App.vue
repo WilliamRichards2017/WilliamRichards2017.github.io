@@ -143,8 +143,8 @@
 <script lang="ts" setup>
 
 
-
 import { ref, watch, onMounted, defineComponent } from 'vue';
+import { useTheme } from 'vuetify';
 import Cookies from 'js-cookie';
 
 import {
@@ -186,10 +186,18 @@ const updateTextScale = (value: number) => {
   Cookies.set("textScale", value.toString(), { expires: 365 });
 };
 
+// Theme Control
+const theme = useTheme();
+
 // Contrast Control
 const highContrast = ref(Cookies.get("highContrast") === "true");
 const updateContrast = (value: boolean) => {
-  document.body.classList.toggle('high-contrast', value);
+  if (value) {
+    theme.global.name.value = 'highContrast';
+  } else {
+    // Return to the previous theme (you might want to track this)
+    theme.global.name.value = 'light'; // or 'dark' based on user preference
+  }
   Cookies.set("highContrast", value.toString(), { expires: 365 });
 };
 
@@ -273,14 +281,8 @@ html {
   }
 }
 
-/* High Contrast Mode */
-.high-contrast {
-  /* --v-theme-background: #000 !important;
-  --v-theme-surface: #111 !important;
-  --v-theme-primary: #FFD700 !important;
-  --v-theme-on-primary: #000 !important;
-  filter: contrast(1.4); */
-}
+/* Remove the CSS-based high contrast implementation */
+/* .high-contrast styles can be removed since we're using Vuetify themes */
 
 .icon-link {
   color: rgba(var(--v-theme-text-secondary), var(--v-medium-emphasis-opacity));

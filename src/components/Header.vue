@@ -62,7 +62,11 @@ const toggleTheme = () => {
   localStorage.setItem("theme", theme.global.name.value);
 };
 
-const iconColor = computed(() => (isDark.value ? 'white' : 'black'));
+const iconColor = computed(() => {
+  const themeName = theme.global.name.value;
+  if (themeName === 'highContrast') return 'white';
+  return isDark.value ? 'white' : 'black';
+});
 
 onMounted(() => {
   const savedTheme = localStorage.getItem("theme") || "light";
