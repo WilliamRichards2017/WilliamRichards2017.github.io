@@ -138,6 +138,42 @@ export default {
   min-height: 400px;
   animation: subtle-pulse 6s infinite;
   border: 2px solid rgb(var(--v-theme-primary)) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-project::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -100%;
+  width: 100%;
+  height: calc(100% + 4px);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease-in-out;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.featured-project:hover::before {
+  left: 100%;
+}
+
+/* Dark theme shimmer adjustment */
+@media (prefers-color-scheme: dark) {
+  .featured-project::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+  }
 }
 
 .featured-highlights {
@@ -150,6 +186,11 @@ export default {
 @keyframes subtle-pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.005); }
+}
+
+@keyframes shimmer-sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 @media (min-width: 1024px) {

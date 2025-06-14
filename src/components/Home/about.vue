@@ -30,7 +30,8 @@
       <!-- Profile Image -->
       <div class="image-section">
         <v-img class="profile-image" :src="profileImage" alt="Will Richards portrait"/>
-        <span id="typeit-signature"></span>
+        <p class="name-label">Will Richards</p>
+        
       </div>
     </div>
 
@@ -133,60 +134,10 @@
 <script>
 import SideProjects from './../SideProjects/SideProjects.vue';
 import Cookies from 'js-cookie';
-import TypeIt from 'typeit';
 
 export default {
   components: {
     SideProjects
-  },
-  mounted() {
-    new TypeIt('#typeit-signature', {
-      lifeLike: false,
-      speed: 0,
-      afterComplete: function (instance) {
-        instance.destroy();
-      }
-    })
-    .delete(12, { instant: true })
-    .type("W")
-    .pause(100)
-    .pause(269)
-    .type("i")
-    .pause(95)
-    .type("l")
-    .pause(256)
-    .type("l")
-    .pause(165)
-    .type("i")
-    .pause(194)
-    .type("a")
-    .pause(118)
-    .type("m")
-    .pause(594)
-    .delete(1)
-    .pause(140)
-    .delete(1)
-    .pause(143)
-    .delete(1)
-    .pause(417)
-    .type(" ")
-    .pause(230)
-    .type("R")
-    .pause(127)
-    .type("i")
-    .pause(131)
-    .type("c")
-    .pause(111)
-    .type("h")
-    .pause(79)
-    .type("a")
-    .pause(80)
-    .type("r")
-    .pause(187)
-    .type("d")
-    .pause(67)
-    .type("s")
-    .go();
   },
   data() {
     return {
@@ -198,10 +149,6 @@ export default {
 </script>
 
 <style>
-#typeit-signature {
-  display: inline-block;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -342,7 +289,7 @@ li > a, ul > li {
 .profile-image {
   width: 100%;
   max-width: 350px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -352,6 +299,30 @@ li > a, ul > li {
   flex-direction: column;
   align-items: center;
   min-width: 20vw;
+}
+
+.name-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-style: italic;
+  color: rgb(var(--v-theme-primary));
+  margin: 0;
+  text-align: center;
+  position: relative;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.5px;
+}
+
+.name-label::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(var(--v-theme-primary)), transparent);
+  opacity: 0.6;
 }
 
 /* Responsive Design */
@@ -390,22 +361,8 @@ li > a, ul > li {
     font-size: 1.1rem;
   }
 
-  .typed-out {
-    font-size: 1.4rem;
+  .name-label {
+    font-size: 1.2rem;
   }
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink-cursor {
-  from, to { border-color: transparent; }
-  50% { border-color: rgba(var(--v-theme-text-primary), 1); }
-}
-
-@keyframes hide-cursor {
-  to { border-right-color: transparent; }
 }
 </style>

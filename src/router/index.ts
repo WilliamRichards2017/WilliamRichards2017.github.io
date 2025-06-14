@@ -5,7 +5,7 @@
  */
 
 // Composables
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import { createRouter, createWebHistory } from 'vue-router' // Change from vue-router/auto to standard vue-router
 
 import ProjectDetail from '../components/SideProjects/ProjectDetail.vue';
 import Home from '../components/Home/home.vue';
@@ -37,7 +37,7 @@ const routes = [
 
 // Create the router instance
 const router = createRouter({
-  history: createWebHistory(), // Use HTML5 history mode
+  history: createWebHistory(import.meta.env.BASE_URL), // Add BASE_URL here
   routes, // Short for `routes: routes`
 });
 // Workaround for https://github.com/vitejs/vite/issues/11804
