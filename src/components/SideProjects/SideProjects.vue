@@ -1,31 +1,34 @@
 <template>
   <div class="side-projects">
-    <h2 class="subheading">Featured Side Project</h2>
+    <h2 class="subheading">Featured Side Projects</h2>
     <div class="project-grid">
-      <router-link
+      <component
         v-for="project in projects"
         :key="project.id"
-        :to="{
+        :is="project.externalUrl ? 'a' : 'router-link'"
+        :href="project.externalUrl"
+        :target="project.externalUrl ? '_blank' : undefined"
+        :to="!project.externalUrl ? {
           name: 'ProjectDetail',
           params: { id: project.id }
-        }"
-        :class="['project-card', 'animated-element', { 'featured-project': project.featured }]"
+        } : undefined"
+        :class="['project-card', 'animated-element']"
         :style="{ backgroundImage: 'url(' + project.preview + ')', backgroundSize: 'cover', backgroundPosition: 'center' }"
       >
         <div class="card-overlay"></div>
         <div class="card-content">
           <h1>{{ project.title }}</h1>
           <p>{{ project.description }}</p>
-          <div v-if="project.featured" class="featured-highlights">
+          <div class="highlights">
             <div v-for="highlight in project.highlights" :key="highlight" class="highlight-item">{{ highlight }}</div>
           </div>
         </div>
-      </router-link>
+      </component>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import projects from './../../config/projects'
 
 export default {
@@ -38,6 +41,15 @@ export default {
 </script>
 
 <style scoped>
+
+
+.highlights {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
@@ -55,19 +67,23 @@ export default {
   min-height: 300px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.3s ease;
+  transition: all 0.5s ease-out;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(var(--v-theme-card-border));
+  border: 1px solid rgb(var(--v-theme-secondary));
 }
 
 .project-card:hover {
   transform: translateY(-5px);
   color: rgb(var(--v-theme-text-primary)) !important;
-  mask: linear-gradient(-60deg, rgb(var(--v-theme-text-primary)) 30%,
-          rgba(var(--v-theme-text-primary), 0.2),
-          rgb(var(--v-theme-text-primary)) 70%) right/350% 100%;
-  animation: shimmer 2.5s infinite;
   opacity: 0.9;
+  border-color: rgb(var(--v-theme-primary));
+  border-width: 3px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+}
+
+.project-card:hover .highlight-item {
+  border-color: rgb(var(--v-theme-primary)) !important;
 }
 
 .card-overlay {
@@ -120,7 +136,16 @@ export default {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(var(--v-theme-primary));
+  border: 1px solid rgba(var(--v-theme-secondary));
+    transition: all 0.5s ease-out;
+
+}
+
+
+
+.project-card:hover .card-button {
+  transform: translate(-50%, 0);
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -133,82 +158,9 @@ export default {
   }
 }
 
-.featured-project {
-  grid-column: 1 / -1 !important;
-  min-height: 400px;
-  animation: subtle-pulse 6s infinite;
-  border: 2px solid rgb(var(--v-theme-primary)) !important;
-  position: relative;
-  overflow: hidden;
-}
 
-.featured-project::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -100%;
-  width: 100%;
-  height: calc(100% + 4px);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transition: left 0.6s ease-in-out;
-  z-index: 2;
-  pointer-events: none;
-}
 
-.featured-project:hover::before {
-  left: 100%;
-}
 
-/* Dark theme shimmer adjustment */
-@media (prefers-color-scheme: dark) {
-  .featured-project::before {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-  }
-}
 
-.featured-highlights {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
 
-@keyframes subtle-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.005); }
-}
-
-@keyframes shimmer-sweep {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-@media (min-width: 1024px) {
-  .featured-project {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 768px) {
-  .featured-project {
-    min-height: 300px;
-  }
-  .featured-highlights {
-    gap: 0.5rem;
-  }
-  .highlight-item {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-  }
-}
 </style>
