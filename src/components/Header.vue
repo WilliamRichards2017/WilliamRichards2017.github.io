@@ -49,7 +49,7 @@ import {
   mdiWhiteBalanceSunny
 } from '@mdi/js';
 
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import Icon from './Icon.vue';
 import { useTheme } from 'vuetify/lib/framework.mjs';
 
@@ -60,6 +60,8 @@ const toggleTheme = () => {
   isDark.value = !isDark.value;
   theme.global.name.value = isDark.value ? "dark" : "light";
   localStorage.setItem("theme", theme.global.name.value);
+  debugger;
+
 };
 
 const iconColor = computed(() => {
@@ -68,8 +70,9 @@ const iconColor = computed(() => {
   return isDark.value ? 'white' : 'black';
 });
 
-onMounted(() => {
+onMounted(async () => {
   const savedTheme = localStorage.getItem("theme") || "light";
+  await nextTick();
   isDark.value = savedTheme === "dark";
   theme.global.name.value = savedTheme;
 });
