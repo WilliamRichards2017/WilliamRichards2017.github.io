@@ -71,7 +71,7 @@ const iconColor = computed(() => {
 });
 
 onMounted(async () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
+  const savedTheme = localStorage.getItem("theme") || "light"; 
   await nextTick();
   isDark.value = savedTheme === "dark";
   theme.global.name.value = savedTheme;
